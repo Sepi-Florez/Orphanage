@@ -7,7 +7,7 @@
       <Entity type="Class">
         <Name>FpsInputController</Name>
         <Access>Public</Access>
-        <Location left="82" top="157" />
+        <Location left="10" top="10" />
         <Size width="255" height="247" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private CharacterMotor motor</Member>
@@ -25,7 +25,7 @@
       <Entity type="Class">
         <Name>CharacterMotor</Name>
         <Access>Public</Access>
-        <Location left="405" top="157" />
+        <Location left="333" top="10" />
         <Size width="162" height="77" />
         <Collapsed>True</Collapsed>
         <Modifier>None</Modifier>
@@ -33,30 +33,15 @@
       <Entity type="Class">
         <Name>CharacterController</Name>
         <Access>Public</Access>
-        <Location left="405" top="367" />
+        <Location left="333" top="220" />
         <Size width="162" height="77" />
         <Collapsed>True</Collapsed>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
-        <Name>CombatManager</Name>
-        <Access>Public</Access>
-        <Location left="618" top="157" />
-        <Size width="258" height="256" />
-        <Collapsed>False</Collapsed>
-        <Member type="Field">public Enum WeaponType</Member>
-        <Member type="Field">WeaponType wTypeL</Member>
-        <Member type="Field">WeaponType wTypeR</Member>
-        <Member type="Field">public Animator weaponAnimL</Member>
-        <Member type="Field">public Animator weaponAnimR</Member>
-        <Member type="Field">public float health</Member>
-        <Member type="Method">public void CheckIfOneHanded()</Member>
-        <Modifier>None</Modifier>
-      </Entity>
-      <Entity type="Class">
         <Name>CraftingStation</Name>
         <Access>Public</Access>
-        <Location left="82" top="479" />
+        <Location left="10" top="332" />
         <Size width="255" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public string recipesDataPath</Member>
@@ -68,8 +53,8 @@
       <Entity type="Class">
         <Name>InventoryManager</Name>
         <Access>Public</Access>
-        <Location left="618" top="479" />
-        <Size width="258" height="256" />
+        <Location left="542" top="332" />
+        <Size width="272" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public List&lt;Item&gt; items = new List&lt;Item&gt;()</Member>
         <Member type="Field">private Button nextAndPrevious</Member>
@@ -79,19 +64,19 @@
       </Entity>
       <Entity type="Comment">
         <Text>List inventory zonder slepen enzo, button is droppen en button is oppakken. (Skyrim)</Text>
-        <Location left="880" top="479" />
-        <Size width="160" height="75" />
+        <Location left="822" top="332" />
+        <Size width="160" height="99" />
       </Entity>
       <Entity type="Comment">
         <Text>List aan items die je kunt maken en als je de nodige items in de slots hebt geflikkerd krijg je t item</Text>
-        <Location left="340" top="479" />
-        <Size width="160" height="75" />
+        <Location left="322" top="310" />
+        <Size width="160" height="110" />
       </Entity>
       <Entity type="Class">
         <Name>Item</Name>
         <Access>Public</Access>
-        <Location left="357" top="742" />
-        <Size width="243" height="128" />
+        <Location left="249" top="628" />
+        <Size width="301" height="128" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public String name</Member>
         <Member type="Field">public String id</Member>
@@ -101,7 +86,7 @@
       <Entity type="Class">
         <Name>GameManager</Name>
         <Access>Public</Access>
-        <Location left="949" top="157" />
+        <Location left="1339" top="10" />
         <Size width="255" height="145" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public string CurObjectivePath</Member>
@@ -113,102 +98,178 @@
       <Entity type="Class">
         <Name>DialogueManager</Name>
         <Access>Public</Access>
-        <Location left="1077" top="479" />
-        <Size width="258" height="216" />
+        <Location left="1000" top="299" />
+        <Size width="258" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int newField</Member>
         <Member type="Method">public void NewMethod()</Member>
         <Modifier>None</Modifier>
       </Entity>
+      <Entity type="Class">
+        <Name>Npc</Name>
+        <Access>Public</Access>
+        <Location left="866" top="646" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Minotaur</Name>
+        <Access>Public</Access>
+        <Location left="843" top="10" />
+        <Size width="438" height="256" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public int currentHealth</Member>
+        <Member type="Field">anim Animator</Member>
+        <Member type="Field">public int health</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CombatManager</Name>
+        <Access>Public</Access>
+        <Location left="519" top="10" />
+        <Size width="258" height="256" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public Enum WeaponType</Member>
+        <Member type="Field">WeaponType wTypeL</Member>
+        <Member type="Field">WeaponType wTypeR</Member>
+        <Member type="Field">public Animator weaponAnimL</Member>
+        <Member type="Field">public Animator weaponAnimR</Member>
+        <Member type="Field">public float health</Member>
+        <Member type="Method">public void CheckIfOneHanded()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
     </Entities>
     <Relationships>
       <Relationship type="Association" first="1" second="0">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>374</X>
-          <Y>180</Y>
+          <X>302</X>
+          <Y>33</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>366</X>
-          <Y>180</Y>
+          <X>294</X>
+          <Y>33</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="1">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>486</X>
-          <Y>285</Y>
+          <X>414</X>
+          <Y>138</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>486</X>
-          <Y>285</Y>
+          <X>414</X>
+          <Y>138</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="0" second="2">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>363</X>
-          <Y>389</Y>
+          <X>291</X>
+          <Y>242</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>371</X>
-          <Y>389</Y>
+          <X>299</X>
+          <Y>242</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
-      <Relationship type="Association" first="5" second="4">
+      <Relationship type="Association" first="4" second="3">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>517</X>
+          <Y>473</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="4" second="3">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>517</X>
+          <Y>502</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="7" second="4">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>600</X>
+          <Y>690</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>673</X>
+          <Y>613</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="3" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="11">
         <Label>
         </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
-        <AssociationType>Composition</AssociationType>
-      </Relationship>
-      <Relationship type="Association" first="5" second="4">
-        <Label>
-        </Label>
-        <StartOrientation>Horizontal</StartOrientation>
-        <EndOrientation>Horizontal</EndOrientation>
-        <BendPoint relativeToStartShape="True">
-          <X>593</X>
-          <Y>649</Y>
-        </BendPoint>
-        <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
-      <Relationship type="Association" first="8" second="5">
+      <Relationship type="Association" first="10" second="9">
         <Label>
         </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>650</X>
-          <Y>804</Y>
-        </BendPoint>
-        <BendPoint relativeToStartShape="False">
-          <X>749</X>
+          <X>1211</X>
           <Y>760</Y>
         </BendPoint>
-        <Direction>Bidirectional</Direction>
+        <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
-      <Relationship type="Association" first="4" second="8">
+      <Relationship type="Association" first="4" second="12">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="4">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="4" second="10">
         <Label>
         </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>742</X>
+          <Y>613</Y>
+        </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
