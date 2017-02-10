@@ -1,0 +1,217 @@
+<Project>
+  <Name>Theseus</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>FrontEnd</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>FpsInputController</Name>
+        <Access>Public</Access>
+        <Location left="82" top="157" />
+        <Size width="255" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private CharacterMotor motor</Member>
+        <Member type="Field">private CharacterController controller</Member>
+        <Member type="Field">public Animator anim</Member>
+        <Member type="Field">public Transform cam</Member>
+        <Member type="Field">public bool grounded = false</Member>
+        <Member type="Field">bool locked = false</Member>
+        <Member type="Field">public float timer</Member>
+        <Member type="Field">public float moveTimer = 0</Member>
+        <Member type="Method">void Awake()</Member>
+        <Member type="Method">void Update()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CharacterMotor</Name>
+        <Access>Public</Access>
+        <Location left="405" top="157" />
+        <Size width="162" height="77" />
+        <Collapsed>True</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CharacterController</Name>
+        <Access>Public</Access>
+        <Location left="405" top="367" />
+        <Size width="162" height="77" />
+        <Collapsed>True</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CombatManager</Name>
+        <Access>Public</Access>
+        <Location left="618" top="157" />
+        <Size width="258" height="256" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public Enum WeaponType</Member>
+        <Member type="Field">WeaponType wTypeL</Member>
+        <Member type="Field">WeaponType wTypeR</Member>
+        <Member type="Field">public Animator weaponAnimL</Member>
+        <Member type="Field">public Animator weaponAnimR</Member>
+        <Member type="Field">public float health</Member>
+        <Member type="Method">public void CheckIfOneHanded()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CraftingStation</Name>
+        <Access>Public</Access>
+        <Location left="82" top="479" />
+        <Size width="255" height="256" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public string recipesDataPath</Member>
+        <Member type="Field">public List&lt;Item&gt; recipes = new List&lt;Item&gt;()</Member>
+        <Member type="Method">public void RenderList()</Member>
+        <Member type="Method">public void CheckForItems()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>InventoryManager</Name>
+        <Access>Public</Access>
+        <Location left="618" top="479" />
+        <Size width="258" height="256" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public List&lt;Item&gt; items = new List&lt;Item&gt;()</Member>
+        <Member type="Field">private Button nextAndPrevious</Member>
+        <Member type="Method">public void RenderList()</Member>
+        <Member type="Method">public void AddToList(Transform tr)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Comment">
+        <Text>List inventory zonder slepen enzo, button is droppen en button is oppakken. (Skyrim)</Text>
+        <Location left="880" top="479" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Comment">
+        <Text>List aan items die je kunt maken en als je de nodige items in de slots hebt geflikkerd krijg je t item</Text>
+        <Location left="340" top="479" />
+        <Size width="160" height="75" />
+      </Entity>
+      <Entity type="Class">
+        <Name>Item</Name>
+        <Access>Public</Access>
+        <Location left="357" top="742" />
+        <Size width="243" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public String name</Member>
+        <Member type="Field">public String id</Member>
+        <Member type="Field">public List&lt;Item&gt; ReqComp = new List&lt;Item&gt;</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>GameManager</Name>
+        <Access>Public</Access>
+        <Location left="949" top="157" />
+        <Size width="255" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public string CurObjectivePath</Member>
+        <Member type="Field">public string CurObjective</Member>
+        <Member type="Field">public Text hud</Member>
+        <Member type="Method">public void GenObjectives()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DialogueManager</Name>
+        <Access>Public</Access>
+        <Location left="1077" top="479" />
+        <Size width="258" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int newField</Member>
+        <Member type="Method">public void NewMethod()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="1" second="0">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>374</X>
+          <Y>180</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>366</X>
+          <Y>180</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>486</X>
+          <Y>285</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>486</X>
+          <Y>285</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="2">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>363</X>
+          <Y>389</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>371</X>
+          <Y>389</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="5" second="4">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="5" second="4">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>593</X>
+          <Y>649</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="5">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>650</X>
+          <Y>804</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>749</X>
+          <Y>760</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="4" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
