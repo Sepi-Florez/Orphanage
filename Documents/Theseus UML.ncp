@@ -41,7 +41,7 @@
       <Entity type="Class">
         <Name>CraftingStation</Name>
         <Access>Public</Access>
-        <Location left="10" top="332" />
+        <Location left="10" top="399" />
         <Size width="255" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public string recipesDataPath</Member>
@@ -53,29 +53,30 @@
       <Entity type="Class">
         <Name>InventoryManager</Name>
         <Access>Public</Access>
-        <Location left="542" top="332" />
+        <Location left="448" top="399" />
         <Size width="272" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public List&lt;Item&gt; items = new List&lt;Item&gt;()</Member>
         <Member type="Field">private Button nextAndPrevious</Member>
         <Member type="Method">public void RenderList()</Member>
         <Member type="Method">public void AddToList(Transform tr)</Member>
+        <Member type="Method">public void DeleteCrafted(List&lt;Item&gt; crafted)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Comment">
-        <Text>List inventory zonder slepen enzo, button is droppen en button is oppakken. (Skyrim)</Text>
-        <Location left="822" top="332" />
+        <Text>Will manage the inventory in  a list ( like skyrim ) Dragging wont be a thing. you'll have to select and then press a button to use or drop the item.</Text>
+        <Location left="736" top="426" />
         <Size width="160" height="99" />
       </Entity>
       <Entity type="Comment">
-        <Text>List aan items die je kunt maken en als je de nodige items in de slots hebt geflikkerd krijg je t item</Text>
-        <Location left="322" top="310" />
+        <Text>Crafting station will check if you have the neccesary items for the selected crafting recipe.</Text>
+        <Location left="276" top="399" />
         <Size width="160" height="110" />
       </Entity>
       <Entity type="Class">
         <Name>Item</Name>
         <Access>Public</Access>
-        <Location left="249" top="628" />
+        <Location left="194" top="715" />
         <Size width="301" height="128" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public String name</Member>
@@ -98,30 +99,31 @@
       <Entity type="Class">
         <Name>DialogueManager</Name>
         <Access>Public</Access>
-        <Location left="1000" top="299" />
+        <Location left="978" top="399" />
         <Size width="258" height="256" />
         <Collapsed>False</Collapsed>
-        <Member type="Field">int newField</Member>
-        <Member type="Method">public void NewMethod()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Npc</Name>
         <Access>Public</Access>
-        <Location left="866" top="646" />
+        <Location left="768" top="630" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
+        <Member type="Method">public void Interact()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Minotaur</Name>
         <Access>Public</Access>
-        <Location left="843" top="10" />
+        <Location left="852" top="10" />
         <Size width="438" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public int currentHealth</Member>
         <Member type="Field">anim Animator</Member>
         <Member type="Field">public int health</Member>
+        <Member type="Method">void MakeAction()</Member>
+        <Member type="Method">IEnumerator ActionLength(float ActionTime)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -139,11 +141,21 @@
         <Member type="Method">public void CheckIfOneHanded()</Member>
         <Modifier>None</Modifier>
       </Entity>
+      <Entity type="Class">
+        <Name>UIManager</Name>
+        <Access>Public</Access>
+        <Location left="1339" top="399" />
+        <Size width="220" height="256" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void UpdateHealth()</Member>
+        <Member type="Method">public void UpdateBossHP()</Member>
+        <Member type="Method">public void ToggleIG()</Member>
+        <Member type="Method">public void UpdateObj()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
     </Entities>
     <Relationships>
       <Relationship type="Association" first="1" second="0">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -158,6 +170,8 @@
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="2" second="1">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -172,6 +186,8 @@
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="0" second="2">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -186,89 +202,143 @@
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="3">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>517</X>
-          <Y>473</Y>
+          <X>423</X>
+          <Y>540</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="3">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>517</X>
-          <Y>502</Y>
+          <X>423</X>
+          <Y>569</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="7" second="4">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>600</X>
-          <Y>690</Y>
+          <X>550</X>
+          <Y>796</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>673</X>
-          <Y>613</Y>
+          <X>579</X>
+          <Y>680</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="3" second="7">
+        <Label>
+        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>142</X>
+          <Y>798</Y>
+        </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="12" second="11">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="10" second="9">
-        <Label>
-        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>1211</X>
-          <Y>760</Y>
+          <X>965</X>
+          <Y>803</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1111</X>
+          <Y>680</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="12">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="0" second="4">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
       <Relationship type="Association" first="4" second="10">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>742</X>
-          <Y>613</Y>
+          <X>648</X>
+          <Y>680</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>743</X>
+          <Y>798</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="13">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>748</X>
+          <Y>291</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="11" second="13">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="13">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="4" second="13">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>707</X>
+          <Y>332</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1449</X>
+          <Y>373</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
