@@ -5,26 +5,39 @@ using UnityEngine;
 public class Camera : MonoBehaviour {
     public float h;
     public float r;
-    public float speed;
-    public float t = 0;
-    public float tt;
+    public float speedR;
+    public float speedH;
+    bool move;
     void Update() {
         Input_();
     }
     void Input_() {
         if(Input.GetButtonDown("Fire1")) {
-            t = 0;
-            StartCoroutine(NextFrame());
+            if (!move) {
+                StartCoroutine(NextSlide());
+            }
 
         }
     }
-    IEnumerator NextFrame() {
-        t++;
-        if (t == tt) {
+    IEnumerator NextSlide() {
+        float rotatedAmount = 0f;
+        float decendAmount = 0f;
+        move = false;
+        while (decendAmount <= h || rotatedAmount <= r) {
+            if (rotatedAmount <= r) {
+                float addedValue = speedR * Time.deltaTime;
+                rotatedAmount += addedValue;
+                transform.parent.transform.Rotate(new Vector3(0,-addedValue,0) * speedR * Time.deltaTime);
 
+                //rotate with addedValue
+            }
+            if (decendAmount <= h) {
+                float addedValue = speedH * Time.deltaTime;
+                decendAmount += addedValue;
+                transform.parent.transform.Translate(new Vector3(0, -addedValue, 0) * speedH * Time.deltaTime);
+            }
+
+            yield return null;
         }
-
-            yield return new WaitForSeconds(speed);
-
     }
 }
