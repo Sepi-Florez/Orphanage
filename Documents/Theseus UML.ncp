@@ -7,7 +7,7 @@
       <Entity type="Class">
         <Name>FpsInputController</Name>
         <Access>Public</Access>
-        <Location left="10" top="10" />
+        <Location left="36" top="45" />
         <Size width="255" height="247" />
         <Collapsed>False</Collapsed>
         <Member type="Field">private CharacterMotor motor</Member>
@@ -25,7 +25,7 @@
       <Entity type="Class">
         <Name>CharacterMotor</Name>
         <Access>Public</Access>
-        <Location left="333" top="10" />
+        <Location left="359" top="45" />
         <Size width="162" height="77" />
         <Collapsed>True</Collapsed>
         <Modifier>None</Modifier>
@@ -33,7 +33,7 @@
       <Entity type="Class">
         <Name>CharacterController</Name>
         <Access>Public</Access>
-        <Location left="333" top="220" />
+        <Location left="359" top="255" />
         <Size width="162" height="77" />
         <Collapsed>True</Collapsed>
         <Modifier>None</Modifier>
@@ -41,23 +41,24 @@
       <Entity type="Class">
         <Name>CraftingStation</Name>
         <Access>Public</Access>
-        <Location left="10" top="399" />
+        <Location left="36" top="434" />
         <Size width="255" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public string recipesDataPath</Member>
         <Member type="Field">public List&lt;Item&gt; recipes = new List&lt;Item&gt;()</Member>
         <Member type="Method">public void RenderList()</Member>
-        <Member type="Method">public void CheckForItems()</Member>
+        <Member type="Method">public void CheckForItems(string id)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>InventoryManager</Name>
         <Access>Public</Access>
-        <Location left="448" top="399" />
+        <Location left="474" top="434" />
         <Size width="272" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public List&lt;Item&gt; items = new List&lt;Item&gt;()</Member>
         <Member type="Field">private Button nextAndPrevious</Member>
+        <Member type="Field">static string itemsDataPath</Member>
         <Member type="Method">public void RenderList()</Member>
         <Member type="Method">public void AddToList(Transform tr)</Member>
         <Member type="Method">public void DeleteCrafted(List&lt;Item&gt; crafted)</Member>
@@ -65,18 +66,18 @@
       </Entity>
       <Entity type="Comment">
         <Text>Will manage the inventory in  a list ( like skyrim ) Dragging wont be a thing. you'll have to select and then press a button to use or drop the item.</Text>
-        <Location left="736" top="426" />
+        <Location left="758" top="434" />
         <Size width="160" height="99" />
       </Entity>
       <Entity type="Comment">
         <Text>Crafting station will check if you have the neccesary items for the selected crafting recipe.</Text>
-        <Location left="276" top="399" />
+        <Location left="302" top="434" />
         <Size width="160" height="110" />
       </Entity>
       <Entity type="Class">
         <Name>Item</Name>
         <Access>Public</Access>
-        <Location left="194" top="715" />
+        <Location left="220" top="750" />
         <Size width="301" height="128" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public String name</Member>
@@ -87,7 +88,7 @@
       <Entity type="Class">
         <Name>GameManager</Name>
         <Access>Public</Access>
-        <Location left="1339" top="10" />
+        <Location left="1365" top="45" />
         <Size width="255" height="145" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public string CurObjectivePath</Member>
@@ -99,24 +100,31 @@
       <Entity type="Class">
         <Name>DialogueManager</Name>
         <Access>Public</Access>
-        <Location left="978" top="399" />
+        <Location left="1018" top="434" />
         <Size width="258" height="256" />
         <Collapsed>False</Collapsed>
+        <Member type="Field">Option options</Member>
+        <Member type="Field">string LinkedQuest</Member>
+        <Member type="Field">public List&lt;Item&gt; linkedItems = new List&lt;Item&gt;()</Member>
+        <Member type="Method">public void LoadNewDialogue()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Npc</Name>
         <Access>Public</Access>
-        <Location left="768" top="630" />
-        <Size width="162" height="216" />
+        <Location left="758" top="664" />
+        <Size width="208" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Method">public void Interact()</Member>
+        <Member type="Method">public void GenBox(optCount i)</Member>
+        <Member type="Method">public void AddItem()</Member>
+        <Member type="Method">public void AddQuest()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>Minotaur</Name>
         <Access>Public</Access>
-        <Location left="852" top="10" />
+        <Location left="878" top="45" />
         <Size width="438" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public int currentHealth</Member>
@@ -124,12 +132,15 @@
         <Member type="Field">public int health</Member>
         <Member type="Method">void MakeAction()</Member>
         <Member type="Method">IEnumerator ActionLength(float ActionTime)</Member>
+        <Member type="Method">public void BullCharge()</Member>
+        <Member type="Method">public void Overhead()</Member>
+        <Member type="Method">public void Sweep()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>CombatManager</Name>
         <Access>Public</Access>
-        <Location left="519" top="10" />
+        <Location left="545" top="45" />
         <Size width="258" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public Enum WeaponType</Member>
@@ -144,7 +155,7 @@
       <Entity type="Class">
         <Name>UIManager</Name>
         <Access>Public</Access>
-        <Location left="1339" top="399" />
+        <Location left="1365" top="434" />
         <Size width="220" height="256" />
         <Collapsed>False</Collapsed>
         <Member type="Method">public void UpdateHealth()</Member>
@@ -153,18 +164,28 @@
         <Member type="Method">public void UpdateObj()</Member>
         <Modifier>None</Modifier>
       </Entity>
+      <Entity type="Class">
+        <Name>Option</Name>
+        <Access>Public</Access>
+        <Location left="1018" top="711" />
+        <Size width="254" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Text text</Member>
+        <Member type="Field">string linkedOption</Member>
+        <Modifier>None</Modifier>
+      </Entity>
     </Entities>
     <Relationships>
       <Relationship type="Association" first="1" second="0">
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>302</X>
-          <Y>33</Y>
+          <X>328</X>
+          <Y>68</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>294</X>
-          <Y>33</Y>
+          <X>320</X>
+          <Y>68</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -175,12 +196,12 @@
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>414</X>
-          <Y>138</Y>
+          <X>440</X>
+          <Y>173</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>414</X>
-          <Y>138</Y>
+          <X>440</X>
+          <Y>173</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -191,12 +212,12 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>291</X>
-          <Y>242</Y>
+          <X>317</X>
+          <Y>277</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>299</X>
-          <Y>242</Y>
+          <X>325</X>
+          <Y>277</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -207,8 +228,8 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>423</X>
-          <Y>540</Y>
+          <X>449</X>
+          <Y>575</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
@@ -219,8 +240,8 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>423</X>
-          <Y>569</Y>
+          <X>449</X>
+          <Y>604</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -231,12 +252,12 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>550</X>
-          <Y>796</Y>
+          <X>584</X>
+          <Y>847</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>579</X>
-          <Y>680</Y>
+          <X>605</X>
+          <Y>715</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -247,8 +268,8 @@
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="False">
-          <X>142</X>
-          <Y>798</Y>
+          <X>156</X>
+          <Y>845</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -259,16 +280,16 @@
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>
-      <Relationship type="Association" first="10" second="9">
+      <Relationship type="Association" first="9" second="10">
         <StartOrientation>Horizontal</StartOrientation>
-        <EndOrientation>Vertical</EndOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>965</X>
-          <Y>803</Y>
+          <X>993</X>
+          <Y>634</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1111</X>
-          <Y>680</Y>
+          <X>993</X>
+          <Y>688</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -289,12 +310,12 @@
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>648</X>
-          <Y>680</Y>
+          <X>674</X>
+          <Y>715</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>743</X>
-          <Y>798</Y>
+          <X>733</X>
+          <Y>847</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -305,8 +326,8 @@
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>748</X>
-          <Y>291</Y>
+          <X>774</X>
+          <Y>326</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
@@ -333,12 +354,58 @@
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>707</X>
-          <Y>332</Y>
+          <X>733</X>
+          <Y>367</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1449</X>
-          <Y>373</Y>
+          <X>1475</X>
+          <Y>408</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="13" second="10">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1489</X>
+          <Y>853</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="9" second="14">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1144</X>
+          <Y>686</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="13" second="9">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1340</X>
+          <Y>520</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="7" second="12">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>10</X>
+          <Y>895</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>623</X>
+          <Y>20</Y>
         </BendPoint>
         <Direction>Bidirectional</Direction>
         <AssociationType>Association</AssociationType>
