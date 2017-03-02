@@ -4,40 +4,38 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
-    public Animator anim;
+    Animator tabletAnim;
     GameObject healthObj;
     GameObject bossObj;
-    public float health;
-    public float bossHealth = 100;
-    public bool hpOpen;
-    public bool bhpOpen;
+    GameObject ObjectiveObj;
+    bool hpOpen;
+    bool bhpOpen;
     
-    public float OocTime;
+    public float oocTime;
 
     bool tablet = false;
 
     Coroutine Oocc;
 	// Use this for initialization
 	void Start () {
-        anim = GameObject.FindGameObjectWithTag("Tablet").GetComponent<Animator>();
+        tabletAnim = GameObject.FindGameObjectWithTag("Tablet").GetComponent<Animator>();
         healthObj = GameObject.FindGameObjectWithTag("Health");
         bossObj = GameObject.FindGameObjectWithTag("BossHP");
+        ObjectiveObj = GameObject.FindGameObjectWithTag("CurrentObjective");
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetButtonDown("Jump")) {
             ToggleTablet();
-            BossHealthUpdate("Minotaur",bossHealth);
-            bossHealth -= 10;
+            BossHealthUpdate("Minotaur",10);
             }
 	}
     void ToggleTablet () {
         tablet = !tablet;
-        anim.SetBool("Open", tablet);
+        tabletAnim.SetBool("Open", tablet);
     }
-    public void HealthUpdate (int hit) {
-        health -= hit;
+    public void HealthUpdate (float health) {
         healthObj.GetComponent<Image>().fillAmount = health / 100;
         healthObj.GetComponent<Animator>().SetBool("Open", true);
         if (Oocc != null) {
@@ -55,10 +53,13 @@ public class UIManager : MonoBehaviour {
         bossObj.transform.GetComponent<Image>().fillAmount = bhp / 100;
     }
     IEnumerator Ooc() {
-        yield return new WaitForSeconds(OocTime);
+        yield return new WaitForSeconds(oocTime);
         healthObj.GetComponent<Animator>().SetBool("Open", false);
         yield return null;
 
+    }
+    public void CCObjective(string objective) {
+        ObjectiveObj.transform.GetChild(0).GetComponent<Text>().text = objective;
     }
 
 }
