@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ItemDataBase>
+	<List>
+		<Item>
+			<ItemName>sword</ItemName>
+			<ItemID>0</ItemID>
+		</Item>
+		<Item>
+			<ItemName>shield</ItemName>
+			<ItemID>1</ItemID>
+		</Item>
+	</List>
+</ItemDataBase>	
