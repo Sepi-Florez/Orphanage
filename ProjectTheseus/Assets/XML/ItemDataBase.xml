@@ -4,7 +4,8 @@
     <Item>
       <ItemName>Mango</ItemName>
       <ItemID>0</ItemID>
-      <Count>0</Count>
+      <count>0</count>
+      <Category>0</Category>
     </Item>
   </List>
 </ItemDataBase>

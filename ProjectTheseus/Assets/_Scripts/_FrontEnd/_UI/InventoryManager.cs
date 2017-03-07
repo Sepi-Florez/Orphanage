@@ -10,6 +10,8 @@ using System.Xml.Serialization;
 public class InventoryManager : MonoBehaviour {
     public string dataPath;
     public ItemDatabase dbList;
+    Transform inventoryObj;
+    public GameObject ItemPref;
     public List<Item>inventory = new List<Item>();
 	void Awake () {
         if (File.Exists(Application.dataPath + dataPath)) {
@@ -17,25 +19,36 @@ public class InventoryManager : MonoBehaviour {
             XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
             ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
             stream.Close();
-            a = dbList;
+            dbList = a;
             print("Loaded Database");
         }
         else {
             dbList = new ItemDatabase();
             print("Did not load Database");
         }
+        inventoryObj = GameObject.FindGameObjectWithTag("Inventory").transform;
     }
 
 	void Update () {
-
+        if (Input.GetButtonDown("Jump")) {
+            AddItem(0, 2);
+        }
 	}
     public void AddItem (int ID, int count) {
-        inventory.Add(dbList.itemList[ID]);
-        inventory[0].count = count;
-        Organize();
+        if (dbList.itemList.Count > ID) {
+            inventory.Add(dbList.itemList[ID]);
+            inventory[0].count = count;
+            Visualize(dbList.itemList[ID],0); 
+            Organize();
+        }
     }
-    public void Organize() {
+    void Organize() {
 
+    }
+    public void Visualize(Item newItem, int option) {
+        Transform insItem = (Transform)Instantiate(ItemPref, inventoryObj.position, Quaternion.identity).transform;
+        insItem.transform.SetParent(inventoryObj.GetChild(newItem.category));
+        insItem.GetChild(0).GetComponent<Text>().text = newItem.itemName + newItem.count;
     }
     public void CreateItem(Transform creator) {
         if (creator.GetChild(0).transform.GetChild(2).GetComponent<Text>().text != null) {
@@ -61,8 +74,9 @@ public class Item {
     public string itemName;
     [XmlElement("ItemID")]
     public int itemID;
-    [XmlElement("Count")]
     public int count;
+    [XmlElement("Category")]
+    public int category;
 
     public Item() {
 
