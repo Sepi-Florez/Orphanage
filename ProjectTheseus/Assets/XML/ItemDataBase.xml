@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ItemDataBase>
-	<List>
-		<Item>
-			<ItemName>sword</ItemName>
-			<ItemID>0</ItemID>
-		</Item>
-		<Item>
-			<ItemName>shield</ItemName>
-			<ItemID>1</ItemID>
-		</Item>
-	</List>
-</ItemDataBase>	
+<?xml version="1.0" encoding="Windows-1252"?>
+<ItemDataBase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <List>
+    <Item>
+      <ItemName>Mango</ItemName>
+      <ItemID>0</ItemID>
+      <Count>0</Count>
+    </Item>
+  </List>
+</ItemDataBase>
