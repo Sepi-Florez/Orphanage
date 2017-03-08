@@ -7,5 +7,17 @@
       <count>0</count>
       <Category>0</Category>
     </Item>
+    <Item>
+      <ItemName>Sword</ItemName>
+      <ItemID>1</ItemID>
+      <count>10</count>
+      <Category>1</Category>
+    </Item>
+    <Item>
+      <ItemName>Gun</ItemName>
+      <ItemID>2</ItemID>
+      <count>0</count>
+      <Category>1</Category>
+    </Item>
   </List>
 </ItemDataBase>
