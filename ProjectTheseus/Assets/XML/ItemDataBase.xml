@@ -6,18 +6,21 @@
       <ItemID>0</ItemID>
       <count>0</count>
       <Category>0</Category>
+      <Description>A tasty fruit</Description>
+    </Item>
+    <Item>
+      <ItemName>Shield</ItemName>
+      <ItemID>1</ItemID>
+      <count>0</count>
+      <Category>1</Category>
+      <Description>A sturdy shield</Description>
     </Item>
     <Item>
       <ItemName>Sword</ItemName>
-      <ItemID>1</ItemID>
-      <count>10</count>
-      <Category>1</Category>
-    </Item>
-    <Item>
-      <ItemName>Gun</ItemName>
       <ItemID>2</ItemID>
       <count>0</count>
       <Category>1</Category>
+      <Description>A sturdy sword</Description>
     </Item>
   </List>
 </ItemDataBase>

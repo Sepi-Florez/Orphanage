@@ -14,9 +14,14 @@ public class InventoryManager : MonoBehaviour {
     Transform equipObj;
     Transform materialObj;
 
+    public Button testButton;
+    public int testID;
+    public int testCount;
+
     public GameObject ItemPref;
-    public List<Item>inventory = new List<Item>();
-	void Awake () {
+    public List<Item> materials = new List<Item>();
+    public List<Item> equipment = new List<Item>();
+    void Awake () {
         if (File.Exists(Application.dataPath + dataPath)) {
             FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
@@ -36,46 +41,37 @@ public class InventoryManager : MonoBehaviour {
 
 	void Update () {
         if (Input.GetButtonDown("Jump")) {
-            AddItem(0, 2);
-        }
-        if (Input.GetButtonDown("Fire1")) {
-            AddItem(1, 10);
-        }
-        if (Input.GetButtonDown("Fire2")) {
-            AddItem(2, 10);
+            testButton.onClick.AddListener(() => AddItem(testID, testCount));
+
         }
 	}
-    public void AddItem (int ID, int count) {
+    public void AddItem(int ID, int count) {
         if (dbList.itemList.Count > ID) {
             switch (dbList.itemList[ID].category) {
                 case 0:
                     bool dub = true;
-                    for(int a = 0; inventory.Count > a; a++) {
+                    for (int a = 0; materials.Count > a; a++) {
 
-                        if(inventory[a].itemName == dbList.itemList[ID].itemName) {
-                            inventory[a].count += count;
+                        if (materials[a].itemName == dbList.itemList[ID].itemName) {
+                            materials[a].count += count;
                             Refresh(a);
                             dub = false;
                         }
-                        
+
                     }
                     if (dub) {
-                        CreateAdd(ID, count);
+                        materials.Add(dbList.itemList[ID]);
                     }
                     break;
                 case 1:
-                    CreateAdd(ID, count);
+                    equipment.Add(dbList.itemList[ID]);
+                    equipment[0].count = count;
                     break;
             }
+            Visualize(dbList.itemList[ID]);
 
         }
     }
-    public void CreateAdd(int ID, int count) {
-        inventory.Add(dbList.itemList[ID]);
-        inventory[0].count = count;
-        Visualize(dbList.itemList[ID]);
-    }
-
     void Organize() {
 
     }
@@ -85,24 +81,28 @@ public class InventoryManager : MonoBehaviour {
         insItem.GetChild(0).GetComponent<Text>().text = newItem.itemName;
         switch (newItem.category) {
             case 0:
-                insItem.transform.SetParent(equipObj);
-                insItem.transform.GetChild(2).GetComponent<Text>().text = inventory[0].count.ToString();
+                insItem.transform.SetParent(materialObj);
+                insItem.transform.GetChild(2).GetComponent<Text>().text = materials[0].count.ToString();
+                insItem.transform.GetChild(3).GetComponent<Text>().text = newItem.description;
                 break;
             case 1:
-                insItem.transform.SetParent(materialObj);
+                insItem.transform.SetParent(equipObj);
+                insItem.transform.GetChild(2).GetComponent<Text>().text = null;
+                insItem.transform.GetChild(3).GetComponent<Text>().text = newItem.description;
                 break;
         }
         Organize();
 
     }
     public void Refresh(int num) {
-        equipObj.GetChild(num).transform.GetChild(2).GetComponent<Text>().text = inventory[num].count.ToString();
+        materialObj.GetChild(num).transform.GetChild(2).GetComponent<Text>().text = materials[num].count.ToString();
     }
     public void CreateItem(Transform creator) {
         if (creator.GetChild(0).transform.GetChild(2).GetComponent<Text>().text != null) {
             Item newItem = new Item();
             newItem.itemName = creator.GetChild(0).transform.GetChild(2).GetComponent<Text>().text;
             newItem.category = Convert.ToInt32(creator.GetChild(1).transform.GetChild(2).GetComponent<Text>().text);
+            newItem.description = creator.GetChild(2).transform.GetChild(2).GetComponent<Text>().text;
             newItem.itemID = dbList.itemList.Count;
             dbList.itemList.Add(newItem);
             XmlSerializer writer = new XmlSerializer(typeof(ItemDatabase));
@@ -126,14 +126,17 @@ public class Item {
     public int count;
     [XmlElement("Category")]
     public int category;
+    [XmlElement("Description")]
+    public string description;
 
     public Item() {
 
     }
-    public Item(string _itemName, int _itemID, int _count) {
+    public Item(string _itemName, int _itemID, int _count,int _category, string _description ) {
         itemName = _itemName;
         itemID = _itemID;
-        count = _count;
+        category = _category;
+        description = _description;
     }
 }
 [XmlRoot("ItemDataBase")]
