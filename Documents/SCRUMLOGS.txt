@@ -1,0 +1,51 @@
+______
+Week 09
+
+
+Maaike
+------
+Working on lady NPC model
+No problems
+
+Walter
+------
+Fixed movement
+Combat is up next
+No problems
+
+Gerwin
+------
+Looking at scale of everything
+making terrain
+No Problems
+
+Janneke
+------
+Finishing up sword
+No Problems
+
+Rilana
+------
+Finishing up organisation
+No Problems
+_______
+Week 10
+
+
+Maaike
+------
+
+Walter
+------
+
+
+Gerwin
+------
+
+
+Janneke
+------
+
+
+Rilana
+------
