@@ -66,23 +66,24 @@ public class InventoryManager : MonoBehaviour {
                 case 1:
                     equipment.Add(dbList.itemList[ID]);
                     equipment[0].count = count;
+                    Visualize(dbList.itemList[ID], count);
                     break;
             }
-            Visualize(dbList.itemList[ID]);
+
 
         }
     }
     void Organize() {
 
     }
-    public void Visualize(Item newItem) {
+    public void Visualize(Item newItem,int count) {
         print("Visualizing");
         Transform insItem = (Transform)Instantiate(ItemPref, inventoryObj.position, Quaternion.identity).transform;
         insItem.GetChild(0).GetComponent<Text>().text = newItem.itemName;
         switch (newItem.category) {
             case 0:
                 insItem.transform.SetParent(materialObj);
-                insItem.transform.GetChild(2).GetComponent<Text>().text = materials[0].count.ToString();
+                insItem.transform.GetChild(2).GetComponent<Text>().text = count.ToString();
                 insItem.transform.GetChild(3).GetComponent<Text>().text = newItem.description;
                 break;
             case 1:
@@ -99,11 +100,7 @@ public class InventoryManager : MonoBehaviour {
     }
     public void CreateItem(Transform creator) {
         if (creator.GetChild(0).transform.GetChild(2).GetComponent<Text>().text != null) {
-            Item newItem = new Item();
-            newItem.itemName = creator.GetChild(0).transform.GetChild(2).GetComponent<Text>().text;
-            newItem.category = Convert.ToInt32(creator.GetChild(1).transform.GetChild(2).GetComponent<Text>().text);
-            newItem.description = creator.GetChild(2).transform.GetChild(2).GetComponent<Text>().text;
-            newItem.itemID = dbList.itemList.Count;
+            Item newItem = new Item(creator.GetChild(0).transform.GetChild(2).GetComponent<Text>().text, dbList.itemList.Count, Convert.ToInt32(creator.GetChild(1).transform.GetChild(2).GetComponent<Text>().text), creator.GetChild(2).transform.GetChild(2).GetComponent<Text>().text);
             dbList.itemList.Add(newItem);
             XmlSerializer writer = new XmlSerializer(typeof(ItemDatabase));
             FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Create);
@@ -132,7 +129,7 @@ public class Item {
     public Item() {
 
     }
-    public Item(string _itemName, int _itemID, int _count,int _category, string _description ) {
+    public Item(string _itemName, int _itemID,int _category, string _description ) {
         itemName = _itemName;
         itemID = _itemID;
         category = _category;

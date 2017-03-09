@@ -22,5 +22,12 @@
       <Category>1</Category>
       <Description>A sturdy sword</Description>
     </Item>
+    <Item>
+      <ItemName>Stone</ItemName>
+      <ItemID>3</ItemID>
+      <count>0</count>
+      <Category>0</Category>
+      <Description>Just a piece of stone</Description>
+    </Item>
   </List>
 </ItemDataBase>
