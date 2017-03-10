@@ -34,7 +34,6 @@ public class InventoryManager : MonoBehaviour {
             dbList = new ItemDatabase();
             print("Did not load Database");
         }
-        inventoryObj = GameObject.FindGameObjectWithTag("Inventory").transform;
         equipObj = GameObject.FindGameObjectWithTag("equipObject").transform;
         materialObj = GameObject.FindGameObjectWithTag("materialObject").transform;
     }
@@ -61,6 +60,7 @@ public class InventoryManager : MonoBehaviour {
                     }
                     if (dub) {
                         materials.Add(dbList.itemList[ID]);
+                        Visualize(dbList.itemList[ID], count);
                     }
                     break;
                 case 1:
@@ -78,7 +78,7 @@ public class InventoryManager : MonoBehaviour {
     }
     public void Visualize(Item newItem,int count) {
         print("Visualizing");
-        Transform insItem = (Transform)Instantiate(ItemPref, inventoryObj.position, Quaternion.identity).transform;
+        Transform insItem = (Transform)Instantiate(ItemPref, Vector3.zero, Quaternion.identity).transform;
         insItem.GetChild(0).GetComponent<Text>().text = newItem.itemName;
         switch (newItem.category) {
             case 0:
