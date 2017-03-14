@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider col;
     private Rigidbody rigid;
 
+    float xRot;
+
     private void Start()
     {
         cameraSettings.myCamera = GetComponentInChildren<Camera>().transform;
@@ -87,7 +89,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawRay(transform.position, ΔB);//θB);
     }
 
-    public void LookRotation()
+    /*public void LookRotation()
     {
         charTgtRot = transform.localRotation;
         camTgtRot = cameraSettings.myCamera.localRotation;
@@ -102,9 +104,9 @@ public class PlayerController : MonoBehaviour
 
         transform.localRotation = Quaternion.Slerp(transform.localRotation, charTgtRot, cameraSettings.camSmthTime * Time.deltaTime);
         cameraSettings.myCamera.localRotation = Quaternion.Slerp(cameraSettings.myCamera.localRotation, camTgtRot, cameraSettings.camSmthTime * Time.deltaTime);
-    }
+    }*/
 
-    Quaternion ClampRotationXAxis(Quaternion q)
+    /*Quaternion ClampRotationXAxis(Quaternion q)
     {
         q.x /= q.w;
         q.y /= q.w;
@@ -118,6 +120,17 @@ public class PlayerController : MonoBehaviour
         q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
 
         return q;
+
+        //Mathf.Clamp(xRot, -(Mathf.Deg2Rad * cameraSettings.clampΔ/2), (Mathf.Deg2Rad * cameraSettings.clampΔ / 2)) ; }//{ xRot = Mathf.Tan(0.5f * Mathf.Deg2Rad * Mathf.Clamp(2.0f * Mathf.Rad2Deg * Mathf.Atan(xRot), -(cameraSettings.clampΔ / 2), (cameraSettings.clampΔ / 2))); } //{ xRot = Mathf.Clamp(xRot, -(cameraSettings.clampΔ / 2), (cameraSettings.clampΔ / 2)); }
+    }*/
+    public void LookRotation()
+    {
+        xRot += Input.GetAxis("Mouse Y") * cameraSettings.Sensitivity.x;
+
+        if (cameraSettings.clampRot) {xRot = Mathf.Clamp(xRot, -(cameraSettings.clampΔ / 2), (cameraSettings.clampΔ / 2));}
+
+        cameraSettings.myCamera.transform.localEulerAngles = new Vector3(-xRot, 0, 0);
+        transform.Rotate(0, Input.GetAxis("Mouse X") * cameraSettings.Sensitivity.y, 0);
     }
 
     private bool isGrnded()

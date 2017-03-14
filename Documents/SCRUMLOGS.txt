@@ -1,0 +1,61 @@
+______
+Week 09
+
+
+Maaike
+------
+Working on lady NPC model
+No problems
+
+Walter
+------
+Fixed movement
+Combat is up next
+No problems
+
+Gerwin
+------
+Looking at scale of everything
+making terrain
+No Problems
+
+Janneke
+------
+Finishing up sword
+No Problems
+
+Rilana
+------
+Finishing up organisation
+No Problems
+_______
+Week 10
+
+
+Maaike
+------
+Character Model deze week af
+Wat problemen met hair design.
+
+Walter
+------
+Movement last bugs fixed.
+Diaogue system deze week af
+
+
+Gerwin
+------
+Terrain wat moeilijker dan hij dacht
+Temple modular assets erbij voor sprint 2 voor afwisseling
+
+
+Janneke
+------
+Sword is finished
+Working on environmental props
+
+
+Rilana
+------
+Busy with arms
+rigging on friday
