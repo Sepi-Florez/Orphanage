@@ -45,7 +45,7 @@ public class InventoryManager : MonoBehaviour {
         }
 	}
     public void AddItem(int ID, int count) {
-        if (dbList.itemList.Count > ID) {
+        if (dbList.itemList.Count > ID && count > 0) {
             switch (dbList.itemList[ID].category) {
                 case 0:
                     bool dub = true;
@@ -79,6 +79,7 @@ public class InventoryManager : MonoBehaviour {
     public void Visualize(Item newItem,int count) {
         print("Visualizing");
         Transform insItem = (Transform)Instantiate(ItemPref, Vector3.zero, Quaternion.identity).transform;
+
         insItem.GetChild(0).GetComponent<Text>().text = newItem.itemName;
         switch (newItem.category) {
             case 0:
@@ -92,6 +93,9 @@ public class InventoryManager : MonoBehaviour {
                 insItem.transform.GetChild(3).GetComponent<Text>().text = newItem.description;
                 break;
         }
+        insItem.localScale = new Vector3(1, 1, 1);
+        insItem.localRotation = Quaternion.Euler(0, 0, 0);
+        insItem.localPosition = new Vector3(0, 0, 0);
         Organize();
 
     }

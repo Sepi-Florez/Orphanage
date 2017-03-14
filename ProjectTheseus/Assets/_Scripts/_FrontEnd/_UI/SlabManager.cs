@@ -8,7 +8,7 @@ public class SlabManager : MonoBehaviour {
 
     public void Awake() {
         menus = GameObject.FindGameObjectsWithTag("Menu");
-        for (int a = 0; menus.Length > a; a++) {
+        for (int a = 1; menus.Length > a; a++) {
             menus[a].GetComponent<CanvasGroup>().interactable = false;
             menus[a].GetComponent<CanvasGroup>().alpha = 0;
         }
