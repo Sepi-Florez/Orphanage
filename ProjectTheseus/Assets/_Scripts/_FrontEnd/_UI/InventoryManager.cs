@@ -6,6 +6,7 @@ using System.IO;
 using System;
 using System.Xml;
 using System.Xml.Serialization;
+using UnityEngine.EventSystems;
 [Serializable]
 public class InventoryManager : MonoBehaviour {
     public string dataPath;
@@ -76,28 +77,37 @@ public class InventoryManager : MonoBehaviour {
     void Organize() {
 
     }
+    //Visualizes the items in the UI and gives them the needed information aswell as adding an event trigger to detect selection
     public void Visualize(Item newItem,int count) {
         print("Visualizing");
         Transform insItem = (Transform)Instantiate(ItemPref, Vector3.zero, Quaternion.identity).transform;
-
         insItem.GetChild(0).GetComponent<Text>().text = newItem.itemName;
+        EventTrigger trigger = insItem.GetComponentInParent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerEnter;
         switch (newItem.category) {
             case 0:
                 insItem.transform.SetParent(materialObj);
                 insItem.transform.GetChild(2).GetComponent<Text>().text = count.ToString();
                 insItem.transform.GetChild(3).GetComponent<Text>().text = newItem.description;
+                entry.callback.AddListener((eventdata) => { Selected(materials.Count); });
                 break;
-            case 1:
+            case 1: 
                 insItem.transform.SetParent(equipObj);
                 insItem.transform.GetChild(2).GetComponent<Text>().text = null;
                 insItem.transform.GetChild(3).GetComponent<Text>().text = newItem.description;
                 break;
         }
+        trigger.triggers.Add(entry);
         insItem.localScale = new Vector3(1, 1, 1);
         insItem.localRotation = Quaternion.Euler(0, 0, 0);
         insItem.localPosition = new Vector3(0, 0, 0);
         Organize();
 
+    }
+
+    public void Selected(int num) {
+        print("Selected " + num);
     }
     public void Refresh(int num) {
         materialObj.GetChild(num).transform.GetChild(2).GetComponent<Text>().text = materials[num].count.ToString();
