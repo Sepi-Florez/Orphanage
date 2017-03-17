@@ -50,41 +50,9 @@ public class InventoryManager : MonoBehaviour {
         }
 	}
     public void Use() {
-
-    }
-    public void AddItem(int ID, int count) {
-        if (dbList.itemList.Count > ID && count > 0) {
-            switch (dbList.itemList[ID].category) {
-                case 0:
-                    bool dub = true;
-                    for (int a = 0; materials.Count > a; a++) {
-
-                        if (materials[a].itemName == dbList.itemList[ID].itemName) {
-                            materials[a].count += count;
-                            Refresh(a);
-                            dub = false;
-                        }
-
-                    }
-                    if (dub) {
-                        materials.Add(dbList.itemList[ID]);
-                        print(materials.Count);
-                        Visualize(dbList.itemList[ID], count);
-                    }
-                    break;
-                case 1:
-                    equipment.Add(dbList.itemList[ID]);
-                    equipment[0].count = count;
-                    Visualize(dbList.itemList[ID], count);
-                    break;
-            }
-
-
-        }
     }
     // Goes through a list of items used to craft an object. It'll get rid of all the items;
     public void DeleteCrafted(List<Item> CraftList) {
-
     }
     // Deletes item from the inventory
     public void DeleteItem(int category,int i) {
@@ -103,6 +71,62 @@ public class InventoryManager : MonoBehaviour {
                     equipObj.GetChild(a).GetComponent<ButtonHelper>().i--;
                 }
                 break;
+        }
+    }
+    //activates when pointerEnters a button 
+    public void Selected(int num) {
+        switch (SlabManager.thisManager.tabOpen) {
+            case 0:
+                materialObj.GetChild(selected).GetComponent<Image>().color = Color.white;
+                selected = num;
+                materialObj.GetChild(selected).GetComponent<Image>().color = Color.red;
+                break;
+            case 1:
+                equipObj.GetChild(selected).GetComponent<Image>().color = Color.white;
+                selected = num;
+                equipObj.GetChild(selected).GetComponent<Image>().color = Color.red;
+                break;
+        }
+        print("Selected " + num);
+    }
+    public void ResetSelected() {
+        switch (SlabManager.thisManager.tabOpen) {
+            case 0:
+                for (int a = 0; a < materialObj.childCount; a++) { 
+                    materialObj.GetChild(a).GetComponent<Image>().color = Color.white;
+                }
+                break;
+            case 1:
+                for (int a = 0; a < materialObj.childCount; a++) {
+                    equipObj.GetChild(a).GetComponent<Image>().color = Color.white;
+                }
+                break;
+        }
+    }
+    public void AddItem(int ID, int count) {
+        if (dbList.itemList.Count > ID && count > 0) {
+            switch (dbList.itemList[ID].category) {
+                case 0:
+                    bool dub = true;
+                    for (int a = 0; materials.Count > a; a++) {
+                        if (materials[a].itemName == dbList.itemList[ID].itemName) {
+                            materials[a].count += count;
+                            Refresh(a);
+                            dub = false;
+                        }
+                    }
+                    if (dub) {
+                        materials.Add(dbList.itemList[ID]);
+                        print(materials.Count);
+                        Visualize(dbList.itemList[ID], count);
+                    }
+                    break;
+                case 1:
+                    equipment.Add(dbList.itemList[ID]);
+                    equipment[0].count = count;
+                    Visualize(dbList.itemList[ID], count);
+                    break;
+            }
         }
     }
     void Organize() {
@@ -131,22 +155,7 @@ public class InventoryManager : MonoBehaviour {
         Organize();
 
     }
-    //activates when pointerEnters a button 
-    public void Selected(int category, int num) {
-        switch (category) {
-            case 0:
-                materialObj.GetChild(selected).GetComponent<Image>().color = Color.white;
-                selected = num;
-                materialObj.GetChild(selected).GetComponent<Image>().color = Color.red;
-                break;
-            case 1:
-                equipObj.GetChild(selected).GetComponent<Image>().color = Color.white;
-                selected = num;
-                equipObj.GetChild(selected).GetComponent<Image>().color = Color.red;
-                break;
-        }
-        print("Selected " + num);
-    }
+
     // used to refresh count values of a certain button
     public void Refresh(int num) {
         materialObj.GetChild(num).transform.GetChild(2).GetComponent<Text>().text = materials[num].count.ToString();

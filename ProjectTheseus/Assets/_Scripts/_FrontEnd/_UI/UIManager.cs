@@ -24,7 +24,6 @@ public class UIManager : MonoBehaviour {
     }
 	void Start () {
 
-        tabletAnim = GameObject.FindGameObjectWithTag("Tablet").GetComponent<Animator>();
         healthObj = GameObject.FindGameObjectWithTag("Health");
         bossObj = GameObject.FindGameObjectWithTag("BossHP");
         ObjectiveObj = GameObject.FindGameObjectWithTag("CurrentObjective");
@@ -32,15 +31,8 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Jump")) {
-            ToggleTablet();
-            BossHealthUpdate("Minotaur",10);
-            }
+
 	}
-    void ToggleTablet () {
-        tablet = !tablet;
-        tabletAnim.SetBool("Open", tablet);
-    }
     public void HealthUpdate (float health) {
         healthObj.GetComponent<Image>().fillAmount = health / 100;
         healthObj.GetComponent<Animator>().SetBool("Open", true);
