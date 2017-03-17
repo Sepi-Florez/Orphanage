@@ -11,7 +11,7 @@
     <Item>
       <ItemName>Shield</ItemName>
       <ItemID>1</ItemID>
-      <count>0</count>
+      <count>2</count>
       <Category>1</Category>
       <Description>A sturdy shield</Description>
     </Item>
@@ -28,6 +28,13 @@
       <count>0</count>
       <Category>0</Category>
       <Description>Just a piece of stone</Description>
+    </Item>
+    <Item>
+      <ItemName>Clams</ItemName>
+      <ItemID>4</ItemID>
+      <count>0</count>
+      <Category>0</Category>
+      <Description>Very nice shells of the sea</Description>
     </Item>
   </List>
 </ItemDataBase>

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
+    public static UIManager thisManager;
+
     Animator tabletAnim;
     GameObject healthObj;
     GameObject bossObj;
@@ -17,7 +19,11 @@ public class UIManager : MonoBehaviour {
 
     Coroutine Oocc;
 	// Use this for initialization
+    void Awake () {
+        thisManager = this;
+    }
 	void Start () {
+
         tabletAnim = GameObject.FindGameObjectWithTag("Tablet").GetComponent<Animator>();
         healthObj = GameObject.FindGameObjectWithTag("Health");
         bossObj = GameObject.FindGameObjectWithTag("BossHP");

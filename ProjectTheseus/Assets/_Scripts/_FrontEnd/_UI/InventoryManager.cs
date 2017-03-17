@@ -9,20 +9,24 @@ using System.Xml.Serialization;
 using UnityEngine.EventSystems;
 [Serializable]
 public class InventoryManager : MonoBehaviour {
+    public static InventoryManager thisManager;
+
     public string dataPath;
     public ItemDatabase dbList;
-    Transform inventoryObj;
     Transform equipObj;
     Transform materialObj;
 
-    public Button testButton;
+    //Temporary Additem variables
     public int testID;
     public int testCount;
 
     public GameObject ItemPref;
+    public int selected;
     public List<Item> materials = new List<Item>();
     public List<Item> equipment = new List<Item>();
     void Awake () {
+        thisManager = this;
+
         if (File.Exists(Application.dataPath + dataPath)) {
             FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
@@ -41,10 +45,13 @@ public class InventoryManager : MonoBehaviour {
 
 	void Update () {
         if (Input.GetButtonDown("Jump")) {
-            testButton.onClick.AddListener(() => AddItem(testID, testCount));
+            AddItem(testID, testCount);
 
         }
 	}
+    public void Use() {
+
+    }
     public void AddItem(int ID, int count) {
         if (dbList.itemList.Count > ID && count > 0) {
             switch (dbList.itemList[ID].category) {
@@ -61,6 +68,7 @@ public class InventoryManager : MonoBehaviour {
                     }
                     if (dub) {
                         materials.Add(dbList.itemList[ID]);
+                        print(materials.Count);
                         Visualize(dbList.itemList[ID], count);
                     }
                     break;
@@ -74,6 +82,29 @@ public class InventoryManager : MonoBehaviour {
 
         }
     }
+    // Goes through a list of items used to craft an object. It'll get rid of all the items;
+    public void DeleteCrafted(List<Item> CraftList) {
+
+    }
+    // Deletes item from the inventory
+    public void DeleteItem(int category,int i) {
+        switch (category) {
+            case 0:
+                Destroy(materialObj.GetChild(i));
+                materials.RemoveAt(i);
+                for (int a = 0; a < materialObj.childCount; a++) {
+                    materialObj.GetChild(a).GetComponent<ButtonHelper>().i--;
+                }
+                break;
+            case 1:
+                Destroy(equipObj.GetChild(i));
+                equipment.RemoveAt(i);
+                for (int a = 0; a < materialObj.childCount; a++) {
+                    equipObj.GetChild(a).GetComponent<ButtonHelper>().i--;
+                }
+                break;
+        }
+    }
     void Organize() {
 
     }
@@ -82,15 +113,11 @@ public class InventoryManager : MonoBehaviour {
         print("Visualizing");
         Transform insItem = (Transform)Instantiate(ItemPref, Vector3.zero, Quaternion.identity).transform;
         insItem.GetChild(0).GetComponent<Text>().text = newItem.itemName;
-        EventTrigger trigger = insItem.GetComponentInParent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerEnter;
         switch (newItem.category) {
             case 0:
                 insItem.transform.SetParent(materialObj);
                 insItem.transform.GetChild(2).GetComponent<Text>().text = count.ToString();
                 insItem.transform.GetChild(3).GetComponent<Text>().text = newItem.description;
-                entry.callback.AddListener((eventdata) => { Selected(materials.Count); });
                 break;
             case 1: 
                 insItem.transform.SetParent(equipObj);
@@ -98,20 +125,33 @@ public class InventoryManager : MonoBehaviour {
                 insItem.transform.GetChild(3).GetComponent<Text>().text = newItem.description;
                 break;
         }
-        trigger.triggers.Add(entry);
         insItem.localScale = new Vector3(1, 1, 1);
         insItem.localRotation = Quaternion.Euler(0, 0, 0);
         insItem.localPosition = new Vector3(0, 0, 0);
         Organize();
 
     }
-
-    public void Selected(int num) {
+    //activates when pointerEnters a button 
+    public void Selected(int category, int num) {
+        switch (category) {
+            case 0:
+                materialObj.GetChild(selected).GetComponent<Image>().color = Color.white;
+                selected = num;
+                materialObj.GetChild(selected).GetComponent<Image>().color = Color.red;
+                break;
+            case 1:
+                equipObj.GetChild(selected).GetComponent<Image>().color = Color.white;
+                selected = num;
+                equipObj.GetChild(selected).GetComponent<Image>().color = Color.red;
+                break;
+        }
         print("Selected " + num);
     }
+    // used to refresh count values of a certain button
     public void Refresh(int num) {
         materialObj.GetChild(num).transform.GetChild(2).GetComponent<Text>().text = materials[num].count.ToString();
     }
+    // used for the ingame creating of items in the database
     public void CreateItem(Transform creator) {
         if (creator.GetChild(0).transform.GetChild(2).GetComponent<Text>().text != null) {
             Item newItem = new Item(creator.GetChild(0).transform.GetChild(2).GetComponent<Text>().text, dbList.itemList.Count, Convert.ToInt32(creator.GetChild(1).transform.GetChild(2).GetComponent<Text>().text), creator.GetChild(2).transform.GetChild(2).GetComponent<Text>().text);
