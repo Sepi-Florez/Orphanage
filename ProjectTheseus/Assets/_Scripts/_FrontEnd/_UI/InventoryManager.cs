@@ -21,7 +21,9 @@ public class InventoryManager : MonoBehaviour {
     public int testCount;
 
     public GameObject ItemPref;
+    public bool select = false;
     public int selected;
+    public Item selectedItem;
     public List<Item> materials = new List<Item>();
     public List<Item> equipment = new List<Item>();
     void Awake () {
@@ -50,6 +52,7 @@ public class InventoryManager : MonoBehaviour {
         }
 	}
     public void Use() {
+
     }
     // Goes through a list of items used to craft an object. It'll get rid of all the items;
     public void DeleteCrafted(List<Item> CraftList) {
@@ -58,16 +61,16 @@ public class InventoryManager : MonoBehaviour {
     public void DeleteItem(int category,int i) {
         switch (category) {
             case 0:
-                Destroy(materialObj.GetChild(i));
+                Destroy(materialObj.GetChild(i).gameObject);
                 materials.RemoveAt(i);
-                for (int a = 0; a < materialObj.childCount; a++) {
+                for (int a = i + 1; a < materialObj.childCount; a++) {
                     materialObj.GetChild(a).GetComponent<ButtonHelper>().i--;
                 }
                 break;
             case 1:
-                Destroy(equipObj.GetChild(i));
+                Destroy(equipObj.GetChild(i).gameObject);
                 equipment.RemoveAt(i);
-                for (int a = 0; a < materialObj.childCount; a++) {
+                for (int a = i + 1; a < materialObj.childCount; a++) {
                     equipObj.GetChild(a).GetComponent<ButtonHelper>().i--;
                 }
                 break;
@@ -75,21 +78,26 @@ public class InventoryManager : MonoBehaviour {
     }
     //activates when pointerEnters a button 
     public void Selected(int num) {
+        select = true;
         switch (SlabManager.thisManager.tabOpen) {
             case 0:
                 materialObj.GetChild(selected).GetComponent<Image>().color = Color.white;
                 selected = num;
                 materialObj.GetChild(selected).GetComponent<Image>().color = Color.red;
+                selectedItem = materials[selected];
                 break;
             case 1:
                 equipObj.GetChild(selected).GetComponent<Image>().color = Color.white;
                 selected = num;
                 equipObj.GetChild(selected).GetComponent<Image>().color = Color.red;
+                selectedItem = equipment[selected];
                 break;
         }
         print("Selected " + num);
     }
+    // resets selected for when changing tabs it doesnt stay selected
     public void ResetSelected() {
+        select = false;
         switch (SlabManager.thisManager.tabOpen) {
             case 0:
                 for (int a = 0; a < materialObj.childCount; a++) { 

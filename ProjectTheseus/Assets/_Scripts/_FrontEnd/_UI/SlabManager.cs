@@ -84,10 +84,10 @@ public class SlabManager : MonoBehaviour {
         if (Input.GetButtonDown("Cancel")) {
             SlabToggle();
         }
-        //if (Input.GetButtonDown("Use")) {
-        //    InventoryManager.thisManager.Use();
-        //}
-        //if(Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Use")) {
+            InventoryManager.thisManager.Use();
+        }
+       // if (Input.GetButtonDown("Fire1")) {
         //    InventoryManager.thisManager.Equip(0);
         //}
         //if (Input.GetButtonDown("Fire2")) {
