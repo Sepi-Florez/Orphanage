@@ -12,9 +12,7 @@ public class SlabManager : MonoBehaviour {
     Transform currentMenu;
     public GameObject[] tabs;
     public GameObject[] menus;
-     
-    bool input = true;
-
+    
     public int tabOpen = 0;
 
     void Awake() {
@@ -42,10 +40,7 @@ public class SlabManager : MonoBehaviour {
         }
 
     }
-    void Update() {
-        if (input) {
-            _Input();
-        }
+    void Update() { 
     }
     //Activated by a button to switch between menus
     public void ChangeTab(Transform tab) {
@@ -58,7 +53,7 @@ public class SlabManager : MonoBehaviour {
         currentTab = tab;
         tabOpen = tab.GetSiblingIndex();
         print(tabOpen);
-        InventoryManager.thisManager.ResetSelected();
+        //InventoryManager.thisManager.ResetSelected();
         currentTab.GetComponent<CanvasGroup>().interactable = true;
         currentTab.GetComponent<CanvasGroup>().blocksRaycasts = true;
         currentTab.GetComponent<CanvasGroup>().alpha = 1;
@@ -76,22 +71,9 @@ public class SlabManager : MonoBehaviour {
         currentMenu.GetComponent<CanvasGroup>().alpha = 1;
 
     }
+    // Temporary anim. Later on this will be activated in the arms
     public void SlabToggle() {
         anim.SetTrigger("Toggle");
         slabOpen = !slabOpen;
-    }
-    private void _Input() {
-        if (Input.GetButtonDown("Cancel")) {
-            SlabToggle();
-        }
-        if (Input.GetButtonDown("Use")) {
-            InventoryManager.thisManager.Use();
-        }
-       // if (Input.GetButtonDown("Fire1")) {
-        //    InventoryManager.thisManager.Equip(0);
-        //}
-        //if (Input.GetButtonDown("Fire2")) {
-        //    InventoryManager.thisManager.Equip(1);
-        //}
     }
 }
