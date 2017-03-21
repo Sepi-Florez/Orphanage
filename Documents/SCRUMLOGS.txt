@@ -59,3 +59,35 @@ Rilana
 ------
 Busy with arms
 rigging on friday
+________________
+Week 12
+(11 slome week, maaike ging weg )
+
+
+Maaike
+------
+Character Model deze week af
+Wat problemen met hair design.
+
+Walter
+------
+Movement last bugs fixed.
+Diaogue system deze week af
+
+
+Gerwin
+------
+Terrain wat moeilijker dan hij dacht
+Temple modular assets erbij voor sprint 2 voor afwisseling
+
+
+Janneke
+------
+Sword is finished
+Working on environmental props
+
+
+Rilana
+------
+Busy with arms
+rigging on friday

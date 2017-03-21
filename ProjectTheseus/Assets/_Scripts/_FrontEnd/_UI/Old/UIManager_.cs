@@ -52,7 +52,6 @@ public class UIManager : MonoBehaviour {
     }
     IEnumerator Ooc() {
         yield return new WaitForSeconds(oocTime);
-        healthObj.GetComponent<Animator>().SetBool("Open", false);
         yield return null;
 
     }
