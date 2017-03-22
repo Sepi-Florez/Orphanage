@@ -530,7 +530,7 @@
       <Entity type="Class">
         <Name>DataBaseManager</Name>
         <Access>Public</Access>
-        <Location left="421" top="10" />
+        <Location left="380" top="10" />
         <Size width="292" height="349" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public static DataBaseManager thisManager</Member>
@@ -541,18 +541,20 @@
       <Entity type="Class">
         <Name>InventoryManager</Name>
         <Access>Public</Access>
-        <Location left="773" top="10" />
+        <Location left="691" top="10" />
         <Size width="296" height="349" />
         <Collapsed>False</Collapsed>
         <Member type="Method">void Visualize(Item item)</Member>
+        <Member type="Method">void Discount(Item item)</Member>
         <Member type="Method">void Delete(Item item)</Member>
         <Member type="Method">void ItemSelect(Item item)</Member>
+        <Member type="Method">public void NewMethod()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>SlabManager</Name>
         <Access>Public</Access>
-        <Location left="1135" top="10" />
+        <Location left="1006" top="10" />
         <Size width="273" height="267" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public static SlabManager thisManager</Member>
