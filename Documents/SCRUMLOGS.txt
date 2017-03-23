@@ -60,34 +60,47 @@ Rilana
 Busy with arms
 rigging on friday
 ________________
-Week 12
+Week 12 part 1
 (11 slome week, maaike ging weg )
 
+Walter 
+-------
+Nog steeds bezig met combat en dialogue system ( duurt wat lang omdat het wat gecompliceerd is )
 
-Maaike
-------
-Character Model deze week af
-Wat problemen met hair design.
+Gerwin
+-------
+Island wordt deze weke afgerond en op git gezet ( kunnen dus volgende week beginnen met bouwen)
+Moet deze week verder met temple island en modular assets
 
-Walter
+Janneke 
+-------
+Heeft meeste van haar environmental props als af. Gaat beginnen met modular assets voor de village
+
+Rilana
 ------
-Movement last bugs fixed.
-Diaogue system deze week af
+Minotaur model is bijna af deze week beginnen aan texturing
+______________
+Week 12 part 2
+
+Walter 
+------
+Nog steeds bezig met combat en dialogue system ( duurt wat lang omdat het wat gecompliceerd is )
 
 
 Gerwin
 ------
-Terrain wat moeilijker dan hij dacht
-Temple modular assets erbij voor sprint 2 voor afwisseling
-
+Heeft main island geupload moet nog worden getextured door Janneke
 
 Janneke
-------
-Sword is finished
-Working on environmental props
+-------
+Moet van environmental props nog trees doen en kan daar bezig met het island 
 
-
+.
 Rilana
-------
-Busy with arms
-rigging on friday
+-------
+Minotaur finals edits en volgende week beginnen aan texturing
+
+
+
+
+
