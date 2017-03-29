@@ -553,7 +553,7 @@
       <Entity type="Class">
         <Name>Item</Name>
         <Access>Public</Access>
-        <Location left="407" top="514" />
+        <Location left="406" top="514" />
         <Size width="452" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">string itemName</Member>

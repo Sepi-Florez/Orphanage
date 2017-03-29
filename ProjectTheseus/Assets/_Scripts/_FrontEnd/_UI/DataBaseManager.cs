@@ -15,9 +15,8 @@ public class DataBaseManager : MonoBehaviour {
     public int effect;
     public int strength;
 
-
+    
     public static DataBaseManager thisManager;
-
     public ItemDatabase dbList;
 
     public string dataPath;
@@ -57,9 +56,11 @@ public class DataBaseManager : MonoBehaviour {
                 break;
                 
         }
+       
         dbList.itemList.Add(newItem);
-        XmlSerializer writer = new XmlSerializer(typeof(ItemDatabase));
-        FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Create);
+        Type[] extraType = {typeof(Weapon)};
+        XmlSerializer writer = new XmlSerializer(typeof(ItemDatabase),extraType);
+        FileStream stream = new FileStream(Environment.CurrentDirectory + dataPath, FileMode.Create);
         writer.Serialize(stream, dbList);
         stream.Close();
         }
@@ -67,6 +68,7 @@ public class DataBaseManager : MonoBehaviour {
 [XmlRoot("ItemDataBase")]
 public class ItemDatabase {
     [XmlArray("List")]
+    [XmlArrayItem("Item")]
     public List<Item> itemList;
 
     public ItemDatabase() {
@@ -87,8 +89,13 @@ public class Item {
 
     }
 }
+[Serializable]
 public class Weapon : Item {
+    [XmlElement("Damage")]
     int weaponDamage;
+    public Weapon() {
+
+    }
     public Weapon(int _weaponDamage) {
         weaponDamage = _weaponDamage;
 
@@ -98,9 +105,13 @@ public class Weapon : Item {
         description = _description;
     }
 }
+[Serializable]
 public class Consumable : Item {
+    [XmlElement("Consumable Strength")]
     int strength;
+    [XmlElement("Consumable Effect")]
     int effect;
+    [XmlElement("Count")]
     int count;
     public Consumable(int _strength, int _effect, int _count) {
         strength = _strength;
@@ -108,8 +119,9 @@ public class Consumable : Item {
         count = _count;
     }
 }
-
+[Serializable]
 public class CraftingObject : Item {
+    [XmlElement("Count")]
     int count;
     public CraftingObject(int _count) {
         count = _count;
