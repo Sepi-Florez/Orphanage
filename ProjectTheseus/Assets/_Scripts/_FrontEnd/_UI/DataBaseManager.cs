@@ -5,10 +5,10 @@ using System.IO;
 using System;
 using System.Xml;
 using System.Xml.Serialization;
-
 public class DataBaseManager : MonoBehaviour {
     public int itemType;
     public string itemName;
+    public string itemSpritePath;
     public string itemDescription;
     public int weaponDamage;
     public int count;
@@ -43,7 +43,7 @@ public class DataBaseManager : MonoBehaviour {
         }
     }
     void DataBaseAdd() {
-        Item newItem = null;
+        Item newItem = new Item(itemName,itemSpritePath,itemDescription);
         switch (itemType) {
             case 0:
                 newItem = new Weapon(weaponDamage);
@@ -54,21 +54,24 @@ public class DataBaseManager : MonoBehaviour {
             case 2:
                 newItem = new CraftingObject(count);
                 break;
+            case 3:
+                break;
                 
         }
        
         dbList.itemList.Add(newItem);
         Type[] extraType = {typeof(Weapon)};
-        XmlSerializer writer = new XmlSerializer(typeof(ItemDatabase),extraType);
-        FileStream stream = new FileStream(Environment.CurrentDirectory + dataPath, FileMode.Create);
+        XmlSerializer writer = new XmlSerializer(typeof(ItemDatabase));
+        FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Create);
+        print(Application.persistentDataPath + dataPath);
         writer.Serialize(stream, dbList);
         stream.Close();
+        print("added");
         }
 }
 [XmlRoot("ItemDataBase")]
 public class ItemDatabase {
     [XmlArray("List")]
-    [XmlArrayItem("Item")]
     public List<Item> itemList;
 
     public ItemDatabase() {
@@ -88,8 +91,12 @@ public class Item {
     public Item() {
 
     }
+    public Item(string _itemName, string _spritePath, string _description) {
+        itemName = _itemName;
+        spritePath = _spritePath;
+        description = _description;
+    }
 }
-[Serializable]
 public class Weapon : Item {
     [XmlElement("Damage")]
     int weaponDamage;
@@ -100,8 +107,9 @@ public class Weapon : Item {
         weaponDamage = _weaponDamage;
 
     }
-    public void Item(string _itemName,string _spritePath, string _description) {
+    public void Item(string _itemName, string _spritePath, string _description) {
         itemName = _itemName;
+        spritePath = _spritePath;
         description = _description;
     }
 }
