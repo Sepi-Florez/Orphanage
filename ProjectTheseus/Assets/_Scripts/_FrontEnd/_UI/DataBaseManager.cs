@@ -42,7 +42,11 @@ public class DataBaseManager : MonoBehaviour {
             DataBaseAdd();
         }
         if (Input.GetButtonDown("Fire1")) {
-            print("1");
+            FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
+            XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
+            print(dbList.itemList[0].count);
+            ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
+            stream.Close();
         }
     }
     void DataBaseAdd() {
@@ -64,7 +68,7 @@ public class DataBaseManager : MonoBehaviour {
         newItem.ID = dbList.itemList.Count;
         dbList.itemList.Add(newItem);
         XmlSerializer writer = new XmlSerializer(typeof(ItemDatabase));
-        FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Create);
+        FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Create);
         print(Application.persistentDataPath + dataPath);
         writer.Serialize(stream, dbList);
         stream.Close();
@@ -120,7 +124,7 @@ public class Consumable : Item {
     [XmlElement("Consumable_Effect")]
     public int effect;
     [XmlElement("Count")]
-    int count;
+    public int count;
     public Consumable() {
 
     }
