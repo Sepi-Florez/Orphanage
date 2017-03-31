@@ -41,28 +41,30 @@ public class DataBaseManager : MonoBehaviour {
         if (Input.GetButtonDown("Jump")) {
             DataBaseAdd();
         }
+        if (Input.GetButtonDown("Fire1")) {
+            print("1");
+        }
     }
     void DataBaseAdd() {
-        Item newItem = new Item(itemName,itemSpritePath,itemDescription);
+        Item newItem = null;
         switch (itemType) {
             case 0:
-                newItem = new Weapon(weaponDamage);
+                newItem = new Weapon(weaponDamage, itemName, itemSpritePath, itemDescription);
                 break;
             case 1:
-                newItem = new Consumable(strength,effect,count);
+                newItem = new Consumable(strength,effect,count, itemName, itemSpritePath, itemDescription);
                 break;
             case 2:
-                newItem = new CraftingObject(count);
+                newItem = new CraftingObject(count, itemName, itemSpritePath, itemDescription);
                 break;
             case 3:
                 break;
                 
         }
-       
+        newItem.ID = dbList.itemList.Count;
         dbList.itemList.Add(newItem);
-        Type[] extraType = {typeof(Weapon)};
         XmlSerializer writer = new XmlSerializer(typeof(ItemDatabase));
-        FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Create);
+        FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Create);
         print(Application.persistentDataPath + dataPath);
         writer.Serialize(stream, dbList);
         stream.Close();
@@ -71,7 +73,7 @@ public class DataBaseManager : MonoBehaviour {
 }
 [XmlRoot("ItemDataBase")]
 public class ItemDatabase {
-    [XmlArray("List")]
+    [XmlArray("DataBase")]
     public List<Item> itemList;
 
     public ItemDatabase() {
@@ -80,7 +82,12 @@ public class ItemDatabase {
 
 }
 [Serializable]
+[XmlInclude(typeof(Weapon))]
+[XmlInclude(typeof(Consumable))]
+[XmlInclude(typeof(CraftingObject))]
 public class Item {
+    [XmlElement("ID")]
+    public int ID;
     [XmlElement("ItemName")]
     public string itemName;
     [XmlElement("spritePath")]
@@ -91,23 +98,16 @@ public class Item {
     public Item() {
 
     }
-    public Item(string _itemName, string _spritePath, string _description) {
-        itemName = _itemName;
-        spritePath = _spritePath;
-        description = _description;
-    }
 }
+[Serializable]
 public class Weapon : Item {
     [XmlElement("Damage")]
-    int weaponDamage;
+    public int weaponDamage;
     public Weapon() {
 
     }
-    public Weapon(int _weaponDamage) {
+    public Weapon(int _weaponDamage, string _itemName, string _spritePath, string _description) {
         weaponDamage = _weaponDamage;
-
-    }
-    public void Item(string _itemName, string _spritePath, string _description) {
         itemName = _itemName;
         spritePath = _spritePath;
         description = _description;
@@ -115,23 +115,35 @@ public class Weapon : Item {
 }
 [Serializable]
 public class Consumable : Item {
-    [XmlElement("Consumable Strength")]
-    int strength;
-    [XmlElement("Consumable Effect")]
-    int effect;
+    [XmlElement("Consumable_Strength")]
+    public int strength;
+    [XmlElement("Consumable_Effect")]
+    public int effect;
     [XmlElement("Count")]
     int count;
-    public Consumable(int _strength, int _effect, int _count) {
+    public Consumable() {
+
+    }
+    public Consumable(int _strength, int _effect, int _count, string _itemName, string _spritePath, string _description) {
         strength = _strength;
         effect = _effect;
         count = _count;
+        itemName = _itemName;
+        spritePath = _spritePath;
+        description = _description;
     }
 }
 [Serializable]
 public class CraftingObject : Item {
     [XmlElement("Count")]
     int count;
-    public CraftingObject(int _count) {
+    public CraftingObject() {
+
+    }
+    public CraftingObject(int _count, string _itemName, string _spritePath, string _description) {
         count = _count;
+        itemName = _itemName;
+        spritePath = _spritePath;
+        description = _description;
     }
 }
