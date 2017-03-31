@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
+    public static UIManager thisManager;
+
     Animator tabletAnim;
     GameObject healthObj;
     GameObject bossObj;
@@ -17,8 +19,11 @@ public class UIManager : MonoBehaviour {
 
     Coroutine Oocc;
 	// Use this for initialization
+    void Awake () {
+        thisManager = this;
+    }
 	void Start () {
-        tabletAnim = GameObject.FindGameObjectWithTag("Tablet").GetComponent<Animator>();
+
         healthObj = GameObject.FindGameObjectWithTag("Health");
         bossObj = GameObject.FindGameObjectWithTag("BossHP");
         ObjectiveObj = GameObject.FindGameObjectWithTag("CurrentObjective");
@@ -26,15 +31,8 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Jump")) {
-            ToggleTablet();
-            BossHealthUpdate("Minotaur",10);
-            }
+
 	}
-    void ToggleTablet () {
-        tablet = !tablet;
-        tabletAnim.SetBool("Open", tablet);
-    }
     public void HealthUpdate (float health) {
         healthObj.GetComponent<Image>().fillAmount = health / 100;
         healthObj.GetComponent<Animator>().SetBool("Open", true);
@@ -54,7 +52,6 @@ public class UIManager : MonoBehaviour {
     }
     IEnumerator Ooc() {
         yield return new WaitForSeconds(oocTime);
-        healthObj.GetComponent<Animator>().SetBool("Open", false);
         yield return null;
 
     }
