@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     public struct MovementSettings
     {
         public float movSpd;// = 6;
-        public float RunMult;// = 2.0f;
+        public float runMult;// = 2.0f;
         [Space(10)]
         public float jumpApex;//= 3;
         public float secToApex;// = .5f;
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
                 rigid.velocity += jumpVelocity * transform.up;
             }
         }
-        charTrans.Translate(Input.GetAxis("Horizontal") * movement.movSpd * Time.deltaTime, 0, Input.GetAxis("Vertical") * movement.movSpd * Time.deltaTime); //move the character forth/ back with Vertical axis:
+        charTrans.Translate(Input.GetAxis("Horizontal") * movement.movSpd * (Input.GetButton("Sprint") ? movement.runMult : 1f) * Time.deltaTime, 0, Input.GetAxis("Vertical") * movement.movSpd * (Input.GetButton("Sprint") ? movement.runMult : 1f) * Time.deltaTime); //move the character forth/ back with Vertical axis:
     }
 
     private void OnDrawGizmos()
@@ -138,7 +138,9 @@ public class PlayerController : MonoBehaviour
         //m_PreviouslyGrounded = m_IsGrounded;
         RaycastHit hit;
 
-        if (Physics.SphereCast(transform.position, col.radius, Vector3.down, out hit, distToGrnd + movement.minDistToGrnd))//((col.height / 2f) - col.radius) + minDistToGrnd))
+        Debug.DrawRay(transform.position - new Vector3(0, col.height / 2, 0), -transform.up);
+
+        if (Physics.SphereCast(transform.position - new Vector3(0, col.height/2f, 0), col.radius, Vector3.down, out hit, distToGrnd + movement.minDistToGrnd))//((col.height / 2f) - col.radius) + minDistToGrnd))
         {
             return hit.distance <= distToGrnd + movement.minDistToGrnd;
         }
