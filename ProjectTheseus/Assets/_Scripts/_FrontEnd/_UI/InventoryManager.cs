@@ -18,15 +18,19 @@ public class InventoryManager : MonoBehaviour {
 
     List<Item> inventory = new List<Item>();
     List<Transform> inventoryButtons = new List<Transform>();
+
+ 
     void Awake() {
         thisManager = this;
         contentObjects = GameObject.FindGameObjectsWithTag("Content");
     }
+    // Is called upon when adding an item to the inventory
     void InventoryAdd(int itemID) {
         Item newItem = DataBaseManager.thisManager.ReturnItem(itemID);
         inventory.Add(newItem);
         inventoryButtons.Add(Visualize(newItem));
     }
+    //Instantiates the button which represents the item.
     Transform Visualize(Item item) {
         Transform newButton = Instantiate(buttonPref, Vector3.zero, Quaternion.identity).transform;
         newButton.SetParent(contentObjects[item.category].transform);
@@ -36,6 +40,7 @@ public class InventoryManager : MonoBehaviour {
     void Delete(Item item) {
 
     }
+    //Gives back a list full of items which are of the requested category
     List<Item> GetCategory(int category) {
         List<Item> scanList = new List<Item>();
         for (int a = 0; a < inventory.Count; a++) {
@@ -45,4 +50,4 @@ public class InventoryManager : MonoBehaviour {
         }
         return scanList;
     }
-}
+} 
