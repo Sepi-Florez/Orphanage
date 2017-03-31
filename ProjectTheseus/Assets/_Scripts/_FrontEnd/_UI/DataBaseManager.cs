@@ -24,8 +24,8 @@ public class DataBaseManager : MonoBehaviour {
     void Awake() {
         thisManager = this;
 
-        if (File.Exists(Application.dataPath + dataPath)) {
-            FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
+        if (File.Exists(Application.persistentDataPath + dataPath)) {
+            FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
             ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
             stream.Close();
@@ -41,6 +41,7 @@ public class DataBaseManager : MonoBehaviour {
         if (Input.GetButtonDown("Jump")) {
             DataBaseAdd();
         }
+<<<<<<< HEAD
         if (Input.GetButtonDown("Fire1")) {
             FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
@@ -48,6 +49,11 @@ public class DataBaseManager : MonoBehaviour {
             ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
             stream.Close();
         }
+=======
+    }
+    public Item ReturnItem(int ItemID) {
+        return dbList.itemList[ItemID];
+>>>>>>> 10f89f91b1c1df154c977b0ae0dfd5b5959c9f90
     }
     void DataBaseAdd() {
         Item newItem = null;
@@ -74,6 +80,9 @@ public class DataBaseManager : MonoBehaviour {
         stream.Close();
         print("added");
         }
+    public Item GetItem(int itemID) {
+        return dbList.itemList[itemID];
+    }
 }
 [XmlRoot("ItemDataBase")]
 public class ItemDatabase {
@@ -98,6 +107,8 @@ public class Item {
     public string spritePath;
     [XmlElement("Description")]
     public string description;
+    [XmlElement("Category")]
+    public int category;
 
     public Item() {
 
@@ -115,6 +126,7 @@ public class Weapon : Item {
         itemName = _itemName;
         spritePath = _spritePath;
         description = _description;
+        category = 0;
     }
 }
 [Serializable]
@@ -125,6 +137,7 @@ public class Consumable : Item {
     public int effect;
     [XmlElement("Count")]
     public int count;
+
     public Consumable() {
 
     }
@@ -135,12 +148,13 @@ public class Consumable : Item {
         itemName = _itemName;
         spritePath = _spritePath;
         description = _description;
+        category = 1;
     }
 }
 [Serializable]
 public class CraftingObject : Item {
     [XmlElement("Count")]
-    int count;
+    public int count;   
     public CraftingObject() {
 
     }
@@ -149,5 +163,6 @@ public class CraftingObject : Item {
         itemName = _itemName;
         spritePath = _spritePath;
         description = _description;
+        category = 2;
     }
 }
