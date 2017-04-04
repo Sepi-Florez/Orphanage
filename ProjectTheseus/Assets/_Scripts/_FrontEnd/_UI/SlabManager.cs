@@ -40,7 +40,10 @@ public class SlabManager : MonoBehaviour {
         }
 
     }
-    void Update() { 
+    void Update() {
+        if (Input.GetButtonDown("Cancel")) {
+            SlabToggle();
+        }
     }
     //Activated by a button to switch between menus
     public void ChangeTab(Transform tab) {

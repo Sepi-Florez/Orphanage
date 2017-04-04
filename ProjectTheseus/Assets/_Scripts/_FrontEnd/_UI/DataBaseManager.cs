@@ -42,7 +42,7 @@ public class DataBaseManager : MonoBehaviour {
             DataBaseAdd();
         }
         if (Input.GetButtonDown("Fire1")) {
-            FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
+            FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
             //print(dbList.itemList[0].count);
             ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;

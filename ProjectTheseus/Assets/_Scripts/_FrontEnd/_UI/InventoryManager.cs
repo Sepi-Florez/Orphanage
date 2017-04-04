@@ -11,14 +11,16 @@ using UnityEngine.EventSystems;
 public class InventoryManager : MonoBehaviour {
     public static InventoryManager thisManager;
 
-    GameObject buttonPref;
+    public GameObject buttonPref;
 
     GameObject[] contentObjects;
 
 
     List<Item> inventory = new List<Item>();
     List<Transform> inventoryButtons = new List<Transform>();
-
+    void Start() {
+        InventoryAdd(0);
+    }
  
     void Awake() {
         thisManager = this;
@@ -34,6 +36,11 @@ public class InventoryManager : MonoBehaviour {
     Transform Visualize(Item item) {
         Transform newButton = Instantiate(buttonPref, Vector3.zero, Quaternion.identity).transform;
         newButton.SetParent(contentObjects[item.category].transform);
+        newButton.localPosition = Vector3.zero;
+        newButton.localRotation = Quaternion.identity;
+        newButton.localScale = new Vector3(1, 1, 1);
+        newButton.GetComponent<ItemButton>().FillValues(item.itemName, item.description);
+
         return newButton;
 
     }
