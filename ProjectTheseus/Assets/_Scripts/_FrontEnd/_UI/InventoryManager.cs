@@ -15,11 +15,14 @@ public class InventoryManager : MonoBehaviour {
 
     GameObject[] contentObjects;
 
+    public 
+        GameObject optionWindowPref;
+
 
     List<Item> inventory = new List<Item>();
     List<Transform> inventoryButtons = new List<Transform>();
     void Start() {
-        InventoryAdd(0);
+        InventoryAdd(1);
     }
  
     void Awake() {
@@ -39,7 +42,7 @@ public class InventoryManager : MonoBehaviour {
         newButton.localPosition = Vector3.zero;
         newButton.localRotation = Quaternion.identity;
         newButton.localScale = new Vector3(1, 1, 1);
-        newButton.GetComponent<ItemButton>().FillValues(item.itemName, item.description);
+        newButton.GetComponent<ItemButton>().FillValues(item);
 
         return newButton;
 

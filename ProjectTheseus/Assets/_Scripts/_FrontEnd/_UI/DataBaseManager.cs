@@ -51,7 +51,7 @@ public class DataBaseManager : MonoBehaviour {
 
     }
     public Item ReturnItem(int ItemID) {
-        return dbList.itemList[ItemID];
+        return dbList.itemList[ItemID]; 
     }
     void DataBaseAdd() {
         Item newItem = null;
