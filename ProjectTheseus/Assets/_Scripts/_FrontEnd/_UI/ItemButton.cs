@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemButton : MonoBehaviour {
+
     public void FillValues(Item item) {
         transform.GetChild(0).GetComponent<Text>().text = item.itemName;
         transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(item.spritePath);
@@ -20,9 +21,32 @@ public class ItemButton : MonoBehaviour {
             case 2:
                 break;
         }
-        transform.GetComponent<Button>().onClick.AddListener(() => OpenOptions());
+        transform.GetComponent<Button>().onClick.AddListener(() => OpenOptions(item));
     }
-    public void OpenOptions() {
+    public void OpenOptions(Item item) {
         GameObject optionWindow = (GameObject)Instantiate(InventoryManager.thisManager.optionWindowPref, Input.mousePosition, Quaternion.identity);
+        optionWindow.transform.SetParent(GameObject.FindGameObjectWithTag("HUD").transform);
+        optionWindow.transform.position = Input.mousePosition;
+        switch (item.category) {
+            case 0:
+                optionWindow.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => InventoryManager.thisManager.Use(item));
+                optionWindow.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "Equip";
+                break;
+            case 1:
+                optionWindow.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => InventoryManager.thisManager.Use(item));
+                optionWindow.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "Consume";
+                break;
+            case 2:
+                Destroy(optionWindow.transform.GetChild(1).gameObject);
+                break;
+        }
+        optionWindow.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = "Destroy";
+        optionWindow.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => InventoryManager.thisManager.Delete(item));
+        optionWindow.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = "Cancel";
+        optionWindow.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => CloseOptions(optionWindow));
+        optionWindow.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => CloseOptions(optionWindow));
+    }
+    public void CloseOptions(GameObject options) {
+        Destroy(options);
     }
 }
