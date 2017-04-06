@@ -15,6 +15,7 @@ public class DataBaseManager : MonoBehaviour {
     public int effect;
     public int strength;
 
+    bool loaded = false;
     
     public static DataBaseManager thisManager;
     public ItemDatabase dbList;
@@ -31,10 +32,12 @@ public class DataBaseManager : MonoBehaviour {
             stream.Close();
             dbList = a;
             print("Loaded Database");
+            loaded = true;
         }
         else {
             dbList = new ItemDatabase();
             print("Did not load Database");
+            loaded = false;
         }
     }
     void Update() {
@@ -50,8 +53,11 @@ public class DataBaseManager : MonoBehaviour {
         }
 
     }
-    public Item ReturnItem(int ItemID) {
-        return dbList.itemList[ItemID]; 
+    public Item ReturnItem(int itemID) {
+        if(loaded)
+            if(dbList.itemList.Count > itemID)
+                return dbList.itemList[itemID];
+        return null;
     }
     void DataBaseAdd() {
         Item newItem = null;

@@ -11,14 +11,13 @@ public class ItemButton : MonoBehaviour {
         transform.GetChild(3).GetComponent<Text>().text = item.description;
         print(item.spritePath);
         switch (item.category) {
-            case 0:
-                transform.GetChild(2).GetComponent<Text>().text = "";
-                break;
             case 1:
                 Consumable nItem = item as Consumable;
-                transform.GetChild(2).GetComponent<Text>().text = nItem.count.ToString();
+                transform.GetChild(2).GetComponent<Text>().text += nItem.count.ToString();
                 break;
             case 2:
+                CraftingObject nnItem = item as CraftingObject;
+                transform.GetChild(2).GetComponent<Text>().text += nnItem.count.ToString();
                 break;
         }
         transform.GetComponent<Button>().onClick.AddListener(() => OpenOptions(item));

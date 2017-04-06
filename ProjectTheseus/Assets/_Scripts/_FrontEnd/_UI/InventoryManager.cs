@@ -22,7 +22,7 @@ public class InventoryManager : MonoBehaviour {
     List<Item> inventory = new List<Item>();
     List<Transform> inventoryButtons = new List<Transform>();
     void Start() {
-        InventoryAdd(1,2);
+        InventoryAdd(0,2);
     }
 
     void Awake() {
@@ -33,19 +33,22 @@ public class InventoryManager : MonoBehaviour {
     }
     // Is called upon when adding an item to the inventory
     void InventoryAdd(int itemID,int count) {
-        Item newItem = DataBaseManager.thisManager.ReturnItem(itemID);
-        switch (newItem.category) {
-            case 1:
-                Consumable newCon = newItem as Consumable;
-                newCon.count = count;
-                break;
-            case 2:
-                CraftingObject newCraft = newItem as CraftingObject;
-                newCraft.count = count;
-                newItem = newCraft;
-                break;
+        if (DataBaseManager.thisManager.ReturnItem(itemID) != null) {
+            Item newItem = DataBaseManager.thisManager.ReturnItem(itemID);
+            switch (newItem.category) {
+                case 1:
+                    Consumable newCon = newItem as Consumable;
+                    newCon.count = count;
+                    break;
+                case 2:
+                    CraftingObject newCraft = newItem as CraftingObject;
+                    newCraft.count = count;
+                    newItem = newCraft;
+                    break;
+            }
+            inventoryButtons.Add(Visualize(newItem));
+            inventory.Add(newItem);
         }
-        inventoryButtons.Add(Visualize(newItem));
 
     }
     //Instantiates the button which represents the item.
@@ -54,25 +57,24 @@ public class InventoryManager : MonoBehaviour {
         newButton.SetParent(contentObjects[item.category].transform);
         helpArrange(newButton);
         newButton.GetComponent<ItemButton>().FillValues(item);
-
         return newButton;
-
     }
+    //Used to delete the item received from the inventory
     public void Delete(Item item) {
         if(item.category == 0) {
             //check if equiped else delete
         }
         else {
             int a = 0;
-            foreach(Item i in inventory) {
+            foreach(Item i in GetCategory(item.category)) {
                 a++;
+                print("InvCheck");
                 if(inventory[a] == item) {
                     inventory.RemoveAt(a);
                     Destroy(inventoryButtons[a].gameObject);
                     inventoryButtons.RemoveAt(a);
                 }
             }
-            
         }
     }
     public void Use(Item item) {
