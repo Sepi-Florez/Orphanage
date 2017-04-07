@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour {
 
     public GameObject buttonPref;
     
-    GameObject[] contentObjects = new GameObject[2];
+    GameObject[] contentObjects = new GameObject[3];
 
     public 
         GameObject optionWindowPref;
@@ -21,29 +21,49 @@ public class InventoryManager : MonoBehaviour {
 
     List<Item> inventory = new List<Item>();
     List<Transform> inventoryButtons = new List<Transform>();
-    void Start() {
-        InventoryAdd(0,2);
+    void Update() {
+        if (Input.GetButtonDown("Fire2")) {
+            InventoryAdd(0, 2);
+        }
     }
 
     void Awake() {
         thisManager = this;
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             contentObjects[i] = GameObject.FindGameObjectWithTag("Content" + i);
         }
     }
     // Is called upon when adding an item to the inventory
-    void InventoryAdd(int itemID,int count) {
-        if (DataBaseManager.thisManager.ReturnItem(itemID) != null) {
-            Item newItem = DataBaseManager.thisManager.ReturnItem(itemID);
+    void InventoryAdd(int item,int count) {
+        if (DataBaseManager.thisManager.ReturnItem(item) != null) {
+            Item newItem = DataBaseManager.thisManager.ReturnItem(item);
+            int i = SearchInventory(newItem);
             switch (newItem.category) {
                 case 1:
                     Consumable newCon = newItem as Consumable;
-                    newCon.count = count;
+                    if (i != -1) {
+                        newCon = inventory[i] as Consumable;
+                        newCon.count += count;
+                        inventoryButtons[i].GetComponent<ItemButton>().UpdateCount(newCon.count);
+                        return;
+                    }
+                    else {
+                        newCon.count = count;
+                        newItem = newCon;
+                    }
                     break;
                 case 2:
                     CraftingObject newCraft = newItem as CraftingObject;
-                    newCraft.count = count;
-                    newItem = newCraft;
+                    if (i != -1) {
+                        newCraft = inventory[i] as CraftingObject;
+                        newCraft.count += count;
+                        inventoryButtons[i].GetComponent<ItemButton>().UpdateCount(newCraft.count);
+                        return;
+                    }
+                    else {
+                        newCraft.count = count;
+                        newItem = newCraft;
+                    }
                     break;
             }
             inventoryButtons.Add(Visualize(newItem));
@@ -65,23 +85,37 @@ public class InventoryManager : MonoBehaviour {
             //check if equiped else delete
         }
         else {
+            print("koek");
             int a = 0;
-            foreach(Item i in GetCategory(item.category)) {
-                a++;
+            List<Item> checkList = GetCategory(item.category);
+            foreach(Item i in checkList) {
+
                 print("InvCheck");
-                if(inventory[a] == item) {
+                if(checkList[a] == item) {
                     inventory.RemoveAt(a);
                     Destroy(inventoryButtons[a].gameObject);
                     inventoryButtons.RemoveAt(a);
                 }
+                a++;
+
             }
         }
+
     }
+    //Activated when consuming or equiping an item.
     public void Use(Item item) {
         switch (item.category) {
             case 1:
-                break;
-            case 2:
+                //Use potion somewhere
+                Consumable itemCon = inventory[SearchInventory(item)] as Consumable;
+                if(itemCon.count - 1 == 0) {
+                    Delete(itemCon);
+                }
+                else {
+                    itemCon.count--;
+                    inventoryButtons[SearchInventory(item)].GetComponent<ItemButton>().UpdateCount(itemCon.count);
+
+                }
                 break;
         }
     }
@@ -99,5 +133,16 @@ public class InventoryManager : MonoBehaviour {
         newButton.localPosition = Vector3.zero;
         newButton.localRotation = Quaternion.identity;
         newButton.localScale = new Vector3(1, 1, 1);
+    }
+    //Gives back the index of the given item.
+    int SearchInventory(Item item) {
+        int i = 0;
+        foreach(Item it in inventory) {
+            if (it == item) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
     }
 } 
