@@ -51,19 +51,12 @@ public class DataBaseManager : MonoBehaviour {
             ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
             stream.Close();
         }
-<<<<<<< HEAD
-    }
-    public Item ReturnItem(int ItemID) {
-        return dbList.itemList[ItemID];
-=======
-
     }
     public Item ReturnItem(int itemID) {
         if(loaded)
             if(dbList.itemList.Count > itemID)
                 return dbList.itemList[itemID];
         return null;
->>>>>>> be7cad8e70e0dfeffa5e8ca6977f083b86292801
     }
     void DataBaseAdd() {
         Item newItem = null;
