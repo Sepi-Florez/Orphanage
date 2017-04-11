@@ -41,7 +41,6 @@ public class DataBaseManager : MonoBehaviour {
         if (Input.GetButtonDown("Jump")) {
             DataBaseAdd();
         }
-<<<<<<< HEAD
         if (Input.GetButtonDown("Fire1")) {
             FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
@@ -49,11 +48,9 @@ public class DataBaseManager : MonoBehaviour {
             ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
             stream.Close();
         }
-=======
     }
     public Item ReturnItem(int ItemID) {
         return dbList.itemList[ItemID];
->>>>>>> 10f89f91b1c1df154c977b0ae0dfd5b5959c9f90
     }
     void DataBaseAdd() {
         Item newItem = null;
