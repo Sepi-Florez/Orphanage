@@ -482,7 +482,7 @@
       <Entity type="Class">
         <Name>HUDManager</Name>
         <Access>Public</Access>
-        <Location left="10" top="819" />
+        <Location left="455" top="594" />
         <Size width="348" height="349" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public static UIManager thisManager</Member>
@@ -506,7 +506,7 @@
       <Entity type="Class">
         <Name>DataBaseManager</Name>
         <Access>Public</Access>
-        <Location left="521" top="189" />
+        <Location left="863" top="173" />
         <Size width="292" height="349" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public static DataBaseManager thisManager</Member>
@@ -520,21 +520,23 @@
         <Name>InventoryManager</Name>
         <Access>Public</Access>
         <Location left="10" top="10" />
-        <Size width="296" height="349" />
+        <Size width="324" height="230" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public static InventoryManager thisManager</Member>
         <Member type="Field">List&lt;Item&gt; Inventory</Member>
-        <Member type="Method">void Visualize(Item item)</Member>
-        <Member type="Method">void Subtract(Item item)</Member>
-        <Member type="Method">void Delete(Item item)</Member>
+        <Member type="Method">public void InventoryAdd(Item item, int Count)</Member>
+        <Member type="Method">Transform Visualize(Item item)</Member>
+        <Member type="Method">public void Delete(Item item)</Member>
+        <Member type="Method">public void Use(Item item)</Member>
         <Member type="Method">public void RecipeCheck(List&lt;Item&gt; itemList)</Member>
         <Member type="Method">List&lt;Item&gt; GetCategory(int category)</Member>
+        <Member type="Method">int SearchInventory(Item item)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
         <Name>SlabManager</Name>
         <Access>Public</Access>
-        <Location left="10" top="525" />
+        <Location left="140" top="594" />
         <Size width="273" height="267" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public static SlabManager thisManager</Member>
@@ -552,7 +554,7 @@
       <Entity type="Class">
         <Name>Item</Name>
         <Access>Public</Access>
-        <Location left="1087" top="641" />
+        <Location left="1241" top="641" />
         <Size width="450" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">string itemName</Member>
@@ -564,7 +566,7 @@
       <Entity type="Class">
         <Name>Weapon</Name>
         <Access>Public</Access>
-        <Location left="1041" top="325" />
+        <Location left="1195" top="325" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public int weaponDamage</Member>
@@ -573,7 +575,7 @@
       <Entity type="Class">
         <Name>Consumable</Name>
         <Access>Public</Access>
-        <Location left="1219" top="325" />
+        <Location left="1373" top="325" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public int consumable_Strength</Member>
@@ -583,7 +585,7 @@
       <Entity type="Class">
         <Name>Material</Name>
         <Access>Public</Access>
-        <Location left="1398" top="325" />
+        <Location left="1552" top="325" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int count</Member>
@@ -592,11 +594,23 @@
       <Entity type="Class">
         <Name>ItemDatabase</Name>
         <Access>Public</Access>
-        <Location left="1142" top="48" />
+        <Location left="1296" top="48" />
         <Size width="301" height="120" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public List&lt;Item&gt; itemList</Member>
         <Member type="Method">public void ItemDatabase()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ItemButton</Name>
+        <Access>Public</Access>
+        <Location left="10" top="295" />
+        <Size width="296" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void FillValues(Item item)</Member>
+        <Member type="Method">public void DeleteOptions(GameObject Options)</Member>
+        <Member type="Method">public void OpenOptions()</Member>
+        <Member type="Method">public void UpdateCount(int count)</Member>
         <Modifier>None</Modifier>
       </Entity>
     </Entities>
@@ -627,11 +641,11 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>838</X>
-          <Y>234</Y>
+          <X>1180</X>
+          <Y>218</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1119</X>
+          <X>1273</X>
           <Y>275</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
@@ -643,11 +657,11 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>840</X>
-          <Y>234</Y>
+          <X>1182</X>
+          <Y>218</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1300</X>
+          <X>1454</X>
           <Y>276</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
@@ -659,11 +673,11 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
-          <X>838</X>
-          <Y>234</Y>
+          <X>1180</X>
+          <Y>218</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>1477</X>
+          <X>1631</X>
           <Y>300</Y>
         </BendPoint>
         <Direction>Unidirectional</Direction>
@@ -675,9 +689,15 @@
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="False">
-          <X>578</X>
-          <Y>26</Y>
+          <X>920</X>
+          <Y>10</Y>
         </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Association</AssociationType>
       </Relationship>

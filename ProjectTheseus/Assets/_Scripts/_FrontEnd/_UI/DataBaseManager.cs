@@ -15,6 +15,7 @@ public class DataBaseManager : MonoBehaviour {
     public int effect;
     public int strength;
 
+    bool loaded = false;
     
     public static DataBaseManager thisManager;
     public ItemDatabase dbList;
@@ -31,10 +32,12 @@ public class DataBaseManager : MonoBehaviour {
             stream.Close();
             dbList = a;
             print("Loaded Database");
+            loaded = true;
         }
         else {
             dbList = new ItemDatabase();
             print("Did not load Database");
+            loaded = false;
         }
     }
     void Update() {
@@ -42,15 +45,25 @@ public class DataBaseManager : MonoBehaviour {
             DataBaseAdd();
         }
         if (Input.GetButtonDown("Fire1")) {
-            FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
+            FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
             //print(dbList.itemList[0].count);
             ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
             stream.Close();
         }
+<<<<<<< HEAD
     }
     public Item ReturnItem(int ItemID) {
         return dbList.itemList[ItemID];
+=======
+
+    }
+    public Item ReturnItem(int itemID) {
+        if(loaded)
+            if(dbList.itemList.Count > itemID)
+                return dbList.itemList[itemID];
+        return null;
+>>>>>>> be7cad8e70e0dfeffa5e8ca6977f083b86292801
     }
     void DataBaseAdd() {
         Item newItem = null;
