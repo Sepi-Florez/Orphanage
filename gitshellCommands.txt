@@ -1,0 +1,5 @@
+git status ( shows the current status of the repository )
+git add --all ( Adds all changes to a commit )
+git commit -a ( Commit current commit )
+git push ( push commits to master )
+git pull ( pull changes to local )
