@@ -9,7 +9,11 @@ public class CombatManager : MonoBehaviour
 
     public List<Transform> emitters = new List<Transform>();
 
-    public float rayLenght = .2f;
+    public List<Transform> hitObjects = new List<Transform>();
+
+    public float rayLenght = .2f, coolRate = .5f;
+
+    float coolTmr;
 
     public void Update()
     {
@@ -33,10 +37,11 @@ public class CombatManager : MonoBehaviour
             }
         }*/
         #endregion
-        anim.SetBool("Fight", Input.GetButton("Fire1"));
+        anim.SetBool("Fight", Input.GetButton("Fire1") && Time.time > coolTmr);
 
         if (checkHit)
         {
+            coolTmr = Time.time + coolRate;
             foreach (Transform emitter in emitters)
             {
                 Color colour = Color.green;
@@ -47,6 +52,7 @@ public class CombatManager : MonoBehaviour
                 if(Physics.Raycast(ray, out hit, rayLenght))
                 {
                     colour = Color.red;
+                    hitObjects.Add(hit.transform);
                     print("hit " + hit.transform.name);
                 }
 
@@ -58,6 +64,7 @@ public class CombatManager : MonoBehaviour
     public void CheckHit()
     {
         checkHit = !checkHit;
+        hitObjects.Clear();
     }
 
     public void EndCheck()
