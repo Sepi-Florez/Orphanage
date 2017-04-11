@@ -11,7 +11,6 @@ public class HUDManager : MonoBehaviour {
 
     GameObject playerHP;
     GameObject bossHP;
-    GameObject objective;
 
     public float fadeRate;
     public float fadeTime;
@@ -27,7 +26,6 @@ public class HUDManager : MonoBehaviour {
 
         playerHP = GameObject.FindGameObjectWithTag("PlayerHP");
         bossHP = GameObject.FindGameObjectWithTag("BossHP");
-        objective = GameObject.FindGameObjectWithTag("Objective");
         playerHPCanvas = playerHP.GetComponent<CanvasGroup>();
         bossHPCanvas = bossHP.GetComponent<CanvasGroup>();
 
@@ -49,8 +47,8 @@ public class HUDManager : MonoBehaviour {
         bossHP.GetComponent<Image>().fillAmount = health / 100;
 
     }
-    public void UpdateObjective(string objectiveString) {
-        objective.GetComponent<Text>().text = objectiveString;
+    public void UpdateObjective(Quest quest) {
+        
     }
     public void DisableHud() {
         StartCoroutine(Fade(thisCanvas));

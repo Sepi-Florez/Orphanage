@@ -15,16 +15,13 @@ public class InventoryManager : MonoBehaviour {
     
     GameObject[] contentObjects = new GameObject[3];
 
-    public 
-        GameObject optionWindowPref;
+    public GameObject optionWindowPref;
 
 
     List<Item> inventory = new List<Item>();
     List<Transform> inventoryButtons = new List<Transform>();
     void Update() {
-        if (Input.GetButtonDown("Fire2")) {
-            InventoryAdd(0, 2);
-        }
+
     }
 
     void Awake() {

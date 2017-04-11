@@ -36,7 +36,7 @@ public class SlabManager : MonoBehaviour {
                 menus[a].GetComponent<CanvasGroup>().alpha = 0;
                 menus[a].GetComponent<CanvasGroup>().blocksRaycasts = false;
             }
-            currentMenu = menus[menus.Length - 1].transform;
+            currentMenu = menus[0].transform;
         }
 
     }
@@ -79,4 +79,5 @@ public class SlabManager : MonoBehaviour {
         anim.SetTrigger("Toggle");
         slabOpen = !slabOpen;
     }
+
 }
