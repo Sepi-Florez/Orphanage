@@ -47,8 +47,11 @@ public class HUDManager : MonoBehaviour {
         bossHP.GetComponent<Image>().fillAmount = health / 100;
 
     }
-    public void UpdateObjective(Quest quest) {
-        
+    public void QuestCompleted(int questID) {
+        // Instantiate Quest completion popup and implement name little lower to it.
+    }
+    public void QuestGained(int questID) {
+        // Instantiate Quest gained popup and implement name.
     }
     public void DisableHud() {
         StartCoroutine(Fade(thisCanvas));

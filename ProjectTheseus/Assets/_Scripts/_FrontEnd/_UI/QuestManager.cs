@@ -12,18 +12,23 @@ public class QuestManager : MonoBehaviour {
     public string dataPath;
     public QuestList questList;
 
-    public Transform questPrefab;
+    Transform questContent;
+    Transform questInfo;
 
-    public int followingQuestID = 0;
+    public Transform questPrefab;
+    public List<Quest> playerQuests = new List<Quest>();
 
     public void Awake() {
         thisManager = this;
+        questContent = GameObject.FindGameObjectWithTag("QuestContent").transform;
+        questInfo = GameObject.FindGameObjectWithTag("QuestInfo").transform;
         if (File.Exists(Application.persistentDataPath + dataPath)) {
             FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(QuestList));
             QuestList a = reader.Deserialize(stream) as QuestList;
             stream.Close();
             questList = a;
+            print("Found Quest file");
         }
         else {
             XmlSerializer writer = new XmlSerializer(typeof(QuestList));
@@ -31,6 +36,7 @@ public class QuestManager : MonoBehaviour {
             print(Application.persistentDataPath + dataPath);
             writer.Serialize(stream, questList);
             stream.Close();
+            print("didn't find Quest file");
         }
     }
     public void Start() {
@@ -38,23 +44,40 @@ public class QuestManager : MonoBehaviour {
         QuestAdd(1);
         QuestAdd(2);
         QuestAdd(3);
+        QuestComplete(2);
+        QuestShow(0);
     }
     public void Update() {
-        if (Input.GetButtonDown("Fire2")) {
-        }
     }
     public void QuestShow(int questID) {
-        Transform qi = GameObject.FindGameObjectWithTag("QuestInfo").transform;
-        qi.GetChild(0).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].title;
-        qi.GetChild(1).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].description;
+        questInfo.GetChild(0).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].title;
+        questInfo.GetChild(1).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].description;
     }
     public void QuestAdd(int questID) {
-        Transform qi = GameObject.FindGameObjectWithTag("QuestContent").transform;
+        print("Creating");
         Transform quest = (Transform)Instantiate(questPrefab, Vector3.zero, Quaternion.identity);
-        quest.SetParent(qi);
+        quest.SetParent(questContent);
         InventoryManager.thisManager.helpArrange(quest);
         quest.GetChild(0).GetComponent<Text>().text = questList.qList[questID].title;
         quest.GetComponent<Button>().onClick.AddListener(() => QuestShow(questID));
+        playerQuests.Add(questList.qList[questID]);
+    }
+    public void QuestComplete(int questID) {
+        for (int i = 0; i < playerQuests.Count; i++) {
+            if (playerQuests[i].questID == questID) {
+                playerQuests.RemoveAt(i);
+                questContent.GetChild(i).SetAsLastSibling();
+                //Change quest status to grayed out or give it a checkmark.
+            }
+        }
+    }
+    public bool QuestCheck(int questID) {
+        for(int i = 0; i > playerQuests.Count; i++) {
+            if(playerQuests[i].questID == questID) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 public class QuestList {
@@ -64,6 +87,7 @@ public class QuestList {
     }
 }
 public class Quest {
+    public int questID;
     public string title;
     public string description;
     public Quest() {
