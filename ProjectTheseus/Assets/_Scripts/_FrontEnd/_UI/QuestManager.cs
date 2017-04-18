@@ -17,9 +17,10 @@ public class QuestManager : MonoBehaviour {
 
     public Transform questPrefab;
     public List<Quest> playerQuests = new List<Quest>();
+    public List<Quest> playerQuestsCompleted = new List<Quest>();
 
     public void Awake() {
-        thisManager = this;
+        thisManager = this; 
         questContent = GameObject.FindGameObjectWithTag("QuestContent").transform;
         questInfo = GameObject.FindGameObjectWithTag("QuestInfo").transform;
         if (File.Exists(Application.persistentDataPath + dataPath)) {
@@ -41,10 +42,6 @@ public class QuestManager : MonoBehaviour {
     }
     public void Start() {
         QuestAdd(0);
-        QuestAdd(1);
-        QuestAdd(2);
-        QuestAdd(3);
-        QuestComplete(2);
         QuestShow(0);
     }
     public void Update() {
@@ -60,11 +57,13 @@ public class QuestManager : MonoBehaviour {
         InventoryManager.thisManager.helpArrange(quest);
         quest.GetChild(0).GetComponent<Text>().text = questList.qList[questID].title;
         quest.GetComponent<Button>().onClick.AddListener(() => QuestShow(questID));
+        quest.transform.SetAsFirstSibling();
         playerQuests.Add(questList.qList[questID]);
     }
     public void QuestComplete(int questID) {
         for (int i = 0; i < playerQuests.Count; i++) {
             if (playerQuests[i].questID == questID) {
+                playerQuestsCompleted.Add(playerQuests[i]);
                 playerQuests.RemoveAt(i);
                 questContent.GetChild(i).SetAsLastSibling();
                 //Change quest status to grayed out or give it a checkmark.
@@ -72,7 +71,9 @@ public class QuestManager : MonoBehaviour {
         }
     }
     public bool QuestCheck(int questID) {
-        for(int i = 0; i > playerQuests.Count; i++) {
+        print(playerQuests.Count);
+        for (int i = 0; i < playerQuests.Count; i++) {
+            print("CheckQuest " + i );
             if(playerQuests[i].questID == questID) {
                 return true;
             }

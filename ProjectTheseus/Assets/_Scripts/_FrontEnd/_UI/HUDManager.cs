@@ -28,7 +28,7 @@ public class HUDManager : MonoBehaviour {
         bossHP = GameObject.FindGameObjectWithTag("BossHP");
         playerHPCanvas = playerHP.GetComponent<CanvasGroup>();
         bossHPCanvas = bossHP.GetComponent<CanvasGroup>();
-
+        bossHPCanvas.alpha = 0;
         OOCvar = StartCoroutine(OOC());
     }
     public void UpdateHealth(int health) {
