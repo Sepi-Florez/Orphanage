@@ -17,8 +17,9 @@ public class HUDManager : MonoBehaviour {
 
     public float OOCTime;
     Coroutine OOCvar;
-    
 
+    public GameObject questCompleted;
+    public GameObject questGained;
 
     void Awake() {
         thisManager = this;
@@ -26,15 +27,16 @@ public class HUDManager : MonoBehaviour {
 
         playerHP = GameObject.FindGameObjectWithTag("PlayerHP");
         bossHP = GameObject.FindGameObjectWithTag("BossHP");
+
         playerHPCanvas = playerHP.GetComponent<CanvasGroup>();
         bossHPCanvas = bossHP.GetComponent<CanvasGroup>();
         bossHPCanvas.alpha = 0;
-        OOCvar = StartCoroutine(OOC());
+        OOCvar = StartCoroutine(FadeTimer(OOCTime,playerHP.transform));
     }
     public void UpdateHealth(int health) {
         if(OOCvar != null) {
             StopCoroutine(OOCvar);
-            OOCvar = StartCoroutine(OOC());
+            OOCvar = StartCoroutine(FadeTimer(OOCTime,playerHP.transform)); 
         }
         playerHPCanvas.alpha = 1;
         playerHP.GetComponent<Image>().fillAmount = health / 100;
@@ -48,23 +50,33 @@ public class HUDManager : MonoBehaviour {
 
     }
     public void QuestCompleted(int questID) {
-        // Instantiate Quest completion popup and implement name little lower to it.
+        StartCoroutine(FadeIn(questCompleted.GetComponent<CanvasGroup>()));
+        questCompleted.transform.GetChild(0).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].title;
+        StartCoroutine(FadeTimer(5,questCompleted.transform));
     }
     public void QuestGained(int questID) {
-        // Instantiate Quest gained popup and implement name.
+        StartCoroutine(FadeIn(questGained.GetComponent<CanvasGroup>()));
+        questGained.transform.GetChild(0).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].title;
+        StartCoroutine(FadeTimer(5,questGained.transform));
     }
     public void DisableHud() {
-        StartCoroutine(Fade(thisCanvas));
+        StartCoroutine(FadeOut(thisCanvas));
     }
-    IEnumerator Fade(CanvasGroup Canvas) {
+    IEnumerator FadeOut(CanvasGroup Canvas) {
         while (Canvas.alpha != 0) {
             yield return new WaitForSeconds(fadeTime);
             Canvas.alpha -= fadeRate;
         }
     }
-    IEnumerator OOC() {
-        yield return new WaitForSeconds(OOCTime);
-        StartCoroutine(Fade(playerHPCanvas));
+    IEnumerator FadeIn(CanvasGroup Canvas) {
+        while (Canvas.alpha != 1) {
+            yield return new WaitForSeconds(fadeTime);
+            Canvas.alpha += fadeRate;
+        }
+    }
+    IEnumerator FadeTimer(float time,Transform fader) {
+        yield return new WaitForSeconds(time);
+        StartCoroutine(FadeOut(fader.GetComponent<CanvasGroup>()));
 
     }
 }
