@@ -30,6 +30,9 @@ public class InventoryManager : MonoBehaviour {
             contentObjects[i] = GameObject.FindGameObjectWithTag("Content" + i);
         }
     }
+    private void Start() {
+        InventoryAdd(0, 10);
+    }
     // Is called upon when adding an item to the inventory
     void InventoryAdd(int item,int count) {
         if (DataBaseManager.thisManager.ReturnItem(item) != null) {

@@ -76,7 +76,6 @@ public class SlabManager : MonoBehaviour {
     }
     // Temporary anim. Later on this will be activated in the arms
     public void SlabToggle() {
-        anim.SetTrigger("Toggle");
         slabOpen = !slabOpen;
     }
 
