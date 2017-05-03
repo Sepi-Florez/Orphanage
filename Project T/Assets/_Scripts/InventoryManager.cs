@@ -117,6 +117,7 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 	public bool RecipeCheck(List<Item> recipe){
+        bool ii = false;
 		int i = 0;
 		foreach(Item it in recipe){
 			foreach(Item itt in inventory){
@@ -125,9 +126,10 @@ public class InventoryManager : MonoBehaviour {
 				}
 			}
 		}
-		if(i == recipe.Length){
-			return true; 
+		if(i == recipe.Count){
+            ii = true;
 		}
+        return ii;
 	}
     //Gives back a list full of items which are of the requested category
     List<Item> GetCategory(int category) {
