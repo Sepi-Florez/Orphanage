@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 7c92bfaf76c76c045bc39f2fa48f45e4
-timeCreated: 1493928793
+guid: 40b47cfc2860b6b49bb19774c36e53b1
+timeCreated: 1494359795
 licenseType: Free
 SpeedTreeImporter:
   serializedVersion: 4
   mainColor: {r: 1, g: 1, b: 1, a: 1}
   hueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
-  alphaTestRef: 0
+  alphaTestRef: 0.33
   bestWindQuality: 4
   hasBillboard: 1
   lODSettings:
