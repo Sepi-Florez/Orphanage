@@ -120,6 +120,15 @@ public class InventoryManager : MonoBehaviour {
                 break;
         }
     }
+    public Item Search(int itemID) {
+        Item newItem = DataBaseManager.thisManager.GetItem(itemID);
+        foreach(Item item in inventory) {
+            if(newItem.ID == item.ID) {
+                return (item);
+            }
+        }
+        return null;
+    }
 	public bool RecipeCheck(List<Item> recipe){
         bool ii = false;
 		int i = 0;

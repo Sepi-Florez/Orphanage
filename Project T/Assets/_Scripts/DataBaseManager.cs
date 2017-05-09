@@ -24,6 +24,7 @@ public class DataBaseManager : MonoBehaviour {
 
     void Awake() {
         thisManager = this;
+        
 
         if (File.Exists(Application.persistentDataPath + dataPath)) {
             FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Open);
@@ -39,6 +40,8 @@ public class DataBaseManager : MonoBehaviour {
             print("Did not load Database");
             loaded = false;
         }
+    }
+    void Start() {
     }
     void Update() {
         if (Input.GetButtonDown("Jump")) {
@@ -112,6 +115,10 @@ public class Item {
     public string description;
     [XmlElement("Category")]
     public int category;
+    [XmlElement("Components")]
+    public int[] comps = new int[5];
+    [XmlElement("Components_Need")]
+    public int[] compsc = new int[5];
 
     public Item() {
 

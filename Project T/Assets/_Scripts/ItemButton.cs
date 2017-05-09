@@ -9,7 +9,6 @@ public class ItemButton : MonoBehaviour {
         transform.GetChild(0).GetComponent<Text>().text = item.itemName;
         transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(item.spritePath);
         transform.GetChild(3).GetComponent<Text>().text = item.description;
-        print(item.spritePath);
         switch (item.category) {
             case 1:
                 Consumable nItem = item as Consumable;
