@@ -45,14 +45,7 @@ public class DataBaseManager : MonoBehaviour {
     }
     void Update() {
         if (Input.GetButtonDown("Jump")) {
-            DataBaseAdd();
-        }
-        if (Input.GetButtonDown("Fire1")) {
-            FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Open);
-            XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
-            //print(dbList.itemList[0].count);
-            ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
-            stream.Close();
+            InventoryManager.thisManager.InventoryAdd(0, 3);
         }
     }
     public Item ReturnItem(int itemID) {

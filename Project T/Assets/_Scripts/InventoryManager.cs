@@ -31,11 +31,14 @@ public class InventoryManager : MonoBehaviour {
         }
     }
     private void Start() {
-        InventoryAdd(1, 10);
+        InventoryAdd(0, 10);
+        InventoryAdd(2, 10);
+        InventoryAdd(3, 10);
         contentObjects[0].transform.position = new Vector3(0, 0, 0);
     }
     // Is called upon when adding an item to the inventory
-    void InventoryAdd(int item,int count) {
+    public void InventoryAdd(int item,int count) {
+
         if (DataBaseManager.thisManager.ReturnItem(item) != null) {
             Item newItem = DataBaseManager.thisManager.ReturnItem(item);
             int i = SearchInventory(newItem);
@@ -46,6 +49,7 @@ public class InventoryManager : MonoBehaviour {
                         newCon = inventory[i] as Consumable;
                         newCon.count += count;
                         inventoryButtons[i].GetComponent<ItemButton>().UpdateCount(newCon.count);
+                        CraftingManager.thisManager.RefreshRecipes();
                         return;
                     }
                     else {
@@ -59,6 +63,7 @@ public class InventoryManager : MonoBehaviour {
                         newCraft = inventory[i] as CraftingObject;
                         newCraft.count += count;
                         inventoryButtons[i].GetComponent<ItemButton>().UpdateCount(newCraft.count);
+                        CraftingManager.thisManager.RefreshRecipes();
                         return;
                     }
                     else {
@@ -69,6 +74,8 @@ public class InventoryManager : MonoBehaviour {
             }
             inventoryButtons.Add(Visualize(newItem));
             inventory.Add(newItem);
+            CraftingManager.thisManager.RefreshRecipes();
+
         }
 
     }
@@ -101,6 +108,21 @@ public class InventoryManager : MonoBehaviour {
 
             }
         }
+        CraftingManager.thisManager.RefreshRecipes();
+
+    }
+    public void Remove(Item item, int amount) {
+        Item newItem = Search(item.ID);
+        CraftingObject newCO = newItem as CraftingObject;
+        newCO.count -= amount;
+
+
+        if(newCO.count <= 0) {
+            Delete(newCO);
+        }
+        else {
+            inventoryButtons[SearchInventory(item)].GetComponent<ItemButton>().UpdateCount(newCO.count);
+        }
 
     }
     //Activated when consuming or equiping an item.
@@ -119,6 +141,7 @@ public class InventoryManager : MonoBehaviour {
                 }
                 break;
         }
+        CraftingManager.thisManager.RefreshRecipes();
     }
     public Item Search(int itemID) {
         Item newItem = DataBaseManager.thisManager.GetItem(itemID);
@@ -129,15 +152,21 @@ public class InventoryManager : MonoBehaviour {
         }
         return null;
     }
-	public bool RecipeCheck(List<Item> recipe){
+	public bool RecipeCheck(List<Item> recipe ,List<int> recipeAmount){
         bool ii = false;
 		int i = 0;
+        int a = 0;
 		foreach(Item it in recipe){
 			foreach(Item itt in inventory){
-				if(it.ID == itt.ID){
+                CraftingObject newCon = itt as CraftingObject;
+				if(it.ID == itt.ID && recipeAmount[a] <= newCon.count ){
 					i++;
 				}
+                else {
+                    print("Recipe is no go");
+                }
 			}
+            a++;
 		}
 		if(i == recipe.Count){
             ii = true;
