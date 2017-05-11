@@ -23,11 +23,7 @@ public class HealthManager : MonoBehaviour
     public void UpdateHP(float hpAddition)
     {
         healthPoints += hpAddition;
-        if (hud != null)
-        {
-            hud.HealthUpdate(healthPoints);
-        }
-
+        HUDManager.thisManager.UpdateHealth(healthPoints);
         if (hpAddition <= 0)
         {
             effectsAudioSource.clip = damageSound;

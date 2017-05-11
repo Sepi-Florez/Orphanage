@@ -33,7 +33,7 @@ public class HUDManager : MonoBehaviour {
         bossHPCanvas.alpha = 0;
         OOCvar = StartCoroutine(FadeTimer(OOCTime,playerHP.transform));
     }
-    public void UpdateHealth(int health) {
+    public void UpdateHealth(float health) {
         if(OOCvar != null) {
             StopCoroutine(OOCvar);
             OOCvar = StartCoroutine(FadeTimer(OOCTime,playerHP.transform)); 

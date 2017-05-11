@@ -51,4 +51,4 @@ public class CraftingManager : MonoBehaviour {
             print("Recipe is go");
         }
     }
-}/
+}
