@@ -90,11 +90,6 @@ public class HUDManager : MonoBehaviour {
             yield return new WaitForSeconds(fadeTime);
             Canvas.alpha -= fadeRate;
         }
-        if (Canvas.alpha == 0) {
-            if(fadingList.Count > 0) {
-                QuestfadingList[0]
-            }
-        }
     }
     //Fades given canvas group in
     IEnumerator FadeIn(CanvasGroup Canvas) {
