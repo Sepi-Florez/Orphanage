@@ -5,6 +5,7 @@ using UnityEngine;
 public class SlabManager : MonoBehaviour {
     public static SlabManager thisManager;
 
+    public Transform hand;
     public bool slabOpen = false;
 
     Animator anim;
@@ -44,6 +45,8 @@ public class SlabManager : MonoBehaviour {
         if (Input.GetButtonDown("Cancel")) {
             SlabToggle();
         }
+        transform.position += hand.position;
+
     }
     //Activated by a button to switch between menus
     public void ChangeTab(Transform tab) {

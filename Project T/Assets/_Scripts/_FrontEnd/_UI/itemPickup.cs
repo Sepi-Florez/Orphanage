@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class itemPickup : MonoBehaviour {
+public class itemPickUp : MonoBehaviour {
     public int itemID;
+    public int count;
 }

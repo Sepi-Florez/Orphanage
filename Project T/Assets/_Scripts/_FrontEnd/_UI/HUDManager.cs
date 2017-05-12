@@ -21,6 +21,8 @@ public class HUDManager : MonoBehaviour {
     public GameObject questCompleted;
     public GameObject questGained;
 
+    public GameObject itObject;
+
     void Awake() {
         thisManager = this;
         thisCanvas = this.GetComponent<CanvasGroup>();
@@ -28,10 +30,23 @@ public class HUDManager : MonoBehaviour {
         playerHP = GameObject.FindGameObjectWithTag("PlayerHP");
         bossHP = GameObject.FindGameObjectWithTag("BossHP");
 
+        itObject = GameObject.FindGameObjectWithTag("itObject");
+
         playerHPCanvas = playerHP.GetComponent<CanvasGroup>();
         bossHPCanvas = bossHP.GetComponent<CanvasGroup>();
         bossHPCanvas.alpha = 0;
         OOCvar = StartCoroutine(FadeTimer(OOCTime,playerHP.transform));
+
+    }
+    public void Interaction(bool toggle, int spriteID) {
+        if (toggle) {
+            print("/Sprites/Interaction" + spriteID);
+            itObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Interaction" + spriteID);
+            itObject.SetActive(true);
+        }
+        else {
+            itObject.SetActive(false);
+        }
     }
     public void UpdateHealth(float health) {
         if(OOCvar != null) {
