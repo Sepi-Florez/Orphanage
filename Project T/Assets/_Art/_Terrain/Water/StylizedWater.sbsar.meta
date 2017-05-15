@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e3d849a71cf1896458f0932f079b66a3
-timeCreated: 1494494971
+timeCreated: 1494874697
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
@@ -10,9 +10,9 @@ SubstanceImporter:
     prototypeName: StylizedWater
     shaderName: 
     shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: 
+    shaderKeywords: _EMISSION _NORMALMAP
     renderQueue: -1
-    lightmapFlags: 5
+    lightmapFlags: 1
     inputs:
     - name: $outputsize
       value:
@@ -30,7 +30,7 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: normalStrength
       value:
-        scalar[0]: 27.5
+        scalar[0]: 5.9
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -135,11 +135,15 @@ SubstanceImporter:
       - _Cutoff: 0.5
       - _DetailNormalMapScale: 1
       - _DstBlend: 0
+      - _GlossMapScale: 1
       - _Glossiness: 0.5
+      - _GlossyReflections: 1
       - _Metallic: 0
       - _Mode: 0
       - _OcclusionStrength: 1
       - _Parallax: 0.02
+      - _SmoothnessTextureChannel: 0
+      - _SpecularHighlights: 1
       - _SrcBlend: 1
       - _UVSec: 0
       - _ZWrite: 1
