@@ -23,6 +23,9 @@ public class HUDManager : MonoBehaviour {
 
     public GameObject itObject;
 
+    bool fading;
+    List<int> fadingList = new List<int>();
+
     void Awake() {
         thisManager = this;
         thisCanvas = this.GetComponent<CanvasGroup>();
@@ -72,23 +75,32 @@ public class HUDManager : MonoBehaviour {
     public void QuestGained(int questID) {
         StartCoroutine(FadeIn(questGained.GetComponent<CanvasGroup>()));
         questGained.transform.GetChild(0).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].title;
+        if(fading == true) {
+            fadingList.Add(questID);
+        }
         StartCoroutine(FadeTimer(5,questGained.transform));
     }
-    public void DisableHud() {
-        StartCoroutine(FadeOut(thisCanvas));
+    public void QuestPrompt() {
+
     }
+    //Fade functionality
+    //Fades given canvas group out
     IEnumerator FadeOut(CanvasGroup Canvas) {
         while (Canvas.alpha != 0) {
             yield return new WaitForSeconds(fadeTime);
             Canvas.alpha -= fadeRate;
         }
     }
+    //Fades given canvas group in
     IEnumerator FadeIn(CanvasGroup Canvas) {
+        fading = true;
         while (Canvas.alpha != 1) {
             yield return new WaitForSeconds(fadeTime);
             Canvas.alpha += fadeRate;
         }
+        
     }
+    //Time before it fades something out
     IEnumerator FadeTimer(float time,Transform fader) {
         yield return new WaitForSeconds(time);
         StartCoroutine(FadeOut(fader.GetComponent<CanvasGroup>()));
