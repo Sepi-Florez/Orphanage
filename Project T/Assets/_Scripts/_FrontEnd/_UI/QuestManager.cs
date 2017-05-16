@@ -60,7 +60,7 @@ public class QuestManager : MonoBehaviour {
         quest.GetComponent<Button>().onClick.AddListener(() => QuestShow(questID));
         quest.transform.SetAsFirstSibling();
         playerQuests.Add(questList.qList[questID]);
-        HUDManager.thisManager.QuestGained(questID);
+        HUDManager.thisManager.QuestPrompt(questID, 1);
     }
     public void QuestComplete(int questID) {
         for (int i = 0; i < playerQuests.Count; i++) {
@@ -71,7 +71,7 @@ public class QuestManager : MonoBehaviour {
                 //Change quest status to grayed out or give it a checkmark.
             }
         }
-        HUDManager.thisManager.QuestCompleted(questID);
+        HUDManager.thisManager.QuestPrompt(questID, 0);
     }
     public bool QuestCheck(int questID) {
         print(playerQuests.Count);
