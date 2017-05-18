@@ -24,7 +24,7 @@ public class BunnyBehaviour : MonoBehaviour {
             }
         }
         result = Vector3.zero;
-        //StartCoroutine(PickPoint());
+        //StartCoroutine(BunnyMoment());
         return false;
     }
 
@@ -38,17 +38,18 @@ public class BunnyBehaviour : MonoBehaviour {
     void Update() {
         if (agent.remainingDistance <= agent.stoppingDistance) {
             if (inWaitState == false) {
-                StartCoroutine(PickPoint());
+                StartCoroutine(BunnyMoment());
             }
         }
     }
 
-    IEnumerator PickPoint() {
+    IEnumerator BunnyMoment() {
         Vector3 point;
         if (randomPoint(transform.position, range, out point)) {
             print(point);
             inWaitState = true;
             waitTime = Random.Range(minWaitTime, maxWaitTime);
+            print(waitTime);
             yield return new WaitForSeconds(waitTime);
             target.position = point;
             agent.SetDestination(target.position);
