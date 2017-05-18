@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class BunnyBehaviour : MonoBehaviour {
 
+    public bool chaseMode = false;
+    public GameObject[] bunnyHoles;
+    float distance = Mathf.Infinity;
+
     public Transform target;
     NavMeshAgent agent;
     float waitTime;
@@ -36,14 +40,37 @@ public class BunnyBehaviour : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (agent.remainingDistance <= agent.stoppingDistance) {
-            if (inWaitState == false) {
-                StartCoroutine(BunnyMoment());
+        if (chaseMode == false) {
+            if (agent.remainingDistance <= agent.stoppingDistance) {
+                if (inWaitState == false) {
+                    StartCoroutine(BunnyMovement());
+                }
             }
+        }
+        else {
+            StopCoroutine(BunnyMovement());
+            BunnyChaseBehaviour();
         }
     }
 
-    IEnumerator BunnyMoment() {
+    void BunnyChaseBehaviour() {
+        print("chaseMode Is" + chaseMode);
+        foreach(GameObject bunnyHole in bunnyHoles) {
+            //print("bunnyHole" + bunnyHole);
+            Vector3 diff = bunnyHole.transform.position - transform.position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance) {
+                GameObject closest = bunnyHole;
+                distance = curDistance;
+                agent.SetDestination(bunnyHole.transform.position);
+                print("BunnyHole" + bunnyHole + "Is Closest to Rabbit");
+            }
+            
+        }
+        //agent.SetDestination(target.position);
+    }
+
+    IEnumerator BunnyMovement() {
         Vector3 point;
         if (randomPoint(transform.position, range, out point)) {
             print(point);
