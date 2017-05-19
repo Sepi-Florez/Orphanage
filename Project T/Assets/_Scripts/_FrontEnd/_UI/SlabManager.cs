@@ -45,8 +45,6 @@ public class SlabManager : MonoBehaviour {
         if (Input.GetButtonDown("Cancel")) {
             SlabToggle();
         }
-        transform.position += hand.position;
-
     }
     //Activated by a button to switch between menus
     public void ChangeTab(Transform tab) {
@@ -79,7 +77,16 @@ public class SlabManager : MonoBehaviour {
     }
     // Temporary anim. Later on this will be activated in the arms
     public void SlabToggle() {
+        if (slabOpen) {
+            Cursor.lockState = CursorLockMode.Locked;
+
+        }
+        else {
+            Cursor.lockState = CursorLockMode.Confined;  
+        }
+        Cursor.visible = !slabOpen;
         slabOpen = !slabOpen;
+        GetComponent<Animator>().SetBool("Open", slabOpen);
     }
 
 }

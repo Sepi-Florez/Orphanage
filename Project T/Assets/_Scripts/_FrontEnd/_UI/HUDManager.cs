@@ -52,10 +52,10 @@ public class HUDManager : MonoBehaviour {
         if (toggle) {
             print("/Sprites/Interaction" + spriteID);
             itObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Interaction" + spriteID);
-            itObject.SetActive(true);
+            itObject.GetComponent<CanvasGroup>().alpha = 1;
         }
         else {
-            itObject.SetActive(false);
+            itObject.GetComponent<CanvasGroup>().alpha = 0;
         }
     }
     public void UpdateHealth(float health) {
@@ -105,6 +105,7 @@ public class HUDManager : MonoBehaviour {
             Canvas.alpha = Mathf.Lerp(Canvas.alpha, 1, fadeRate);
             yield return new WaitForSeconds(fadeSpeed);
         }
+        Canvas.alpha = 1;
         print("Fadewait began");
         yield return new WaitForSeconds(fadeWait);
         print("Fadewait up");
