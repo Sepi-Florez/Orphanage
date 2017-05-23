@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
 public class BunnyBehaviour : MonoBehaviour {
 
     public bool chaseMode = false;
     public GameObject[] bunnyHoles;
     float distance = Mathf.Infinity;
+    Coroutine corry;
 
     public Transform target;
     NavMeshAgent agent;
@@ -35,25 +37,47 @@ public class BunnyBehaviour : MonoBehaviour {
     // Use this for initialization
     void Start() {
         agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(target.position);
+        //agent.SetDestination(target.position);
+        corry = StartCoroutine(BunnyMovement());
+        currentMoveState();
     }
 
+
+
     // Update is called once per frame
-    void Update() {
+    //void Update() {
+        /*if (Input.GetButton("Fire1")) {
+            print("Fire1Clicked");
+            currentMoveState();
+        }
+    }*/
+
+   public void OnCollisionEnter(Collider player) {
+        if (player.tag == "Player") {
+            chaseMode = true;
+            currentMoveState();
+        }
+    }
+
+    void currentMoveState() {
         if (chaseMode == false) {
+            print("chaseMode=False");
             if (agent.remainingDistance <= agent.stoppingDistance) {
+                print("RemainingDistance<=StoppingDistance");
                 if (inWaitState == false) {
+                    print("WaitState=False");
                     StartCoroutine(BunnyMovement());
+                    print("CoroutineStarted"); 
                 }
             }
         }
         else {
-            StopCoroutine(BunnyMovement());
-            BunnyChaseBehaviour();
+            distance = Mathf.Infinity;
+            StartCoroutine(BunnyChaseBehaviour());
         }
     }
 
-    void BunnyChaseBehaviour() {
+    IEnumerator BunnyChaseBehaviour() {
         print("chaseMode Is" + chaseMode);
         foreach(GameObject bunnyHole in bunnyHoles) {
             //print("bunnyHole" + bunnyHole);
@@ -64,15 +88,18 @@ public class BunnyBehaviour : MonoBehaviour {
                 distance = curDistance;
                 agent.SetDestination(bunnyHole.transform.position);
                 print("BunnyHole" + bunnyHole + "Is Closest to Rabbit");
+                print("ChaseWentThrough");
             }
-            
+            chaseMode = false;
+            yield return distance;
         }
         //agent.SetDestination(target.position);
     }
 
     IEnumerator BunnyMovement() {
         Vector3 point;
-        if (randomPoint(transform.position, range, out point)) {
+        print("CoroutineStartedMovement");
+        while (randomPoint(transform.position, range, out point)) {
             print(point);
             inWaitState = true;
             waitTime = Random.Range(minWaitTime, maxWaitTime);
@@ -84,6 +111,7 @@ public class BunnyBehaviour : MonoBehaviour {
             inWaitState = false;
         }
         yield return point;
+        //StopCoroutine(BunnyMovement());
     }
 }
 
