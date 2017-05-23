@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[System.Serializable]
+//Serializable]
 public class BunnyBehaviour : MonoBehaviour {
 
     public bool chaseMode = false;
     public GameObject[] bunnyHoles;
     float distance = Mathf.Infinity;
     Coroutine corry;
+    List<Collider> playerChecker = new List<Collider>();
 
     public Transform target;
     NavMeshAgent agent;
@@ -39,27 +40,23 @@ public class BunnyBehaviour : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         //agent.SetDestination(target.position);
         corry = StartCoroutine(BunnyMovement());
-        currentMoveState();
+        CurrentMoveState();
     }
 
 
 
     // Update is called once per frame
-    //void Update() {
-        /*if (Input.GetButton("Fire1")) {
+    /*void Update() {
+   
             print("Fire1Clicked");
             currentMoveState();
-        }
     }*/
 
-   public void OnCollisionEnter(Collider player) {
-        if (player.tag == "Player") {
-            chaseMode = true;
-            currentMoveState();
-        }
+    public void PlayerHasEntered() {
+
     }
 
-    void currentMoveState() {
+    void CurrentMoveState() {
         if (chaseMode == false) {
             print("chaseMode=False");
             if (agent.remainingDistance <= agent.stoppingDistance) {
