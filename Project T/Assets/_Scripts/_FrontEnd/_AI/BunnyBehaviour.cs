@@ -24,13 +24,16 @@ public class BunnyBehaviour : MonoBehaviour {
     bool randomPoint(Vector3 center, float range, out Vector3 result) {
         for (int i = 0; i < 2; i++) {
             Vector3 randomPoint = center + Random.insideUnitSphere * range;
+            print("RandomPoint" + "is" + randomPoint);
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) {
+            if (NavMesh.SamplePosition(randomPoint, out hit, range, NavMesh.AllAreas)) {
+                print("NavMeshHit" + hit + hit.position);
                 result = hit.position;
                 return true;
             }
         }
         result = Vector3.zero;
+        print("error");
         //StartCoroutine(BunnyMoment());
         return false;
     }
@@ -39,8 +42,8 @@ public class BunnyBehaviour : MonoBehaviour {
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         //agent.SetDestination(target.position);
-        corry = StartCoroutine(BunnyMovement());
-        CurrentMoveState();
+        //corry = StartCoroutine(BunnyMovement());
+        NormalMoveTrig();
     }
 
 
@@ -53,24 +56,26 @@ public class BunnyBehaviour : MonoBehaviour {
     }*/
 
     public void PlayerHasEntered() {
-
+        ChaseChecker();
     }
 
-    void CurrentMoveState() {
+    void ChaseChecker() {
+        distance = Mathf.Infinity;
+        StartCoroutine(BunnyChaseBehaviour());
+    }
+
+    void NormalMoveTrig() {
         if (chaseMode == false) {
             print("chaseMode=False");
             if (agent.remainingDistance <= agent.stoppingDistance) {
                 print("RemainingDistance<=StoppingDistance");
+                print("CurrentWait" + inWaitState);
                 if (inWaitState == false) {
                     print("WaitState=False");
                     StartCoroutine(BunnyMovement());
-                    print("CoroutineStarted"); 
+                    print("CoroutineStarted");
                 }
             }
-        }
-        else {
-            distance = Mathf.Infinity;
-            StartCoroutine(BunnyChaseBehaviour());
         }
     }
 
@@ -97,6 +102,7 @@ public class BunnyBehaviour : MonoBehaviour {
         Vector3 point;
         print("CoroutineStartedMovement");
         while (randomPoint(transform.position, range, out point)) {
+            print("StartOfWhile");
             print(point);
             inWaitState = true;
             waitTime = Random.Range(minWaitTime, maxWaitTime);
@@ -106,7 +112,10 @@ public class BunnyBehaviour : MonoBehaviour {
             agent.SetDestination(target.position);
             Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
             inWaitState = false;
+            print(agent.remainingDistance);
+            print("EndOfWhile");
         }
+        print("EndOfMove");
         yield return point;
         //StopCoroutine(BunnyMovement());
     }

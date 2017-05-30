@@ -11,11 +11,6 @@ public class PlayerChecker : MonoBehaviour {
         bunny = transform.parent.GetComponent<BunnyBehaviour>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     void OnTriggerEnter() {
         bunny.PlayerHasEntered();
     }
