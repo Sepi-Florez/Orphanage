@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7d97ffbaa963b624cb5b3ec75591097f
-timeCreated: 1496145535
+guid: ff3af079cec1fc8438cc4b09ea786061
+timeCreated: 1496150452
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -39,11 +39,11 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 110, y: 110, z: 130, w: 135}
   spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   maxTextureSizeSet: 0
@@ -85,7 +85,14 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline: []
+    outline:
+    - - {x: -138, y: 130}
+      - {x: -146, y: 110}
+      - {x: -146, y: -144}
+      - {x: -129, y: -146}
+      - {x: 122, y: -146}
+      - {x: 122, y: 128}
+      - {x: 116, y: 130}
   spritePackingTag: 
   userData: 
   assetBundleName: 
