@@ -15,6 +15,7 @@ Shader "Transparent/Cutout/Diffuse Shake" {
 		SubShader{
 		Tags{ "Queue" = "AlphaTest" "IgnoreProjector" = "True" "RenderType" = "TransparentCutout" }
 		LOD 200
+		Cull Off
 
 		CGPROGRAM
 #pragma target 3.0

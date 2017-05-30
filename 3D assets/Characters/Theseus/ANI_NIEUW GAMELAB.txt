@@ -1,0 +1,20 @@
+Animaties MainChar;
+
+Idle: 0 - 80
+Start Run: 85 - 95
+Run Loop: 95 - 121
+End Run: 121 - 135
+Start Walk: 140 - 160
+Walk Loop: 160 - 210
+End Walk: 210 - 230
+Jump: 235 - 319
+Fall: 285 - 319
+Fall Motion: 320 - 360
+SlashAttack1: 370 - 435
+SlashAttack2: 440 - 510
+Overhead Attack: 515 - 610
+StabAttack: 615 - 685
+Death: 690 - 796
+TakeDamage: 805 - 835
+PickupItem: 840 - 893
+GrabSlab: 900 - 945
