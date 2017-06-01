@@ -36,11 +36,13 @@ public class Boss : MonoBehaviour {
             Vector3 ppos = new Vector3(player.position.x, transform.position.y, player.position.z);
             print("looking");
             if(Vector3.Angle(transform.forward ,ppos - transform.position) < minAngle) {
+                agent.isStopped = false;
                 transform.LookAt(ppos);
                 Move();
                 print("is look at");
             }
             else {
+                agent.isStopped = true;
                 Quaternion rotation = Quaternion.LookRotation(ppos - transform.position);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 1);
                 print("is turning to");

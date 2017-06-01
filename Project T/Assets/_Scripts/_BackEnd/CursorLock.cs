@@ -33,7 +33,7 @@ public class CursorLock
         }
 	}*/
 
-    public void Lock (PlayerControl playerController, CombatManager weapon)
+    /*public void Lock (PlayerControl playerController, CombatManager weapon)
     {
 
         if (harry)
@@ -65,5 +65,5 @@ public class CursorLock
             Cursor.lockState = CursorLockMode.Locked;
             harry = !harry;
         }
-    }
+    }*/
 }

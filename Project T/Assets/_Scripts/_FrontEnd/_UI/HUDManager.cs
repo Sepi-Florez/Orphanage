@@ -60,7 +60,7 @@ public class HUDManager : MonoBehaviour {
     }
     public void UpdateHealth(float health) {
         print("health update");
-        playerHP.GetComponent<Image>().fillAmount = health / 100;
+        playerHP.transform.GetChild(0).GetComponent<Image>().fillAmount = health / 100;
         playerHPCanvas.alpha = 1;
         if (OOCvar == null) {
             OOCvar = StartCoroutine(OOC());
@@ -77,7 +77,7 @@ public class HUDManager : MonoBehaviour {
         if (bossHPCanvas.alpha != 0) {
             bossHPCanvas.alpha = 1;
         }
-        bossHP.GetComponent<Image>().fillAmount = health / 100;
+        bossHP.transform.GetChild(0).GetComponent<Image>().fillAmount = health / 100;
 
     }
     public void QuestPrompt(int questID, int option) {
@@ -88,13 +88,13 @@ public class HUDManager : MonoBehaviour {
         else {
             if (option == 0) {
                 StartCoroutine(Fade(questObj.GetComponent<CanvasGroup>()));
-                questObj.GetComponent<Text>().text = "Quest Completed";
-                questObj.transform.GetChild(0).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].title;
+                questObj.transform.GetChild(0).GetComponent<Text>().text = "Quest Completed";
+                questObj.transform.GetChild(1).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].title;
             }
             else {
                 StartCoroutine(Fade(questObj.GetComponent<CanvasGroup>()));
-                questObj.transform.GetChild(0).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].title;
-                questObj.GetComponent<Text>().text = "New Quest";
+                questObj.transform.GetChild(1).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].title;
+                questObj.transform.GetChild(0).GetComponent<Text>().text = "New Quest";
             }
         }
     }
