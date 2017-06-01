@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-//Serializable]
 public class BunnyBehaviour : MonoBehaviour {
 
     public bool chaseMode = false;
@@ -11,6 +10,7 @@ public class BunnyBehaviour : MonoBehaviour {
     float distance = Mathf.Infinity;
     Coroutine corry;
     List<Collider> playerChecker = new List<Collider>();
+    public float chaseSpeed;
 
     public Transform target;
     NavMeshAgent agent;
@@ -21,8 +21,9 @@ public class BunnyBehaviour : MonoBehaviour {
     public float maxWaitTime;
 
     public float range = 10.0f;
+    //Hieronder wordt een randompoint in een bepaalde radius vanaf de bunny op de navmesh gekozen.
     bool randomPoint(Vector3 center, float range, out Vector3 result) {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 30; i++) {
             Vector3 randomPoint = center + Random.insideUnitSphere * range;
             print("RandomPoint" + "is" + randomPoint);
             NavMeshHit hit;
@@ -34,36 +35,24 @@ public class BunnyBehaviour : MonoBehaviour {
         }
         result = Vector3.zero;
         print("error");
-        //StartCoroutine(BunnyMoment());
         return false;
     }
 
-    // Use this for initialization
+    // Wordt gebruit om de normalmovement te triggeren en de NavMesh component aan te geven.
     void Start() {
         agent = GetComponent<NavMeshAgent>();
-        //agent.SetDestination(target.position);
-        //corry = StartCoroutine(BunnyMovement());
         NormalMoveTrig();
     }
 
 
 
-    // Update is called once per frame
-    /*void Update() {
-   
-            print("Fire1Clicked");
-            currentMoveState();
-    }*/
-
+    //Wordt aangeroepen door het script PlayerChecker als een object met de layer "Player" in zijn collider komt. Start de "ChaseFase" van de rabbit.
     public void PlayerHasEntered() {
-        ChaseChecker();
-    }
-
-    void ChaseChecker() {
         distance = Mathf.Infinity;
         StartCoroutine(BunnyChaseBehaviour());
     }
 
+    //Normale Movement van de Rabbit, checked eerst of hij in zijn "NormalState" zit en stuurt hem dan aan.
     void NormalMoveTrig() {
         if (chaseMode == false) {
             print("chaseMode=False");
@@ -78,26 +67,24 @@ public class BunnyBehaviour : MonoBehaviour {
             }
         }
     }
-
+    //De IEnumerator die alles voor de bunny chase regelt.
     IEnumerator BunnyChaseBehaviour() {
         print("chaseMode Is" + chaseMode);
         foreach(GameObject bunnyHole in bunnyHoles) {
-            //print("bunnyHole" + bunnyHole);
             Vector3 diff = bunnyHole.transform.position - transform.position;
             float curDistance = diff.sqrMagnitude;
             if (curDistance < distance) {
                 GameObject closest = bunnyHole;
                 distance = curDistance;
                 agent.SetDestination(bunnyHole.transform.position);
+                agent.speed = chaseSpeed;
                 print("BunnyHole" + bunnyHole + "Is Closest to Rabbit");
                 print("ChaseWentThrough");
             }
-            chaseMode = false;
             yield return distance;
         }
-        //agent.SetDestination(target.position);
     }
-
+    //De IEnumerator die alles voor de bunny movement regelt.
     IEnumerator BunnyMovement() {
         Vector3 point;
         print("CoroutineStartedMovement");
@@ -117,7 +104,7 @@ public class BunnyBehaviour : MonoBehaviour {
         }
         print("EndOfMove");
         yield return point;
-        //StopCoroutine(BunnyMovement());
+        NormalMoveTrig();
     }
 }
 
