@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour {
     UnityEngine.AI.NavMeshAgent agent;
+    Animator anim;
 
     Transform player;
 
@@ -22,9 +23,10 @@ public class Boss : MonoBehaviour {
 
     //Fills in some variables
 	void Start () {
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        StartCoroutine(LookForPlayer());
+        anim = GetComponent<Animator>();
     }
 
     //decides on the next course of action.
@@ -32,45 +34,43 @@ public class Boss : MonoBehaviour {
         print("Deciding");
         float dist = Vector3.Distance(transform.position, player.position);
         float stopDist;
-        print(dist);
-        if (dist > 20) {
+        if (dist > 30) {
             bossAction += BullCharge;
             stopDist = dist;
         }
         else {
-            int r = Random.Range(0, 1);
+            int r = Random.Range(0, 2);
             if(r == 0) {
-
+                bossAction += Overhead;
+                stopDist = 7;
             }
             else {
-
-
+                bossAction += Sweep;
+                stopDist = 5;
             }
         }
-
+        agent.stoppingDistance = stopDist;
     }
-
-// Makes the boss look at the player when in the 
+    // Makes the boss look at the player when in the 
     IEnumerator LookForPlayer() {
         while (looking) {
             Vector3 ppos = new Vector3(player.position.x, transform.position.y, player.position.z);
-            if(Vector3.Angle(transform.forward ,ppos - transform.position) < minAngle) {
-
+            if (Vector3.Angle(transform.forward, ppos - transform.position) < minAngle) {
+                print("Player in vision");
                 transform.LookAt(ppos);
-                if (agent.isStopped) {
-                    DecideAction();
-                    agent.isStopped = false;
-                }
-                if(agent.velocity == Vector3.zero) {  
-                    print("stopped");
-                    bossAction();
-                    looking = false;
-                    break;
-                }
                 Move();
+                if (agent.isStopped) {
+                    agent.isStopped = false;
+                    DecideAction();
+                }
+                else if (agent.remainingDistance - agent.stoppingDistance <= 0) {
+                    bossAction();
+                    agent.isStopped = true;
+                    looking = false;
+                }
             }
             else {
-                if(!agent.isStopped)
+                if (!agent.isStopped)
                     agent.isStopped = true;
 
                 Quaternion rotation = Quaternion.LookRotation(ppos - transform.position);
@@ -79,23 +79,31 @@ public class Boss : MonoBehaviour {
             }
             yield return new WaitForSeconds(0.01f);
         }
-        print("hagrid");
     }
+    void StartLooking() {
+        looking = true;
+        StartCoroutine(LookForPlayer());
+        print("Start");
+    }
+    //IEnumerator AttackFollow() {
     //Moves the boss towards the player.
     void Move() {
         print("moving");
         agent.SetDestination(player.position);
     }
-        
     void Overhead() {
         print("Overhead");
+        anim.SetTrigger("Overhead");
+        bossAction -= Overhead;
     }
     void Sweep() {
         print("Sweep");
+        anim.SetTrigger("Sweep");
+        bossAction -= Sweep;
+
     }
     void BullCharge() {
         print("CHAAAAAAAAAAARGE");
         bossAction -= BullCharge;
     }
-
 }
