@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 2e49259b1a8682b4e9bb1df8258fab60
-timeCreated: 1496147279
-=======
-guid: cdea28fe94f2b734fb43bc8b08f7fe21
-timeCreated: 1496150438
->>>>>>> 16c47ab3fadbaebda16d42a961aa79e8046741b4
-licenseType: Free
+guid: dda78c41eb7f8f348b18a930e7f25981
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
@@ -33,42 +26,23 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-<<<<<<< HEAD
-    aniso: -1
-    mipBias: -1
-    wrapMode: -1
-  nPOTScale: 1
-  lightmap: 0
-  compressionQuality: 50
-  spriteMode: 0
-=======
     aniso: 16
     mipBias: -1
     wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
->>>>>>> 16c47ab3fadbaebda16d42a961aa79e8046741b4
+  spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-<<<<<<< HEAD
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 0
-=======
-  spriteBorder: {x: 110, y: 110, z: 135, w: 130}
-  spritePixelsToUnits: 100
-  alphaUsage: 1
-  alphaIsTransparency: 1
-  spriteTessellationDetail: -1
   textureType: 8
->>>>>>> 16c47ab3fadbaebda16d42a961aa79e8046741b4
   textureShape: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
@@ -82,8 +56,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-<<<<<<< HEAD
-=======
   - buildTarget: Standalone
     maxTextureSize: 2048
     textureFormat: -1
@@ -92,23 +64,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: Android
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: WebGL
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
->>>>>>> 16c47ab3fadbaebda16d42a961aa79e8046741b4
   spriteSheet:
     serializedVersion: 2
     sprites: []
