@@ -1,36 +1,15 @@
 fileFormatVersion: 2
-guid: b93cd6fca4bdce44cae110fd27aead6d
-timeCreated: 1492459901
+guid: e2ec9c6565c1f70429f66f204efed85b
+timeCreated: 1496772632
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Box023
-    100004: Box024
-    100006: Box025
-    100008: Box026
     400000: //RootNode
-    400002: Box023
-    400004: Box024
-    400006: Box025
-    400008: Box026
-    2300000: Box023
-    2300002: Box024
-    2300004: Box025
-    2300006: Box026
-    3300000: Box023
-    3300002: Box024
-    3300004: Box025
-    3300006: Box026
-    4300000: Box023
-    4300002: Box024
-    4300004: Box025
-    4300006: Box026
-    6400000: Box023
-    6400002: Box024
-    6400004: Box025
-    6400006: Box026
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Roofwallpiece
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -60,7 +39,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -77,7 +56,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -96,7 +75,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
