@@ -18,6 +18,7 @@ public class Interaction : MonoBehaviour {
                         i = true;
                         HUDManager.thisManager.Interaction(true, 0);
                         if (Input.GetButtonDown("Interaction")) {
+                            print(itObject.name);
                             InventoryManager.thisManager.InventoryAdd(itObject.GetComponent<itemPickUp>().itemID, itObject.GetComponent<itemPickUp>().count);
                         }
                         break;

@@ -44,9 +44,6 @@ public class DataBaseManager : MonoBehaviour {
     void Start() {
     }
     void Update() {
-        if (Input.GetButtonDown("Jump")) {
-            InventoryManager.thisManager.InventoryAdd(0, 3);
-        }
     }
     public Item ReturnItem(int itemID) {
         if(loaded)

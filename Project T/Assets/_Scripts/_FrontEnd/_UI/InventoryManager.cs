@@ -31,14 +31,11 @@ public class InventoryManager : MonoBehaviour {
         }
     }
     private void Start() {
-        InventoryAdd(0, 10);
-        InventoryAdd(2, 10);
-        InventoryAdd(3, 10);
         contentObjects[0].transform.position = new Vector3(0, 0, 0);
     }
     // Is called upon when adding an item to the inventory
     public void InventoryAdd(int item,int count) {
-
+        print("Adding" + item);
         if (DataBaseManager.thisManager.ReturnItem(item) != null) {
             Item newItem = DataBaseManager.thisManager.ReturnItem(item);
             int i = SearchInventory(newItem);
