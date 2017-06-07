@@ -32,6 +32,8 @@ public class InventoryManager : MonoBehaviour {
     }
     private void Start() {
         contentObjects[0].transform.position = new Vector3(0, 0, 0);
+        InventoryAdd(0, 10);
+        InventoryAdd(3, 10);
     }
     // Is called upon when adding an item to the inventory
     public void InventoryAdd(int item,int count) {

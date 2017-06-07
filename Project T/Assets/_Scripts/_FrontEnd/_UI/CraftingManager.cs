@@ -13,6 +13,7 @@ public class CraftingManager : MonoBehaviour {
 
     public void Start() {
         AddRecipe(1);
+        AddRecipe(2);
     }
     // adds a recipe to the list
     public void AddRecipe(int itemID) {
