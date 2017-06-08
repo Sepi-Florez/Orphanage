@@ -77,7 +77,9 @@ public class BunnyBehaviour : MonoBehaviour {
                 GameObject closest = bunnyHole;
                 distance = curDistance;
                 agent.SetDestination(bunnyHole.transform.position);
-                agent.speed = chaseSpeed;
+                if(curDistance < distance) {
+                    print("Yellow");
+                }
                 print("BunnyHole" + bunnyHole + "Is Closest to Rabbit");
                 print("ChaseWentThrough");
             }
