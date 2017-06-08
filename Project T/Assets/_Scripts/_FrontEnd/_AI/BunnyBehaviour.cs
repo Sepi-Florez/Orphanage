@@ -11,6 +11,7 @@ public class BunnyBehaviour : MonoBehaviour {
     Coroutine corry;
     List<Collider> playerChecker = new List<Collider>();
     public float chaseSpeed;
+    MeshRenderer bunnyMesh;
 
     public Transform target;
     NavMeshAgent agent;
@@ -42,6 +43,7 @@ public class BunnyBehaviour : MonoBehaviour {
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         NormalMoveTrig();
+        bunnyMesh = transform.GetComponent<MeshRenderer>();
     }
 
 
@@ -77,8 +79,9 @@ public class BunnyBehaviour : MonoBehaviour {
                 GameObject closest = bunnyHole;
                 distance = curDistance;
                 agent.SetDestination(bunnyHole.transform.position);
-                if(curDistance < distance) {
+                if(agent.remainingDistance <= agent.stoppingDistance) {
                     print("Yellow");
+                    bunnyMesh.enabled = false;
                 }
                 print("BunnyHole" + bunnyHole + "Is Closest to Rabbit");
                 print("ChaseWentThrough");
