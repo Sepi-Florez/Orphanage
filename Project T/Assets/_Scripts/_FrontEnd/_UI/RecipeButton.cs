@@ -10,8 +10,8 @@ public class RecipeButton : MonoBehaviour {
     public void FillValues(Item item) {
         if (!filled) {
             thisItem = item;
-            transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(item.spritePath);
-            transform.GetChild(0).GetChild(1).GetComponent<Text>().text = item.itemName;
+            transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(item.spritePath);
+            transform.GetChild(0).GetChild(2).GetComponent<Text>().text = item.itemName;
             UpdateValues();
             Transform mats = transform.GetChild(1);
             print(item.itemName + "Filling in");
@@ -26,7 +26,7 @@ public class RecipeButton : MonoBehaviour {
             filled = true;
         }
     }
-
+    //Ik hou van je David <3
     public void UpdateValues() {
         print("UpdatingValues");
         Transform mats = transform.GetChild(1);
@@ -34,24 +34,24 @@ public class RecipeButton : MonoBehaviour {
             for (int i = 0; i < thisItem.comps.Length; i++) {
                 Item newItem = DataBaseManager.thisManager.GetItem(thisItem.comps[i]);
                 print(newItem.ID + " = newItem");
-                mats.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(newItem.spritePath);
-                mats.GetChild(i).GetChild(1).GetComponent<Text>().text = newItem.itemName;
+                mats.GetChild(i).GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(newItem.spritePath);
+                mats.GetChild(i).GetChild(2).GetComponent<Text>().text = newItem.itemName;
                 if (InventoryManager.thisManager.Search(newItem.ID) != null) {
                     switch (newItem.category) {
                         case 1:
                             Consumable newCon = InventoryManager.thisManager.Search(newItem.ID) as Consumable;
-                            mats.GetChild(i).GetChild(2).GetComponent<Text>().text = newCon.count.ToString();
+                            mats.GetChild(i).GetChild(3).GetComponent<Text>().text = newCon.count.ToString();
                             break;
                         case 2:
                             CraftingObject newCra = InventoryManager.thisManager.Search(newItem.ID) as CraftingObject;
-                            mats.GetChild(i).GetChild(2).GetComponent<Text>().text = newCra.count.ToString();
+                            mats.GetChild(i).GetChild(3).GetComponent<Text>().text = newCra.count.ToString();
                             break;
                     }
                 }
                 else {
-                    mats.GetChild(i).GetChild(2).GetComponent<Text>().text = "0";
+                    mats.GetChild(i).GetChild(3).GetComponent<Text>().text = "0";
                 }
-                mats.GetChild(i).GetChild(3).GetComponent<Text>().text = thisItem.compsc[i].ToString();
+                mats.GetChild(i).GetChild(4).GetComponent<Text>().text = thisItem.compsc[i].ToString();
             }
         }
 
