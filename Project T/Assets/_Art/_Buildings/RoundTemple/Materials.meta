@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Project T/Assets/_Art/_Buildings/RoundTemple/Materials.meta
 guid: 0aa775902f2e9f3429386fe956d816ad
 folderAsset: yes
 timeCreated: 1496993408
+=======
+guid: 429aa942d5bb95a418d075568d7482da
+folderAsset: yes
+timeCreated: 1496994275
+>>>>>>> a78805584df507a3ea56ec8c43e39ed48a408713:Project T/Assets/_Art/_Buildings/RoundTemple/Materials.meta
 licenseType: Free
 DefaultImporter:
   userData: 
