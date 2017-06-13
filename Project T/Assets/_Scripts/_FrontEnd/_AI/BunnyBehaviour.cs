@@ -11,6 +11,8 @@ public class BunnyBehaviour : MonoBehaviour {
     Coroutine corry;
     List<Collider> playerChecker = new List<Collider>();
     public float chaseSpeed;
+    MeshRenderer bunnyMesh;
+    public bool inChase = false;
 
     public Transform target;
     NavMeshAgent agent;
@@ -42,6 +44,7 @@ public class BunnyBehaviour : MonoBehaviour {
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         NormalMoveTrig();
+        bunnyMesh = transform.GetComponent<MeshRenderer>();
     }
 
 
@@ -49,7 +52,7 @@ public class BunnyBehaviour : MonoBehaviour {
     //Wordt aangeroepen door het script PlayerChecker als een object met de layer "Player" in zijn collider komt. Start de "ChaseFase" van de rabbit.
     public void PlayerHasEntered() {
         distance = Mathf.Infinity;
-        StartCoroutine(BunnyChaseBehaviour());
+        BunnyChaseBehaviour();
     }
 
     //Normale Movement van de Rabbit, checked eerst of hij in zijn "NormalState" zit en stuurt hem dan aan.
@@ -68,7 +71,7 @@ public class BunnyBehaviour : MonoBehaviour {
         }
     }
     //De IEnumerator die alles voor de bunny chase regelt.
-    IEnumerator BunnyChaseBehaviour() {
+    void BunnyChaseBehaviour() {
         print("chaseMode Is" + chaseMode);
         foreach(GameObject bunnyHole in bunnyHoles) {
             Vector3 diff = bunnyHole.transform.position - transform.position;
@@ -77,11 +80,16 @@ public class BunnyBehaviour : MonoBehaviour {
                 GameObject closest = bunnyHole;
                 distance = curDistance;
                 agent.SetDestination(bunnyHole.transform.position);
-                agent.speed = chaseSpeed;
+                /*if(agent.stoppingDistance == agent.remainingDistance) {
+                    print("Yellow");
+                    bunnyMesh.enabled = false;
+                }*/
                 print("BunnyHole" + bunnyHole + "Is Closest to Rabbit");
                 print("ChaseWentThrough");
+                if(inChase == true) {
+                    BunnyChaseBehaviour();
+                }
             }
-            yield return distance;
         }
     }
     //De IEnumerator die alles voor de bunny movement regelt.

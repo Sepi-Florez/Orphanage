@@ -46,7 +46,6 @@ public class HUDManager : MonoBehaviour {
 
     }
     void Start() {
-        UpdateHealth(50);
     }
     public void Interaction(bool toggle, int spriteID) {
         if (toggle) {

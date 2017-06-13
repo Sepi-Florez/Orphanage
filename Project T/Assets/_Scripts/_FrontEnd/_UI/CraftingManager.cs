@@ -13,6 +13,8 @@ public class CraftingManager : MonoBehaviour {
 
     public void Start() {
         AddRecipe(1);
+        AddRecipe(2);
+        AddRecipe(5);
     }
     // adds a recipe to the list
     public void AddRecipe(int itemID) {
@@ -20,7 +22,7 @@ public class CraftingManager : MonoBehaviour {
         newRecipe.SetParent(GameObject.FindGameObjectWithTag("CraftingContent").transform);
         InventoryManager.thisManager.helpArrange(newRecipe);
         recipes.Add(newRecipe.GetComponent<RecipeButton>());
-        recipes[0].FillValues(DataBaseManager.thisManager.GetItem(itemID));
+        recipes[recipes.Count - 1].FillValues(DataBaseManager.thisManager.GetItem(itemID));
     }
     // Refreshes all recipes values
     public void RefreshRecipes() {
@@ -28,8 +30,8 @@ public class CraftingManager : MonoBehaviour {
             r.UpdateValues();
         }
     }
-    // Tries to make the given item
-    public void MakeRecipe(int itemID) {
+    // Tries to make the given recipe
+    public void MakeRecipe(int itemID) {    
         print("Making Recipe");
         Item newItem = DataBaseManager.thisManager.GetItem(itemID);
         List<Item> recipe = new List<Item>();
