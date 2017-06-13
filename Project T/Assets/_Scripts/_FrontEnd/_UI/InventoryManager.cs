@@ -34,6 +34,8 @@ public class InventoryManager : MonoBehaviour {
         contentObjects[0].transform.position = new Vector3(0, 0, 0);
         InventoryAdd(0, 10);
         InventoryAdd(3, 10);
+        InventoryAdd(5, 10);
+        InventoryAdd(6, 10);
     }
     // Is called upon when adding an item to the inventory
     public void InventoryAdd(int item,int count) {
@@ -80,6 +82,7 @@ public class InventoryManager : MonoBehaviour {
     }
     //Instantiates the button which represents the item.
     Transform Visualize(Item item) {
+        print("Vizualizing " + item.itemName);
         Transform newButton = Instantiate(buttonPref, Vector3.zero, Quaternion.identity).transform;
         newButton.SetParent(contentObjects[item.category].transform);
         helpArrange(newButton);
@@ -127,6 +130,9 @@ public class InventoryManager : MonoBehaviour {
     //Activated when consuming or equiping an item.
     public void Use(Item item) {
         switch (item.category) {
+            case 0:
+                //Equip Weapon
+                break;
             case 1:
                 //Use potion somewhere
                 Consumable itemCon = inventory[SearchInventory(item)] as Consumable;

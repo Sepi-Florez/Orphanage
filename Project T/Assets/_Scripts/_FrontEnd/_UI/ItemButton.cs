@@ -9,19 +9,31 @@ public class ItemButton : MonoBehaviour {
         transform.GetChild(0).GetComponent<Text>().text = item.itemName;
         transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(item.spritePath);
         transform.GetChild(3).GetComponent<Text>().text = item.description;
+        Transform options = transform.GetChild(4);
         switch (item.category) {
+            case 0:
+                Weapon nItem = item as Weapon;
+                options.GetChild(0).GetChild(0).GetComponent<Text>().text = "Equip";
+                options.GetChild(0).GetComponent<Button>().onClick.AddListener(() => InventoryManager.thisManager.Use(item));
+                break;
             case 1:
-                Consumable nItem = item as Consumable;
-                transform.GetChild(2).GetComponent<Text>().text += "x " + nItem.count.ToString();
+                Consumable nnnItem = item as Consumable;
+                transform.GetChild(2).GetComponent<Text>().text += "x " + nnnItem.count.ToString();
+
+                options.GetChild(0).GetChild(0).GetComponent<Text>().text = "Consume";
+                options.GetChild(0).GetComponent<Button>().onClick.AddListener(() => InventoryManager.thisManager.Use(item));
                 break;
             case 2:
                 CraftingObject nnItem = item as CraftingObject;
+                Destroy(options.GetChild(0).gameObject);
                 transform.GetChild(2).GetComponent<Text>().text += "x " + nnItem.count.ToString();
                 break;
+
         }
-        transform.GetComponent<Button>().onClick.AddListener(() => OpenOptions(item));
+        options.GetChild(1).GetComponent<Button>().onClick.AddListener(() => InventoryManager.thisManager.Delete(item));
     }
-    public void OpenOptions(Item item) {
+    // Old Functionality 
+    /*public void OpenOptions(Item item) {
         GameObject optionWindow = (GameObject)Instantiate(InventoryManager.thisManager.optionWindowPref, Input.mousePosition, Quaternion.identity);
         optionWindow.transform.SetParent(GameObject.FindGameObjectWithTag("HUD").transform);
         optionWindow.transform.position = Input.mousePosition;
@@ -48,7 +60,7 @@ public class ItemButton : MonoBehaviour {
     }
     public void CloseOptions(GameObject options) {
         Destroy(options);
-    }
+    }*/
     public void UpdateCount(int Count) {
         transform.GetChild(2).GetComponent<Text>().text = "x " + Count.ToString();
     }
