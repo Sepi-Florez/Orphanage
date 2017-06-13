@@ -79,7 +79,7 @@ public class BunnyBehaviour : MonoBehaviour {
                 GameObject closest = bunnyHole;
                 distance = curDistance;
                 agent.SetDestination(bunnyHole.transform.position);
-                if(agent.remainingDistance <= agent.stoppingDistance) {
+                if(agent.stoppingDistance == agent.remainingDistance) {
                     print("Yellow");
                     bunnyMesh.enabled = false;
                 }
