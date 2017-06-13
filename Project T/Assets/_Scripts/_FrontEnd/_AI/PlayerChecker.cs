@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerChecker : MonoBehaviour {
 
     BunnyBehaviour bunny;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -12,6 +13,7 @@ public class PlayerChecker : MonoBehaviour {
 	}
 	
     void OnTriggerEnter() {
+        bunny.inChase = true;
         bunny.PlayerHasEntered();
     }
 }
