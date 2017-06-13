@@ -11,6 +11,7 @@ public class Interaction : MonoBehaviour {
         if (it) {
             RaycastHit hit;
             if(Physics.Raycast(transform.position,transform.forward, out hit, itRange)) {
+                print("Interactle BOy");
                 Transform itObject = hit.transform;
                 bool i = false;
                 switch (itObject.tag) {
@@ -35,6 +36,19 @@ public class Interaction : MonoBehaviour {
                         HUDManager.thisManager.Interaction(true, 0);
                         if (Input.GetButtonDown("Interaction")) {
                             hit.transform.parent.GetComponent<Animator>().SetTrigger("Toggle");
+                        }
+                        //toggle door anim
+                        break;
+                    case "Brazier":
+                        i = true;
+                        HUDManager.thisManager.Interaction(true, 0);
+                        if (Input.GetButtonDown("Interaction")) {
+                            if(InventoryManager.thisManager.Search(itObject.GetComponent<itemPickUp>().itemID) != null) {
+                                InventoryManager.thisManager.Remove(DataBaseManager.thisManager.GetItem(itObject.GetComponent<itemPickUp>().itemID), 1);
+                                itObject.GetChild(0).GetComponent<ParticleSystem>().Play();
+                                FindObjectOfType<Gate>().Open();
+                                
+                            }
                         }
                         //toggle door anim
                         break;

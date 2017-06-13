@@ -95,7 +95,6 @@ public class InventoryManager : MonoBehaviour {
             //check if equiped else delete
         }
         else {
-            print("koek");
             int a = 0;
             List<Item> checkList = GetCategory(item.category);
             foreach(Item i in checkList) {
