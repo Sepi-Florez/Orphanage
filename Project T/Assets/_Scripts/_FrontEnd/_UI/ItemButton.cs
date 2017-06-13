@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemButton : MonoBehaviour {
-
+    // Fils values and adds listeners to buttons.
     public void FillValues(Item item) {
         transform.GetChild(0).GetComponent<Text>().text = item.itemName;
         transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(item.spritePath);

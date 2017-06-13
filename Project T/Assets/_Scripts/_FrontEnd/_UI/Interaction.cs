@@ -21,6 +21,7 @@ public class Interaction : MonoBehaviour {
                         if (Input.GetButtonDown("Interaction")) {
                             print(itObject.name);
                             InventoryManager.thisManager.InventoryAdd(itObject.GetComponent<itemPickUp>().itemID, itObject.GetComponent<itemPickUp>().count);
+                            Destroy(itObject.gameObject);
                         }
                         break;
                     case "NPC":

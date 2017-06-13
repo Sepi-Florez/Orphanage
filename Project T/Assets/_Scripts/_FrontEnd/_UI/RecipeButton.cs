@@ -26,7 +26,6 @@ public class RecipeButton : MonoBehaviour {
             filled = true;
         }
     }
-    //Ik hou van je David <3
     public void UpdateValues() {
         print("UpdatingValues");
         Transform mats = transform.GetChild(1);

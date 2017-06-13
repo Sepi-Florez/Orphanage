@@ -45,6 +45,7 @@ public class DataBaseManager : MonoBehaviour {
     }
     void Update() {
     }
+    // Gives an Item variable back 
     public Item ReturnItem(int itemID) {
         if(loaded)
             if(dbList.itemList.Count > itemID)

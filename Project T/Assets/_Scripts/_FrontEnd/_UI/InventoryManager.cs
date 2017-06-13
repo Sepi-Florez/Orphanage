@@ -112,6 +112,7 @@ public class InventoryManager : MonoBehaviour {
         CraftingManager.thisManager.RefreshRecipes();
 
     }
+    // Used to remove an fixed amount of an item.
     public void Remove(Item item, int amount) {
         Item newItem = Search(item.ID);
         CraftingObject newCO = newItem as CraftingObject;
@@ -133,7 +134,7 @@ public class InventoryManager : MonoBehaviour {
                 //Equip Weapon
                 break;
             case 1:
-                //Use potion somewhere
+                //Put Potions Functions here!
                 Consumable itemCon = inventory[SearchInventory(item)] as Consumable;
                 if(itemCon.count - 1 == 0) {
                     Delete(itemCon);
