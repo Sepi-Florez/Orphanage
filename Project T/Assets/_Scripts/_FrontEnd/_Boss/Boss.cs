@@ -27,6 +27,7 @@ public class Boss : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         anim = GetComponent<Animator>();
+        StartCoroutine(LookForPlayer());
     }
 
     //decides on the next course of action.
