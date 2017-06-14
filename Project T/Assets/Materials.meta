@@ -1,7 +1,11 @@
 fileFormatVersion: 2
 guid: b5bca8172cc285243ab64cbf2e9fc005
 folderAsset: yes
+<<<<<<< HEAD:Project T/Assets/Materials.meta
 timeCreated: 1497424338
+=======
+timeCreated: 1496820422
+>>>>>>> 3d7f9f849da375c72fc4c27ac7a32da974382e25:Project T/Assets/Materials.meta
 licenseType: Free
 DefaultImporter:
   userData: 
