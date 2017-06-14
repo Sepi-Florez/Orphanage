@@ -1,0 +1,15 @@
+Sword childen aan: Bip001 R Finger21
+
+Animations;
+0 - 75 |Start charge
+75 - 113 |Loop Charge Attack
+113 - 180 |Smash on the wall
+180 - 195 |Start Walk
+195 - 237 |Loop Walk
+237 - 250 |End Walk
+255 - 410 |Stagger
+420 - 500 |Axe front sweep
+505 - 667 |Axe Overhead Attack
+675 - 747 |180 Turn
+755 - 789 |90 Turn
+800 - 847 |Death
