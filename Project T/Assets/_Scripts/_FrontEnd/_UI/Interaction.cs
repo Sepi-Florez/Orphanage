@@ -47,7 +47,7 @@ public class Interaction : MonoBehaviour {
                             if(InventoryManager.thisManager.Search(itObject.GetComponent<itemPickUp>().itemID) != null) {
                                 InventoryManager.thisManager.Remove(DataBaseManager.thisManager.GetItem(itObject.GetComponent<itemPickUp>().itemID), 1);
                                 itObject.GetChild(0).GetComponent<ParticleSystem>().Play();
-                                FindObjectOfType<Gate>().Open();
+                                FindObjectOfType<Gate>().GetComponent<Gate>().Open();
                                 
                             }
                         }
