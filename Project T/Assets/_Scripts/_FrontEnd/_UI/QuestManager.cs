@@ -23,8 +23,8 @@ public class QuestManager : MonoBehaviour {
         thisManager = this; 
         questContent = GameObject.FindGameObjectWithTag("QuestContent").transform;
         questInfo = GameObject.FindGameObjectWithTag("QuestInfo").transform;
-        if (File.Exists(Application.persistentDataPath + dataPath)) {
-            FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Open);
+        if (File.Exists(Application.dataPath + dataPath)) {
+            FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(QuestList));
             QuestList a = reader.Deserialize(stream) as QuestList;
             stream.Close();
@@ -33,8 +33,8 @@ public class QuestManager : MonoBehaviour {
         }
         else {
             XmlSerializer writer = new XmlSerializer(typeof(QuestList));
-            FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Create);
-            print(Application.persistentDataPath + dataPath);
+            FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Create);
+            print(Application.dataPath + dataPath);
             writer.Serialize(stream, questList);
             stream.Close();
             print("didn't find Quest file");

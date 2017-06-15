@@ -26,8 +26,8 @@ public class DataBaseManager : MonoBehaviour {
         thisManager = this;
         
 
-        if (File.Exists(Application.persistentDataPath + dataPath)) {
-            FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Open);
+        if (File.Exists(Application.dataPath + dataPath)) {
+            FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
             ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
             stream.Close();
@@ -71,7 +71,7 @@ public class DataBaseManager : MonoBehaviour {
         newItem.ID = dbList.itemList.Count;
         dbList.itemList.Add(newItem);
         XmlSerializer writer = new XmlSerializer(typeof(ItemDatabase));
-        FileStream stream = new FileStream(Application.persistentDataPath + dataPath, FileMode.Create);
+        FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Create);
         print(Application.persistentDataPath + dataPath);
         writer.Serialize(stream, dbList);
         stream.Close();

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ItemDataBase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DataBase>
+    <Item xsi:type="CraftingObject">
+      <ID>0</ID>
+      <ItemName>Water</ItemName>
+      <spritePath>Sprites/Water</spritePath>
+      <Description>Clean drinking water</Description>
+      <Category>2</Category>
+      <Count>10</Count>
+    </Item>
+    <Item xsi:type="Consumable">
+      <ID>1</ID>
+      <ItemName>Potion of	Swiftness</ItemName>
+      <spritePath>Sprites/SwiftnessPotion</spritePath>
+      <Description>An elixer which grants the user some extra speed.</Description>
+      <Category>1</Category>
+      <Components>0</Components>
+      <Components>3</Components>
+      <Components_Need>1</Components_Need>
+      <Components_Need>5</Components_Need>
+      <Consumable_Strength>1</Consumable_Strength>
+      <Consumable_Effect>0</Consumable_Effect>
+      <Count>10</Count>
+    </Item>
+    <Item xsi:type="Consumable">
+      <ID>2</ID>
+      <ItemName>Potion of healing</ItemName>
+      <spritePath>Sprites/HealthPotion</spritePath>
+      <Description>An elixer which restores health.</Description>
+      <Category>1</Category>
+      <Components>0</Components>
+      <Components>4</Components>
+      <Components_Need>1</Components_Need>
+      <Components_Need>5</Components_Need>
+      <Consumable_Strength>1</Consumable_Strength>
+      <Consumable_Effect>0</Consumable_Effect>
+      <Count>10</Count>
+    </Item>
+    <Item xsi:type="CraftingObject">
+      <ID>3</ID>
+      <ItemName>Berries</ItemName>
+      <spritePath>Sprites/Berries</spritePath>
+      <Description>Some hand picked berries</Description>
+      <Category>2</Category>
+      <Count>0</Count>
+    </Item>
+    <Item xsi:type="CraftingObject">
+      <ID>4</ID>
+      <ItemName>Herbs</ItemName>
+      <spritePath>Sprites/leem</spritePath>
+      <Description>Some unkown herbs</Description>
+      <Category>2</Category>
+      <Count>0</Count>
+    </Item>
+    <Item xsi:type="CraftingObject">
+      <ID>5</ID>
+      <ItemName>Blue Fire</ItemName>
+      <spritePath>Sprites/BlueFire</spritePath>
+      <Description>A flame that never dies. The old man told me to use this to open the maze.</Description>
+      <Category>2</Category>
+      <Components>9</Components>
+      <Components>8</Components>
+	  <Components>0</Components>
+	  <Components>10</Components>
+      <Components_Need>1</Components_Need>
+      <Components_Need>5</Components_Need>
+	  <Components_Need>1</Components_Need>
+	  <Components_Need>5</Components_Need>
+      <Count>0</Count>
+    </Item>
+    <Item xsi:type="Weapon">
+      <ID>6</ID>
+      <ItemName>Sword</ItemName>
+      <spritePath>Sprites/Sword</spritePath>
+      <Description>A sturdy blade</Description>
+      <Category>0</Category>
+      <Damage>10</Damage>
+    </Item>
+	<Item xsi:type="CraftingObject">
+      <ID>7</ID>
+      <ItemName>Wood</ItemName>
+      <spritePath>Sprites/Wood</spritePath>
+      <Description>Chopped Wood</Description>
+      <Category>2</Category>
+      <Count>0</Count>
+    </Item>
+	<Item xsi:type="CraftingObject">
+      <ID>8</ID>
+      <ItemName>Coal</ItemName>
+      <spritePath>Sprites/Coal</spritePath>
+      <Description>a fuel mineral</Description>
+      <Category>2</Category>
+      <Count>0</Count>
+    </Item>
+	<Item xsi:type="CraftingObject">
+      <ID>9</ID>
+      <ItemName>Bones</ItemName>
+      <spritePath>Sprites/Bones</spritePath>
+      <Description>These bones seem to be from a tiny animal</Description>
+      <Category>2</Category>
+      <Count>0</Count>
+    </Item>
+	<Item xsi:type="CraftingObject">
+      <ID>10</ID>
+      <ItemName>Clay</ItemName>
+      <spritePath>Sprites/clay</spritePath>
+      <Description>Soft ore</Description>
+      <Category>2</Category>
+      <Count>0</Count>
+    </Item>
+  </DataBase>
+</ItemDataBase>

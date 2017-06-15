@@ -27,7 +27,7 @@ public class Boss : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         anim = GetComponent<Animator>();
-        StartCoroutine(LookForPlayer());
+        StartLooking();
     }
 
     //decides on the next course of action.
@@ -57,6 +57,8 @@ public class Boss : MonoBehaviour {
         while (looking) {
             Vector3 ppos = new Vector3(player.position.x, transform.position.y, player.position.z);
             if (Vector3.Angle(transform.forward, ppos - transform.position) < minAngle) {
+                anim.SetBool("Walking", true);
+                anim.SetBool("Looking", false);
                 print("Player in vision");
                 transform.LookAt(ppos);
                 Move();
@@ -66,6 +68,7 @@ public class Boss : MonoBehaviour {
                 }
                 else if (agent.remainingDistance - agent.stoppingDistance <= 0) {
                     bossAction();
+                    anim.SetBool("Walking", false);
                     agent.isStopped = true;
                     looking = false;
                 }
@@ -74,6 +77,7 @@ public class Boss : MonoBehaviour {
                 if (!agent.isStopped)
                     agent.isStopped = true;
 
+                anim.SetBool("Looking", true);
                 Quaternion rotation = Quaternion.LookRotation(ppos - transform.position);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 1);
                 print("is turning to");
@@ -83,6 +87,7 @@ public class Boss : MonoBehaviour {
     }
     void StartLooking() {
         looking = true;
+        anim.SetBool("Looking", true);
         StartCoroutine(LookForPlayer());
         print("Start");
     }

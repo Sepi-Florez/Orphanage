@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<QuestList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<qList>
+		<Quest>
+			<questID>0</questID>
+			<title>Find the minotaur</title>
+			<description>You have been sent to this island to defeat the minotaur who has been wreaking havoc around the island. Maybe asking the villagers is a good place to start.</description>
+		</Quest>
+		<Quest>
+			<questID>1</questID>
+			<title>Enter the temple</title>
+			<description>A nice villager told me the minotaur resides within the temple on a hill not far from here.</description>
+		</Quest>
+	</qList>	
+</QuestList>
