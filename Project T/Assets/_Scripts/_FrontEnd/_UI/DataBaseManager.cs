@@ -32,12 +32,12 @@ public class DataBaseManager : MonoBehaviour {
             ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
             stream.Close();
             dbList = a;
-            print("Loaded Database");
+            //print("Loaded Database");
             loaded = true;
         }
         else {
             dbList = new ItemDatabase();
-            print("Did not load Database");
+            //print("Did not load Database");
             loaded = false;
         }
     }

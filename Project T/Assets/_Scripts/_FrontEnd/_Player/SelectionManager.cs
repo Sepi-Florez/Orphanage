@@ -19,7 +19,7 @@ public class SelectionManager : MonoBehaviour
                 if (hit.transform.tag == "Item")
                 {
 
-                    InventoryManager.thisManager.InventoryAdd(hit.transform.GetComponent<ItemPickup>().itemID, 2);
+                    InventoryManager.thisManager.InventoryAdd(hit.transform.GetComponent<ItemPickUp>().itemID, 2);
                     Destroy(hit.transform.gameObject);
                     //inventoryManager.inventory
                     //hit.transform.GetComponent<ItemPickup>().itemID;

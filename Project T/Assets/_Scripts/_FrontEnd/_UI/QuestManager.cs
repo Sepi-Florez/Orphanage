@@ -29,7 +29,7 @@ public class QuestManager : MonoBehaviour {
             QuestList a = reader.Deserialize(stream) as QuestList;
             stream.Close();
             questList = a;
-            print("Found Quest file");
+            //print("Found Quest file");
         }
         else {
             XmlSerializer writer = new XmlSerializer(typeof(QuestList));
@@ -37,7 +37,7 @@ public class QuestManager : MonoBehaviour {
             print(Application.dataPath + dataPath);
             writer.Serialize(stream, questList);
             stream.Close();
-            print("didn't find Quest file");
+            //print("didn't find Quest file");
         }
     }
     public void Start() {
