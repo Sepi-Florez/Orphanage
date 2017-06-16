@@ -39,7 +39,7 @@ public class InventoryManager : MonoBehaviour {
     }
     // Is called upon when adding an item to the inventory
     public void InventoryAdd(int item,int count) {
-        print("Adding" + item);
+        //print("Adding" + item);
         if (DataBaseManager.thisManager.ReturnItem(item) != null) {
             Item newItem = DataBaseManager.thisManager.ReturnItem(item);
             int i = SearchInventory(newItem);
@@ -82,7 +82,7 @@ public class InventoryManager : MonoBehaviour {
     }
     //Instantiates the button which represents the item.
     Transform Visualize(Item item) {
-        print("Vizualizing " + item.itemName);
+        //print("Vizualizing " + item.itemName);
         Transform newButton = Instantiate(buttonPref, Vector3.zero, Quaternion.identity).transform;
         newButton.SetParent(contentObjects[item.category].transform);
         helpArrange(newButton);
@@ -99,7 +99,7 @@ public class InventoryManager : MonoBehaviour {
             List<Item> checkList = GetCategory(item.category);
             foreach(Item i in checkList) {
 
-                print("InvCheck");
+                //print("InvCheck");
                 if(checkList[a] == item) {
                     inventory.RemoveAt(a);
                     Destroy(inventoryButtons[a].gameObject);

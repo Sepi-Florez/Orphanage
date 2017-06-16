@@ -20,7 +20,7 @@ public class Interaction : MonoBehaviour {
                         HUDManager.thisManager.Interaction(true, 0);
                         if (Input.GetButtonDown("Interaction")) {
                             print(itObject.name);
-                            InventoryManager.thisManager.InventoryAdd(itObject.GetComponent<itemPickUp>().itemID, itObject.GetComponent<itemPickUp>().count);
+                            InventoryManager.thisManager.InventoryAdd(itObject.GetComponent<ItemPickUp>().itemID, itObject.GetComponent<ItemPickUp>().count);
                             Destroy(itObject.gameObject);
                         }
                         break;
@@ -44,8 +44,8 @@ public class Interaction : MonoBehaviour {
                         i = true;
                         HUDManager.thisManager.Interaction(true, 0);
                         if (Input.GetButtonDown("Interaction")) {
-                            if(InventoryManager.thisManager.Search(itObject.GetComponent<itemPickUp>().itemID) != null) {
-                                InventoryManager.thisManager.Remove(DataBaseManager.thisManager.GetItem(itObject.GetComponent<itemPickUp>().itemID), 1);
+                            if(InventoryManager.thisManager.Search(5) != null) {
+                                InventoryManager.thisManager.Remove(DataBaseManager.thisManager.GetItem(5), 1);
                                 itObject.GetChild(0).GetComponent<ParticleSystem>().Play();
                                 FindObjectOfType<Gate>().GetComponent<Gate>().Open();
                                 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ItemPickup : MonoBehaviour
+public class ItemPickUp : MonoBehaviour
 {
     public int itemID;
     public int count;
