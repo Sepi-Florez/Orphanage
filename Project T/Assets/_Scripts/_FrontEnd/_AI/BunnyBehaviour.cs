@@ -45,6 +45,8 @@ public class BunnyBehaviour : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         NormalMoveTrig();
         bunnyMesh = transform.GetComponent<MeshRenderer>();
+        agent.SetDestination(target.position);
+
     }
 
 
@@ -57,21 +59,19 @@ public class BunnyBehaviour : MonoBehaviour {
 
     //Normale Movement van de Rabbit, checked eerst of hij in zijn "NormalState" zit en stuurt hem dan aan.
     void NormalMoveTrig() {
-        if (chaseMode == false) {
-            print("chaseMode=False");
-            if (agent.remainingDistance <= agent.stoppingDistance) {
-                print("RemainingDistance<=StoppingDistance");
-                print("CurrentWait" + inWaitState);
-                if (inWaitState == false) {
-                    print("WaitState=False");
-                    StartCoroutine(BunnyMovement());
-                    print("CoroutineStarted");
-                }
+        if (agent.remainingDistance <= agent.stoppingDistance) {
+            print("RemainingDistance<=StoppingDistance");
+            print("CurrentWait" + inWaitState);
+            if (inWaitState == false) {
+                print("WaitState=False");
+                StartCoroutine(BunnyMovement());
+                print("CoroutineStarted");
             }
         }
-    }
+}
     //De IEnumerator die alles voor de bunny chase regelt.
     void BunnyChaseBehaviour() {
+        print("IT'S WORKING! IT'S WORKIIIIING!");
         print("chaseMode Is" + chaseMode);
         foreach(GameObject bunnyHole in bunnyHoles) {
             Vector3 diff = bunnyHole.transform.position - transform.position;

@@ -12,8 +12,10 @@ public class PlayerChecker : MonoBehaviour {
         bunny = transform.parent.GetComponent<BunnyBehaviour>();
 	}
 	
-    void OnTriggerEnter() {
-        bunny.inChase = true;
-        bunny.PlayerHasEntered();
+    void OnTriggerEnter(Collider c) {
+        if (c.transform.tag == "Player") {
+            bunny.inChase = true;
+            bunny.PlayerHasEntered();
+        }
     }
 }
