@@ -14,6 +14,7 @@ public class Boss : MonoBehaviour {
 
     public Transform weapon;
 
+    public LayerMask hitLayer;
     //Health
     public int healh;
     private int currentHealth;
@@ -21,6 +22,7 @@ public class Boss : MonoBehaviour {
     //floats
     public float minAngle;
     public float chargeSpeed;
+    public float maxChargeSpeed;
     public float weaponRadius;
 
     //Bools
@@ -38,6 +40,7 @@ public class Boss : MonoBehaviour {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         anim = GetComponent<Animator>();
         StartLooking();
+        
     }
 
     //decides on the next course of action.
@@ -45,7 +48,7 @@ public class Boss : MonoBehaviour {
         print("Deciding");
         float dist = Vector3.Distance(transform.position, player.position);
         float stopDist;
-        if (dist > 25) {
+        if (dist > 17) {
             bossAction += BullCharge;
             stopDist = dist;
             charge = true;
@@ -54,7 +57,7 @@ public class Boss : MonoBehaviour {
             int r = Random.Range(0, 2);
             if(r == 0) {
                 bossAction += Overhead;
-                stopDist = 7;
+                stopDist = 6;
             }
             else {
                 bossAction += Sweep;
@@ -99,13 +102,12 @@ public class Boss : MonoBehaviour {
     void StartLooking() {
         looking = true;
         looker = StartCoroutine(LookForPlayer());
-        print("Start looking");
     }
     IEnumerator AttackFollow() {
         while (lookFollow) {
             Vector3 ppos = new Vector3(player.position.x, transform.position.y, player.position.z);
             if (Vector3.Angle(transform.forward, ppos - transform.position) < minAngle) {
-                transform.LookAt(player);
+                transform.rotation = Quaternion.LookRotation((ppos - transform.position).normalized);
                 lastPos = player.position;
                 
             }
@@ -118,35 +120,35 @@ public class Boss : MonoBehaviour {
             if (Physics.Raycast(transform.position,transform.forward,out hit, 3)) {
                 if(hit.transform.tag == "Player") {
                     charge = false;
+                    print("Charge Hit Player");
                 }
                 charge = false;
+                anim.SetBool("Charge", false);
                 break;
             }
-            transform.Translate(player.position * chargeSpeed);
-            print(lastPos);
-            yield return new WaitForSeconds(0.01f);
+            chargeSpeed += maxChargeSpeed / 100;
+            if (chargeSpeed > maxChargeSpeed)
+                chargeSpeed = maxChargeSpeed;
+            transform.position = Vector3.MoveTowards(transform.position, lastPos, chargeSpeed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
         }
     }
 
     void Move() {
-        print("moving");
         agent.SetDestination(player.position);
     }
     void Overhead() {
-        print("Overhead");
         lookFollow = true;
         StartCoroutine(AttackFollow());
         anim.SetTrigger("Overhead");
         bossAction -= Overhead;
     }
     void Sweep() {
-        print("Sweep");
         anim.SetTrigger("Sweep");
         bossAction -= Sweep;
 
     }
     void BullCharge() {
-        print("CHAAAAAAAAAAARGE");
         anim.SetTrigger("Charge");
         lookFollow = true;
         StartCoroutine(AttackFollow());
@@ -163,10 +165,12 @@ public class Boss : MonoBehaviour {
 
     }
     void HitCheck() {
+        print("checking hit");
         RaycastHit hit;
-        if(Physics.SphereCast(weapon.position,weaponRadius,transform.forward, out hit)) {
-            if(hit.transform.tag == "Player") {
-                print("Player");
+        Collider[] list = Physics.OverlapSphere(weapon.position, weaponRadius, hitLayer);
+        foreach(Collider col in list) {
+            if(col.transform.tag == "Player") {
+                print("Player hit");
             }
         }
     }
