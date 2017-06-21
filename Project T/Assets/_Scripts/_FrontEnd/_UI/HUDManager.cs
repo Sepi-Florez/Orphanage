@@ -39,6 +39,7 @@ public class HUDManager : MonoBehaviour {
 
         itObject = GameObject.FindGameObjectWithTag("itObject");
 
+       
         playerHPCanvas = playerHP.GetComponent<CanvasGroup>();
         bossHPCanvas = bossHP.GetComponent<CanvasGroup>();
         bossHPCanvas.alpha = 0;
@@ -72,7 +73,7 @@ public class HUDManager : MonoBehaviour {
 
 
     }
-    public void UpdateBossHealth(int health) {
+    public void UpdateBossHealth(float health) {
         if (bossHPCanvas.alpha == 0) {
             bossHPCanvas.alpha = 1;
         }

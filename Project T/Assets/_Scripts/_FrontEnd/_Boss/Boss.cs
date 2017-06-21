@@ -41,6 +41,7 @@ public class Boss : MonoBehaviour {
         anim = GetComponent<Animator>();
         currentHealth = health;
         agent.isStopped = true;
+        Damage(10);
         //StartLooking();
         
     }
@@ -179,6 +180,7 @@ public class Boss : MonoBehaviour {
             if(col.transform.tag == "Player") {
                 print("Player hit");
                 HealthManager.thisManager.UpdateHP(-30);
+                //col.attachedRigidbody.
             }
         }
     }

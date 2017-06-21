@@ -48,7 +48,7 @@ public class Interaction : MonoBehaviour {
                                 InventoryManager.thisManager.Remove(DataBaseManager.thisManager.GetItem(5), 1);
                                 itObject.GetChild(0).GetComponent<ParticleSystem>().Play();
                                 FindObjectOfType<Gate>().GetComponent<Gate>().Open();
-                                
+                                hit.transform.GetComponent<Collider>().enabled = false;
                             }
                         }
                         //toggle door anim

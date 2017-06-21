@@ -7,9 +7,11 @@ public class Gate : MonoBehaviour {
     public void Open() {
         if(i == 1) {
             transform.GetComponent<Animator>().SetBool("Open", true);
+            QuestManager.thisManager.QuestComplete(2);
         }
         else {
             i++;
         }
+
     }
 }
