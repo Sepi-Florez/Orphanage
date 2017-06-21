@@ -58,7 +58,7 @@ public class HUDManager : MonoBehaviour {
         }
     }
     public void UpdateHealth(float health) {
-        print("health update");
+        print("health update : " + health);
         playerHP.transform.GetChild(0).GetComponent<Image>().fillAmount = health / 100;
         playerHPCanvas.alpha = 1;
         if (OOCvar == null) {
@@ -73,9 +73,10 @@ public class HUDManager : MonoBehaviour {
 
     }
     public void UpdateBossHealth(int health) {
-        if (bossHPCanvas.alpha != 0) {
+        if (bossHPCanvas.alpha == 0) {
             bossHPCanvas.alpha = 1;
         }
+        print(health);
         bossHP.transform.GetChild(0).GetComponent<Image>().fillAmount = health / 100;
 
     }

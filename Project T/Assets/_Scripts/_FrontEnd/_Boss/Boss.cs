@@ -16,7 +16,7 @@ public class Boss : MonoBehaviour {
 
     public LayerMask hitLayer;
     //Health
-    public int healh;
+    public int health;
     private int currentHealth;
 
     //floats
@@ -39,7 +39,9 @@ public class Boss : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         anim = GetComponent<Animator>();
-        StartLooking();
+        currentHealth = health;
+        agent.isStopped = true;
+        //StartLooking();
         
     }
 
@@ -99,10 +101,11 @@ public class Boss : MonoBehaviour {
             yield return new WaitForSeconds(0.01f);
         }
     }
-    void StartLooking() {
+    public void StartLooking() {
         looking = true;
         looker = StartCoroutine(LookForPlayer());
     }
+    // Follows the player until the attack calls for it to stop
     IEnumerator AttackFollow() {
         while (lookFollow) {
             Vector3 ppos = new Vector3(player.position.x, transform.position.y, player.position.z);
@@ -114,12 +117,14 @@ public class Boss : MonoBehaviour {
             yield return new WaitForSeconds(0.01f);
         }    
     }
+    //Will charge at the player's last position until it hits the play or terrain.
     IEnumerator Charge() {
         while (charge) {
             RaycastHit hit;
             if (Physics.Raycast(transform.position,transform.forward,out hit, 3)) {
                 if(hit.transform.tag == "Player") {
                     charge = false;
+                    HealthManager.thisManager.UpdateHP(-10);
                     print("Charge Hit Player");
                 }
                 charge = false;
@@ -154,6 +159,7 @@ public class Boss : MonoBehaviour {
         StartCoroutine(AttackFollow());
         bossAction -= BullCharge;
     }
+    // A function to be called through animation events
     void EventCall(int i) {
         lookFollow = false;
         switch (i) {
@@ -164,6 +170,7 @@ public class Boss : MonoBehaviour {
         }
 
     }
+    // A check which checks if theres a player within the position of the weapon
     void HitCheck() {
         print("checking hit");
         RaycastHit hit;
@@ -171,7 +178,12 @@ public class Boss : MonoBehaviour {
         foreach(Collider col in list) {
             if(col.transform.tag == "Player") {
                 print("Player hit");
+                HealthManager.thisManager.UpdateHP(-30);
             }
         }
+    }
+    void Damage(int damage) {
+        currentHealth -= damage;
+        HUDManager.thisManager.UpdateBossHealth(currentHealth);
     }
 }

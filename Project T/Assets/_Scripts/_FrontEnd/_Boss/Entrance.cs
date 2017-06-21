@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class Entrance : MonoBehaviour {
     bool i = false;
-    public Transform daddy;
+    public Transform daddyl;
+    public Transform daddyr;
+    public float torchWait;
 
     void Awake() {
-        foreach (Transform child in daddy) {
-            child.GetChild(0).GetComponent<ParticleSystem>().Stop();
+        for (int i = 0; i <= daddyl.childCount - 1; i++) {
+            daddyr.GetChild(i).GetChild(0).GetComponent<ParticleSystem>().Stop();
+            daddyl.GetChild(i).GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
 
     void OnTriggerEnter(Collider intruder) {
         print("Entered");
         if (intruder.transform.tag == "Player") {
+            GetComponent<Collider>().enabled = false;
             if (!i) {
                 StartCoroutine(StartBoss());
             }
@@ -23,11 +27,13 @@ public class Entrance : MonoBehaviour {
     }
     IEnumerator StartBoss() {
         while (!i) {
-            foreach (Transform child in daddy) {
-                child.GetChild(0).GetComponent<ParticleSystem>().Play();
-                yield return new WaitForSeconds(0.5f);
+            for(int i = 0; i <= daddyl.childCount - 1; i++) {
+                daddyr.GetChild(i).GetChild(0).GetComponent<ParticleSystem>().Play();
+                daddyl.GetChild(i).GetChild(0).GetComponent<ParticleSystem>().Play();
+                yield return new WaitForSeconds(torchWait);
             }
-            print("Start Boss");
+            FindObjectOfType<Boss>().StartLooking();
+            HUDManager.thisManager.UpdateBossHealth(100);
             i = true;
         }
     }
