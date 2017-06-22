@@ -14,7 +14,7 @@ public class CombatManager : MonoBehaviour
 
     public List<Transform> hitObjects = new List<Transform>();
 
-    public float rayLenght = .2f, coolRate = .5f;
+    public float rayLenght = .2f, coolRate = .5f, minComboPercentage = 60;
 
     float coolTmr;
 
@@ -40,7 +40,12 @@ public class CombatManager : MonoBehaviour
             }
         }*/
         #endregion
-        anim.SetBool("Fight", Input.GetButton("Fire1") && Time.time > coolTmr);
+        anim.SetBool("cdFinished", Time.time > coolTmr);
+        anim.SetBool("fight", Input.GetButtonDown("Fire1"));
+        anim.SetBool("fightAlt", Input.GetButtonDown("Fire2"));
+        var curAnim = anim.GetCurrentAnimatorStateInfo(1);
+        anim.SetBool("attacking", ((curAnim.IsName("Slash 1")) || (curAnim.IsName("Slash 0"))));    //&& (anim.GetCurrentAnimatorStateInfo(0).length * anim.GetCurrentAnimatorStateInfo(0).speed >= ));
+        anim.SetBool("afterPercentage", (curAnim.normalizedTime >= (minComboPercentage / 100)));
 
         if (checkHit)
         {
@@ -82,10 +87,10 @@ public class CombatManager : MonoBehaviour
         hitObjects.Clear();
     }
 
-    public void EndCheck()
+    /*public void EndCheck()
     {
         checkHit = false;
-    }
+    }*/
 
     public void DoDamage()
     {

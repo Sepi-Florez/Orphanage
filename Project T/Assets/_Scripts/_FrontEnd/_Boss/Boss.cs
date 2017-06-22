@@ -125,7 +125,7 @@ public class Boss : MonoBehaviour {
             if (Physics.Raycast(transform.position,transform.forward,out hit, 3)) {
                 if(hit.transform.tag == "Player") {
                     charge = false;
-                    HealthManager.thisManager.UpdateHP(-10);
+                    HealthManager.UpdateHP(-10);
                     print("Charge Hit Player");
                 }
                 charge = false;
@@ -179,7 +179,7 @@ public class Boss : MonoBehaviour {
         foreach(Collider col in list) {
             if(col.transform.tag == "Player") {
                 print("Player hit");
-                HealthManager.thisManager.UpdateHP(-30);
+                HealthManager.UpdateHP(-30);
                 //col.attachedRigidbody.
             }
         }

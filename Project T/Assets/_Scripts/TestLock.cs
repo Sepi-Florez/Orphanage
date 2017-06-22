@@ -3,7 +3,9 @@
 public class TestLock : MonoBehaviour
 {
     CursorLock cursorLock = new CursorLock();
-    public HealthManager healthManager;
+    public PlayerControlPhysics playerController;
+    public CombatManager combatManager;
+    //public HealthManager healthManager;
     //HealthManager healthManager = new HealthManager();
     void Awake()
     {
@@ -13,8 +15,8 @@ public class TestLock : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire3"))
         {
-            //cursorLock.Lock(Camera.main.GetComponentInParent<PlayerControl>(), Camera.main.GetComponentInChildren<CombatManager>(), 0.5f);
-            healthManager.UpdateHP(-10);
+            cursorLock.Lock(playerController, combatManager);
+            //PlayerControlPhysics.Shake(0.1f, 0.5f);
         }
 	}
 }

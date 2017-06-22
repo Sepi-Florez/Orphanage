@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-public class HealthManager : MonoBehaviour
+public class HealthManager
 {
     public static HealthManager thisManager;
     public HUDManager hud;
@@ -12,30 +10,20 @@ public class HealthManager : MonoBehaviour
         thisManager = this;
     }
 
-    public float healthPoints = 100f;
-    //public float staminaPoints = 100f;
-    //public float magicaPoints = 100f;
+    public static float healthPoints = 100f;
 
-    public AudioClip damageSound;
+    //public static AudioClip damageSound;
 
-    public AudioSource effectsAudioSource;
+    public static AudioSource effectsAudioSource;
 
-    public void UpdateHP(float hpAddition)
+    public static void UpdateHP(float hpAddition)//,AudioClip sound)
     {
         healthPoints += hpAddition;
         HUDManager.thisManager.UpdateHealth(healthPoints);
         if (hpAddition <= 0)
         {
-            effectsAudioSource.clip = damageSound;
-            effectsAudioSource.Play();
+            //effectsAudioSource.clip = sound;
+            //fectsAudioSource.Play();
         }
     }
-    /*public void UpdateST(float stAddition)
-    {
-        staminaPoints += stAddition;
-    }
-    public void UpdateMA(float maAddition)
-    {
-        magicaPoints += maAddition;
-    }*/
 }

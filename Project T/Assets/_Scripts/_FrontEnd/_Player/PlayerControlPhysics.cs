@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 [System.Serializable]
 public class MovSettings
@@ -32,9 +33,12 @@ public class CamSettings
     public Vector2 sensitivity;
 
     public bool clampRot = true;
-
     [Range(0f, 360f)]
     public float clampΔ = 180f;
+    [Space(10)]
+    public bool headBobEnabled = true;
+    public float headBobSpd = 0.15f;
+    public float headBobRotMult = 0.25f;
 }
 
 [RequireComponent(typeof(Rigidbody))]
@@ -43,20 +47,22 @@ public class PlayerControlPhysics : MonoBehaviour
     public Rigidbody rigid;
     public Animator animator;
     public CapsuleCollider coll;
-    public HealthManager healthManager;
-    [Space(10)]
-    public CamSettings cameraSettings;
+    //public HealthManager healthManager;
     [Space(10)]
     public MovSettings movementSettings;
+    [Space(10)]
+    public CamSettings cameraSettings;
 
     //public HealthManager healthManager;
+    public static PlayerControlPhysics instance;
     float minJumpVel, maxJumpVel;
     private Transform charTrans;
+    private Vector3 camOriginal;
     private bool isGrnded;
 
     private float jumpTimer, airTime, spd;
 
-    float xRot, zRot;
+    float xRot, zRot, bobTimer;
 
     private void Start()
     {
@@ -68,19 +74,13 @@ public class PlayerControlPhysics : MonoBehaviour
         {
             rigid = GetComponentInChildren<Rigidbody>();
         }
+        camOriginal = GetComponentInChildren<Camera>().transform.localPosition;
 
         rigid.freezeRotation = true;
         rigid.useGravity = false;
-    }
 
-    /*void Update()
-    {
-        if (Input.GetButtonDown("Jump") && isGrnded)
-        {
-            rigid.velocity = new Vector3(rigid.velocity.x, maxJumpVel, rigid.velocity.z);
-        }
-        print(isGrnded);
-    }*/
+        instance = this;
+    }
 
     private void Update()
     {
@@ -95,16 +95,10 @@ public class PlayerControlPhysics : MonoBehaviour
 
         #endregion
 
-        #region Gravity and JumpVelocities 
+        #region JumpVelocities 
 
-        //gravity = -(2 * movementSettings.maxJumpApex) / Mathf.Pow(movementSettings.secToApex, 2); //((2*a)/t^2)
-        //S = maxJumpVel , U = ?, V = 0, A = -20m/s, T = secToApex
-        maxJumpVel = Mathf.Sqrt(2 * Mathf.Abs(movementSettings.gravity) * movementSettings.maxJumpApex); //
+        maxJumpVel = Mathf.Sqrt(2 * Mathf.Abs(movementSettings.gravity) * movementSettings.maxJumpApex);
         minJumpVel = Mathf.Sqrt(2 * Mathf.Abs(movementSettings.gravity) * movementSettings.minJumpApex);
-
-        //print("gravity = -" + (movementSettings.gravity));
-        //print("maxJumpVel = " + (maxJumpVel));
-        //print("minJumpVel = " + (minJumpVel));
 
         #endregion
 
@@ -181,11 +175,7 @@ public class PlayerControlPhysics : MonoBehaviour
         {
             if (airTime >= movementSettings.maxAirTimeUnharmed)
             {
-                if (healthManager != null)
-                {
-                    healthManager.UpdateHP(-(movementSettings.damgPerSecAirTime * airTime));
-                }
-                else{ print("ERROR NO HEALTHMANAGER"); } //commented cuz no healthmanager
+                HealthManager.UpdateHP(-(movementSettings.damgPerSecAirTime * airTime));
             }
             airTime = 0;
         }
@@ -210,6 +200,8 @@ public class PlayerControlPhysics : MonoBehaviour
         {
             animator.SetFloat("walkSpd", 0);
         }
+
+        animator.SetBool("picking", Input.GetButtonDown("Interaction"));
         //print(((Input.GetButton("Sprint") ? 2 : ((Mathf.Ceil(Mathf.Abs(Input.GetAxis("Horizontal"))) > 0f) || (Mathf.Ceil(Mathf.Abs(Input.GetAxis("Vertical"))) > 0f)) ? 1 : 0)));
 
         //print(Mathf.Ceil(Mathf.Abs(Input.GetAxis("Horizontal"))));
@@ -225,8 +217,7 @@ public class PlayerControlPhysics : MonoBehaviour
     public void LookRot()
     {
         xRot += Input.GetAxis("Mouse Y") * cameraSettings.sensitivity.x;
-        //zRot += Input.GetAxis("Horizontal") * 3f;
-        //print(Input.GetAxis("Mouse X"));
+        zRot = (cameraSettings.headBobEnabled? HeadBob() : 0f); //if head bobbing is enabled the HeadBob() function will run.
 
         if (cameraSettings.clampRot) { xRot = Mathf.Clamp(xRot, -(cameraSettings.clampΔ / 2), (cameraSettings.clampΔ / 2)); }
 
@@ -234,75 +225,64 @@ public class PlayerControlPhysics : MonoBehaviour
         transform.Rotate(0, Input.GetAxis("Mouse X") * cameraSettings.sensitivity.y, 0);
     }
 
-    /*public bool IsGrnded()
-    {
-        RaycastHit hit;
-        return (Physics.SphereCast((transform.position + coll.center), coll.height / 2, -transform.up, out hit, 0.1f));
-    }*/
     public bool IsGrnded()
     {
         RaycastHit hit;
         //return (Physics.Raycast((transform.position + coll.center), -transform.up, out hit, (coll.height / 2) * 1.1f));
         return(Physics.SphereCast(transform.position + coll.center, coll.radius , -transform.up, out hit, (coll.height /2) * 1.1f));
     }
-}
 
-/*
-using UnityEngine;
-using System.Collections;
- 
-[RequireComponent (typeof (Rigidbody))]
-[RequireComponent (typeof (CapsuleCollider))]
- 
-public class CharacterControls : MonoBehaviour {
- 
-	public float speed = 10.0f;
-	public float gravity = 10.0f;
-	public float maxVelocityChange = 10.0f;
-	public bool canJump = true;
-	public float jumpHeight = 2.0f;
-	private bool grounded = false;
- 
-	void Awake () {
-	    rigidbody.freezeRotation = true;
-	    rigidbody.useGravity = false;
-	}
- 
-	void FixedUpdate () {
-	    if (grounded) {
-	        // Calculate how fast we should be moving
-	        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-	        targetVelocity = transform.TransformDirection(targetVelocity);
-	        targetVelocity *= speed;
- 
-	        // Apply a force that attempts to reach our target velocity
-	        Vector3 velocity = rigidbody.velocity;
-	        Vector3 velocityChange = (targetVelocity - velocity);
-	        velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-	        velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-	        velocityChange.y = 0;
-	        rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
- 
-	        // Jump
-	        if (canJump && Input.GetButton("Jump")) {
-	            rigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
-	        }
-	    }
- 
-	    // We apply gravity manually for more tuning control
-	    rigidbody.AddForce(new Vector3 (0, -gravity * rigidbody.mass, 0));
- 
-	    grounded = false;
-	}
- 
-	void OnCollisionStay () {
-	    grounded = true;    
-	}
- 
-	float CalculateJumpVerticalSpeed () {
-	    // From the jump height and gravity we deduce the upwards speed 
-	    // for the character to reach at the apex.
-	    return Mathf.Sqrt(2 * jumpHeight * gravity);
-	}
-} 
-*/
+    public float HeadBob()
+    {
+        float waveSlice = 0.0f;
+        if (Mathf.Abs(Input.GetAxis("Horizontal")) == 0 && Mathf.Abs(Input.GetAxis("Vertical")) == 0)
+        {
+            bobTimer = 0f;
+        }
+        else
+        {
+            waveSlice = Mathf.Sin(bobTimer);
+            bobTimer = bobTimer + (cameraSettings.headBobSpd * (Input.GetButtonDown("Sprint") ? movementSettings.runMult : 1));
+
+            if(bobTimer > Mathf.PI * 2)
+            {
+                bobTimer = bobTimer - (Mathf.PI * 2);
+            }
+        }
+
+        if(waveSlice != 0)
+        {
+            float change = waveSlice * cameraSettings.headBobRotMult; 
+            float inputAxes = Mathf.Abs(Input.GetAxis("Horizontal") + Mathf.Abs(Input.GetAxis("Vertical")));
+            inputAxes = Mathf.Clamp(inputAxes, 0f, 1f);
+            change = inputAxes * change;
+
+            return(change);
+        }
+        else
+        {
+            return(0f);
+        }
+    }
+
+    #region screenShake
+    public static void Shake(float duration, float amount)
+    {
+        instance.StartCoroutine(instance.scrShake(duration, amount));
+    }
+
+    public IEnumerator scrShake(float duration, float amount)
+    {
+        while (duration > 0)
+        {
+            cameraSettings.myCamera.localPosition = camOriginal + Random.insideUnitSphere * amount;
+
+            duration -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        cameraSettings.myCamera.localPosition = camOriginal;
+    }
+    #endregion
+}

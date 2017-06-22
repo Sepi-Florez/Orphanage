@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CursorLock
 {
-    bool harry = true;
+   bool isLocked = true;
     public void Awake()
     {
         Time.timeScale = 1f;
@@ -33,10 +31,9 @@ public class CursorLock
         }
 	}*/
 
-    /*public void Lock (PlayerControl playerController, CombatManager weapon)
+    public void Lock (PlayerControlPhysics playerController, CombatManager weapon)
     {
-
-        if (harry)
+        if (isLocked)
         {
            Time.timeScale = 0f;
             if (playerController != null)
@@ -48,8 +45,9 @@ public class CursorLock
             {
                 weapon.enabled = false;
             }
-            harry = !harry;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            isLocked = !isLocked;
         }
         else
         {
@@ -63,7 +61,8 @@ public class CursorLock
                 weapon.enabled = true;
             }
             Cursor.lockState = CursorLockMode.Locked;
-            harry = !harry;
+            Cursor.visible = false;
+            isLocked = !isLocked;
         }
-    }*/
+    }
 }
