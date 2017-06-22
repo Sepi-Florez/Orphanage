@@ -41,7 +41,7 @@ public class Boss : MonoBehaviour {
         anim = GetComponent<Animator>();
         currentHealth = health;
         agent.isStopped = true;
-        Damage(10);
+        //Damage(10);
         //StartLooking();
         
     }

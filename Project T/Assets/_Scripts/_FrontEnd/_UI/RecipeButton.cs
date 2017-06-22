@@ -16,9 +16,9 @@ public class RecipeButton : MonoBehaviour {
             Transform mats = transform.GetChild(1);
             print(item.itemName + "Filling in");
             if (item.comps.Length < mats.childCount) {
-                for (int a = 5 - item.comps.Length; a > 0; a--) {
+                for (int a = 4 - item.comps.Length; a > 0; a--) {
                     print("destroying material slot");
-                    Destroy(mats.GetChild(5 - a).gameObject);
+                    Destroy(mats.GetChild(4 - a).gameObject);
                 }
             }
             transform.GetComponent<Button>().onClick.AddListener(() => CraftingManager.thisManager.MakeRecipe(thisItem.ID));

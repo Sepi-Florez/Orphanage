@@ -60,7 +60,7 @@ public class HUDManager : MonoBehaviour {
     }
     public void UpdateHealth(float health) {
         print("health update : " + health);
-        playerHP.transform.GetChild(0).GetComponent<Image>().fillAmount = health / 100;
+        playerHP.transform.GetChild(1).GetComponent<Image>().fillAmount = health / 100;
         playerHPCanvas.alpha = 1;
         if (OOCvar == null) {
             OOCvar = StartCoroutine(OOC());
@@ -78,7 +78,7 @@ public class HUDManager : MonoBehaviour {
             bossHPCanvas.alpha = 1;
         }
         print(health);
-        bossHP.transform.GetChild(0).GetComponent<Image>().fillAmount = health / 100;
+        bossHP.transform.GetChild(1).GetComponent<Image>().fillAmount = health / 100;
 
     }
     public void QuestPrompt(int questID, int option) {
