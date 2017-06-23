@@ -129,17 +129,14 @@ public class Boss : MonoBehaviour {
                 if(list.Length > 0) {
                     if(col.tag == "Player") {
                         charge = false;
-                        HealthManager.thisManager.UpdateHP(-10);
+                        HealthManager.UpdateHP(-10);
                         print("Charge Hit Player");
                     }
                     charge = false;
-<<<<<<< HEAD
                     HealthManager.UpdateHP(-10);
                     print("Charge Hit Player");
-=======
                     anim.SetBool("Charge", false);
                     print(col.transform.name);
->>>>>>> origin/master
                 }
             }
                 /*RaycastHit hit;
@@ -211,15 +208,15 @@ public class Boss : MonoBehaviour {
             hitting = false;
         }
         print("checking hit");
-<<<<<<< HEAD
         RaycastHit hit;
         Collider[] list = Physics.OverlapSphere(weapon.position, weaponRadius, hitLayer);
-        foreach(Collider col in list) {
-            if(col.transform.tag == "Player") {
+        foreach (Collider col in list) {
+            if (col.transform.tag == "Player") {
                 print("Player hit");
                 HealthManager.UpdateHP(-30);
                 //col.attachedRigidbody.
-=======
+            }
+        }
 
     }
     IEnumerator HitChecks() {
@@ -228,14 +225,12 @@ public class Boss : MonoBehaviour {
             foreach (Collider col in list) {
                 if (col.transform.tag == "Player") {
                     print("Player hit");
-                    HealthManager.thisManager.UpdateHP(-30);
+                    HealthManager.UpdateHP(-30);
                     //col.attachedRigidbody.
                     hitting = false;
                 }
->>>>>>> origin/master
             }
             yield return new WaitForEndOfFrame();
-
         }
     }
     void Damage(int damage) {
