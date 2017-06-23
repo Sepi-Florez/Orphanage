@@ -14,10 +14,10 @@ public class RecipeButton : MonoBehaviour {
             transform.GetChild(0).GetChild(2).GetComponent<Text>().text = item.itemName;
             UpdateValues();
             Transform mats = transform.GetChild(1);
-            print(item.itemName + "Filling in");
+            //print(item.itemName + "Filling in");
             if (item.comps.Length < mats.childCount) {
                 for (int a = 4 - item.comps.Length; a > 0; a--) {
-                    print("destroying material slot");
+                    //print("destroying material slot");
                     Destroy(mats.GetChild(4 - a).gameObject);
                 }
             }
@@ -27,12 +27,12 @@ public class RecipeButton : MonoBehaviour {
         }
     }
     public void UpdateValues() {
-        print("UpdatingValues");
+        //print("UpdatingValues");
         Transform mats = transform.GetChild(1);
         if(thisItem != null) {
             for (int i = 0; i < thisItem.comps.Length; i++) {
                 Item newItem = DataBaseManager.thisManager.GetItem(thisItem.comps[i]);
-                print(newItem.ID + " = newItem");
+                //print(newItem.ID + " = newItem");
                 mats.GetChild(i).GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>(newItem.spritePath);
                 mats.GetChild(i).GetChild(2).GetComponent<Text>().text = newItem.itemName;
                 if (InventoryManager.thisManager.Search(newItem.ID) != null) {

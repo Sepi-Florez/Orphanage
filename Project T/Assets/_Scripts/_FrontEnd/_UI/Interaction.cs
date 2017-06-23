@@ -11,7 +11,7 @@ public class Interaction : MonoBehaviour {
         if (it) {
             RaycastHit hit;
             if(Physics.Raycast(transform.position,transform.forward, out hit, itRange)) {
-                print("Interactle BOy");
+                //print("Interactle BOy");
                 Transform itObject = hit.transform;
                 bool i = false;
                 switch (itObject.tag) {

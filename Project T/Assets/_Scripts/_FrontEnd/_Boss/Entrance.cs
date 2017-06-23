@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 public class Entrance : MonoBehaviour {
-    bool i = false;
+    public bool i = false;
     public Transform daddyl;
     public Transform daddyr;
     public float torchWait;
@@ -17,7 +17,7 @@ public class Entrance : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider intruder) {
-        print("Entered");
+        //print("Entered");
         if (intruder.transform.tag == "Player") {
             GetComponent<Collider>().enabled = false;
             if (!i) {
@@ -30,6 +30,7 @@ public class Entrance : MonoBehaviour {
             for(int i = 0; i <= daddyl.childCount - 1; i++) {
                 daddyr.GetChild(i).GetChild(0).GetComponent<ParticleSystem>().Play();
                 daddyl.GetChild(i).GetChild(0).GetComponent<ParticleSystem>().Play();
+                print("Torch on");
                 yield return new WaitForSeconds(torchWait);
             }
             FindObjectOfType<Boss>().StartLooking();

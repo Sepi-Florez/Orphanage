@@ -45,7 +45,7 @@ public class Boss : MonoBehaviour {
         currentHealth = health;
         agent.isStopped = true;
         //Damage(10);
-        StartLooking();
+        //StartLooking();
         
     }
 
@@ -133,10 +133,8 @@ public class Boss : MonoBehaviour {
                         print("Charge Hit Player");
                     }
                     charge = false;
-                    HealthManager.UpdateHP(-10);
-                    print("Charge Hit Player");
                     anim.SetBool("Charge", false);
-                    print(col.transform.name);
+                    print("Collision with " + col.transform.name);
                 }
             }
                 /*RaycastHit hit;
@@ -156,7 +154,7 @@ public class Boss : MonoBehaviour {
             chargeSpeed += maxChargeSpeed / 75;
             if (chargeSpeed > maxChargeSpeed)
                 chargeSpeed = maxChargeSpeed;
-            transform.position = Vector3.MoveTowards(transform.position, lastPos, chargeSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, lastPos + transform.forward * 100, chargeSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
     }
@@ -187,11 +185,11 @@ public class Boss : MonoBehaviour {
         switch (i) {
             case 1:
                 charge = true;
-                RaycastHit hit;
-                Vector3 ppos = new Vector3(lastPos.x, transform.position.y, lastPos.z);
-                if (Physics.Raycast(transform.position, ppos, out hit, 1000, hitLayer2)) {
-                    hit.point = lastPos;
-                }
+                //RaycastHit hit;
+                //Vector3 ppos = new Vector3(lastPos.x, transform.position.y, lastPos.z);
+                //if (Physics.Raycast(transform.position, ppos, out hit, 1000, hitLayer2)) {
+                //    lastPos = hit.point;
+                //}
                     StartCoroutine(Charge());
                 
                 break;
@@ -206,16 +204,6 @@ public class Boss : MonoBehaviour {
         }
         else {
             hitting = false;
-        }
-        print("checking hit");
-        RaycastHit hit;
-        Collider[] list = Physics.OverlapSphere(weapon.position, weaponRadius, hitLayer);
-        foreach (Collider col in list) {
-            if (col.transform.tag == "Player") {
-                print("Player hit");
-                HealthManager.UpdateHP(-30);
-                //col.attachedRigidbody.
-            }
         }
 
     }

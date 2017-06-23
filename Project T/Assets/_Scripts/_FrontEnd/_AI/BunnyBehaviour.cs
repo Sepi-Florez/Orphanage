@@ -27,16 +27,16 @@ public class BunnyBehaviour : MonoBehaviour {
     bool randomPoint(Vector3 center, float range, out Vector3 result) {
         for (int i = 0; i < 30; i++) {
             Vector3 randomPoint = center + Random.insideUnitSphere * range;
-            print("RandomPoint" + "is" + randomPoint);
+            //print("RandomPoint" + "is" + randomPoint);
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randomPoint, out hit, range, NavMesh.AllAreas)) {
-                print("NavMeshHit" + hit + hit.position);
+                //print("NavMeshHit" + hit + hit.position);
                 result = hit.position;
                 return true;
             }
         }
         result = Vector3.zero;
-        print("error");
+        //print("error");
         return false;
     }
 
@@ -58,21 +58,21 @@ public class BunnyBehaviour : MonoBehaviour {
     //Normale Movement van de Rabbit, checked eerst of hij in zijn "NormalState" zit en stuurt hem dan aan.
     void NormalMoveTrig() {
         if (chaseMode == false) {
-            print("chaseMode=False");
+            //print("chaseMode=False");
             if (agent.remainingDistance <= agent.stoppingDistance) {
-                print("RemainingDistance<=StoppingDistance");
-                print("CurrentWait" + inWaitState);
+                //print("RemainingDistance<=StoppingDistance");
+                //print("CurrentWait" + inWaitState);
                 if (inWaitState == false) {
-                    print("WaitState=False");
+                    //print("WaitState=False");
                     StartCoroutine(BunnyMovement());
-                    print("CoroutineStarted");
+                    //print("CoroutineStarted");
                 }
             }
         }
     }
     //De IEnumerator die alles voor de bunny chase regelt.
     void BunnyChaseBehaviour() {
-        print("chaseMode Is" + chaseMode);
+        //print("chaseMode Is" + chaseMode);
         foreach(GameObject bunnyHole in bunnyHoles) {
             Vector3 diff = bunnyHole.transform.position - transform.position;
             float curDistance = diff.sqrMagnitude;
@@ -84,8 +84,8 @@ public class BunnyBehaviour : MonoBehaviour {
                     print("Yellow");
                     bunnyMesh.enabled = false;
                 }*/
-                print("BunnyHole" + bunnyHole + "Is Closest to Rabbit");
-                print("ChaseWentThrough");
+                //print("BunnyHole" + bunnyHole + "Is Closest to Rabbit");
+                //print("ChaseWentThrough");
                 if(inChase == true) {
                     BunnyChaseBehaviour();
                 }
@@ -95,22 +95,22 @@ public class BunnyBehaviour : MonoBehaviour {
     //De IEnumerator die alles voor de bunny movement regelt.
     IEnumerator BunnyMovement() {
         Vector3 point;
-        print("CoroutineStartedMovement");
+        //print("CoroutineStartedMovement");
         while (randomPoint(transform.position, range, out point)) {
-            print("StartOfWhile");
-            print(point);
+            //print("StartOfWhile");
+            //print(point);
             inWaitState = true;
             waitTime = Random.Range(minWaitTime, maxWaitTime);
-            print(waitTime);
+            //print(waitTime);
             yield return new WaitForSeconds(waitTime);
             target.position = point;
             agent.SetDestination(target.position);
             Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
             inWaitState = false;
-            print(agent.remainingDistance);
-            print("EndOfWhile");
+            //print(agent.remainingDistance);
+            //print("EndOfWhile");
         }
-        print("EndOfMove");
+        //print("EndOfMove");
         yield return point;
         NormalMoveTrig();
     }

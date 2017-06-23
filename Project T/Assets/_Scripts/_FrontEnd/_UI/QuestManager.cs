@@ -52,7 +52,7 @@ public class QuestManager : MonoBehaviour {
         questInfo.GetChild(1).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].description;
     }
     public void QuestAdd(int questID) {
-        print("Creating");
+        //print("Creating");
         Transform quest = (Transform)Instantiate(questPrefab, Vector3.zero, Quaternion.identity);
         quest.SetParent(questContent);
         InventoryManager.thisManager.helpArrange(quest);

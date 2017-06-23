@@ -7,17 +7,18 @@ public class questCollider : MonoBehaviour {
     public bool give;
     public int questDone;
     public int questGive;
+    public bool destroyOnActivation;
     private void OnTriggerEnter(Collider intruder) {
 
         if(intruder.transform.tag == "Player") {
-            print("INTRUDr");
             if (QuestManager.thisManager.QuestCheck(questDone)) {
                 print("checkdone");
                 if(done)
-                QuestManager.thisManager.QuestComplete(questDone);
+                    QuestManager.thisManager.QuestComplete(questDone);
                 if(give)
-                QuestManager.thisManager.QuestAdd(questGive);
-                Destroy(gameObject);
+                    QuestManager.thisManager.QuestAdd(questGive);
+                if(destroyOnActivation)
+                    Destroy(gameObject);
             }
         }
     }

@@ -50,7 +50,7 @@ public class HUDManager : MonoBehaviour {
     }
     public void Interaction(bool toggle, int spriteID) {
         if (toggle) {
-            print("/Sprites/Interaction" + spriteID);
+            //print("/Sprites/Interaction" + spriteID);
             itObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Interaction" + spriteID);
             itObject.GetComponent<CanvasGroup>().alpha = 1;
         }
@@ -59,7 +59,7 @@ public class HUDManager : MonoBehaviour {
         }
     }
     public void UpdateHealth(float health) {
-        print("health update : " + health);
+        //print("health update : " + health);
         playerHP.transform.GetChild(1).GetComponent<Image>().fillAmount = health / 100;
         playerHPCanvas.alpha = 1;
         if (OOCvar == null) {
@@ -102,14 +102,14 @@ public class HUDManager : MonoBehaviour {
     IEnumerator Fade(CanvasGroup Canvas) {
         fading = true;
         while (Canvas.alpha < 0.95) {
-            print("fading in");
+            //print("fading in");
             Canvas.alpha = Mathf.Lerp(Canvas.alpha, 1, fadeRate);
             yield return new WaitForSeconds(fadeSpeed);
         }
         Canvas.alpha = 1;
-        print("Fadewait began");
+        //print("Fadewait began");
         yield return new WaitForSeconds(fadeWait);
-        print("Fadewait up");
+        //print("Fadewait up");
         while (Canvas.alpha > 0.05) {
             Canvas.alpha = Mathf.Lerp(Canvas.alpha, 0, fadeRate);
             yield return new WaitForSeconds(fadeSpeed);
