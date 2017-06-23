@@ -15,9 +15,8 @@ public class S2SSound : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Fire1")) {
             //print("DitDoetHijWel");
-            thisManager.audioNumber = 11;
             //print("DitDoetHijOok");
-            thisManager.SoundLister();
+            thisManager.SoundLister(7);
         }
 	}
 }
