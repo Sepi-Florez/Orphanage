@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour {
     public Transform weapon;
 
     public LayerMask hitLayer;
+    public LayerMask hitLayer2;
     //Health
     public int health;
     private int currentHealth;
@@ -22,6 +23,7 @@ public class Boss : MonoBehaviour {
     //floats
     public float minAngle;
     public float chargeSpeed;
+    public float chargeRadius;
     public float maxChargeSpeed;
     public float weaponRadius;
 
@@ -29,6 +31,7 @@ public class Boss : MonoBehaviour {
     public bool looking = true;
     public bool lookFollow;
     public bool charge = false;
+    public bool hitting = false;
 
     //Coroutines
     public Coroutine looker;
@@ -42,7 +45,7 @@ public class Boss : MonoBehaviour {
         currentHealth = health;
         agent.isStopped = true;
         //Damage(10);
-        //StartLooking();
+        StartLooking();
         
     }
 
@@ -121,18 +124,34 @@ public class Boss : MonoBehaviour {
     //Will charge at the player's last position until it hits the play or terrain.
     IEnumerator Charge() {
         while (charge) {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position,transform.forward,out hit, 3)) {
-                if(hit.transform.tag == "Player") {
+            Collider[] list = Physics.OverlapSphere(transform.position + transform.forward, chargeRadius, hitLayer);
+            foreach (Collider col in list) {
+                if(list.Length > 0) {
+                    if(col.tag == "Player") {
+                        charge = false;
+                        HealthManager.thisManager.UpdateHP(-10);
+                        print("Charge Hit Player");
+                    }
                     charge = false;
-                    HealthManager.thisManager.UpdateHP(-10);
-                    print("Charge Hit Player");
+                    anim.SetBool("Charge", false);
+                    print(col.transform.name);
                 }
-                charge = false;
-                anim.SetBool("Charge", false);
-                break;
             }
-            chargeSpeed += maxChargeSpeed / 100;
+                /*RaycastHit hit;
+                Vector3 ppos = new Vector3(lastPos.x, transform.position.y, lastPos.z);
+                if (Physics.Raycast(transform.position, ppos ,out hit, 1000, hitLayer2)) {
+                    if (hit.distance < 10) {
+                        if (hit.transform.tag == "Player") {
+                            charge = false;
+                            HealthManager.thisManager.UpdateHP(-10);
+                            print("Charge Hit Player");
+                        }
+                        charge = false;
+                        anim.SetBool("Charge", false);
+                        print(hit.transform.name);
+                    }
+                }*/
+            chargeSpeed += maxChargeSpeed / 75;
             if (chargeSpeed > maxChargeSpeed)
                 chargeSpeed = maxChargeSpeed;
             transform.position = Vector3.MoveTowards(transform.position, lastPos, chargeSpeed * Time.deltaTime);
@@ -166,22 +185,42 @@ public class Boss : MonoBehaviour {
         switch (i) {
             case 1:
                 charge = true;
-                StartCoroutine(Charge());
+                RaycastHit hit;
+                Vector3 ppos = new Vector3(lastPos.x, transform.position.y, lastPos.z);
+                if (Physics.Raycast(transform.position, ppos, out hit, 1000, hitLayer2)) {
+                    hit.point = lastPos;
+                }
+                    StartCoroutine(Charge());
+                
                 break;
         }
 
     }
     // A check which checks if theres a player within the position of the weapon
-    void HitCheck() {
+    void HitCheck(int i) {
+        if (i == 0) {
+            hitting = true;
+            StartCoroutine(HitChecks());
+        }
+        else {
+            hitting = false;
+        }
         print("checking hit");
-        RaycastHit hit;
-        Collider[] list = Physics.OverlapSphere(weapon.position, weaponRadius, hitLayer);
-        foreach(Collider col in list) {
-            if(col.transform.tag == "Player") {
-                print("Player hit");
-                HealthManager.thisManager.UpdateHP(-30);
-                //col.attachedRigidbody.
+
+    }
+    IEnumerator HitChecks() {
+        while (hitting) {
+            Collider[] list = Physics.OverlapSphere(weapon.position, weaponRadius, hitLayer);
+            foreach (Collider col in list) {
+                if (col.transform.tag == "Player") {
+                    print("Player hit");
+                    HealthManager.thisManager.UpdateHP(-30);
+                    //col.attachedRigidbody.
+                    hitting = false;
+                }
             }
+            yield return new WaitForEndOfFrame();
+
         }
     }
     void Damage(int damage) {
