@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<DialogueNode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+  <responses>
+    <string>Hey there, Can you help me?</string>
+    <string>Sup hottie</string>
+    <string>Bye</string>
+  </responses>
+  <responseNodes>
+    <DialogueNode>
+      <answer>With what can I help you sir?</answer>
+      <responses>
+        <string>I have come to destroy the minotaur</string>
+        <string>Is there a shop?</string>
+        <string>yeb</string>
+      </responses>
+      <responseNodes>
+        <DialogueNode>
+          <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+          <responses>
+            <string>Hey there, Can you help me?</string>
+            <string>Sup hottie</string>
+            <string>Bye</string>
+          </responses>
+          <responseNodes>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+          </responseNodes>
+          <end>false</end>
+        </DialogueNode>
+        <DialogueNode>
+          <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+          <responses>
+            <string>Hey there, Can you help me?</string>
+            <string>Sup hottie</string>
+            <string>Bye</string>
+          </responses>
+          <responseNodes>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+          </responseNodes>
+          <end>false</end>
+        </DialogueNode>
+        <DialogueNode>
+          <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+          <responses>
+            <string>Hey there, Can you help me?</string>
+            <string>Sup hottie</string>
+            <string>Bye</string>
+          </responses>
+          <responseNodes>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+          </responseNodes>
+          <end>false</end>
+        </DialogueNode>
+      </responseNodes>
+      <end>false</end>
+    </DialogueNode>
+    <DialogueNode>
+      <answer>Ohmy...</answer>
+      <responses>
+        <string>want some fuk?</string>
+        <string>want some yellow?</string>
+        <string>want some blue?</string>
+      </responses>
+      <responseNodes>
+        <DialogueNode>
+          <answer>Go Away ron</answer>
+          <responses>
+            <string>Hey there, Can you help me?</string>
+            <string>Sup hottie</string>
+            <string>Bye</string>
+          </responses>
+          <responseNodes>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+          </responseNodes>
+          <end>false</end>
+        </DialogueNode>
+        <DialogueNode>
+          <answer>No ron!</answer>
+          <responses>
+            <string>Hey there, Can you help me?</string>
+            <string>Sup hottie</string>
+            <string>Bye</string>
+          </responses>
+          <responseNodes>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+          </responseNodes>
+          <end>false</end>
+        </DialogueNode>
+        <DialogueNode>
+          <answer>Ron, no!</answer>
+          <responses>
+            <string>Hey there, Can you help me?</string>
+            <string>Sup hottie</string>
+            <string>Bye</string>
+          </responses>
+          <responseNodes>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+          </responseNodes>
+          <end>false</end>
+        </DialogueNode>
+      </responseNodes>
+      <end>false</end>
+    </DialogueNode>
+	    <DialogueNode>
+      <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+      <responses>
+        <string>Hey there, Can you help me?</string>
+        <string>Sup hottie</string>
+        <string>Bye</string>
+      </responses>
+      <responseNodes>
+        <DialogueNode>
+          <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+          <responses>
+            <string>Hey there, Can you help me?</string>
+            <string>Sup hottie</string>
+            <string>Bye</string>
+          </responses>
+          <responseNodes>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+          </responseNodes>
+          <end>false</end>
+        </DialogueNode>
+        <DialogueNode>
+          <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+          <responses>
+            <string>Hey there, Can you help me?</string>
+            <string>Sup hottie</string>
+            <string>Bye</string>
+          </responses>
+          <responseNodes>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+          </responseNodes>
+          <end>false</end>
+        </DialogueNode>
+        <DialogueNode>
+          <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+          <responses>
+            <string>Hey there, Can you help me?</string>
+            <string>Sup hottie</string>
+            <string>Bye</string>
+          </responses>
+          <responseNodes>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+          </responseNodes>
+          <end>false</end>
+        </DialogueNode>
+      </responseNodes>
+      <end>true</end>
+    </DialogueNode>
+  </responseNodes>
+  <end>false</end>
+</DialogueNode>

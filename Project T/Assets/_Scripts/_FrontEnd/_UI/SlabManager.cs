@@ -7,6 +7,7 @@ public class SlabManager : MonoBehaviour {
 
     public Transform hand;
     public bool slabOpen = false;
+    public bool toggling = true;
 
     Animator anim;
     Transform currentTab;
@@ -77,8 +78,10 @@ public class SlabManager : MonoBehaviour {
     }
     // Temporary anim. Later on this will be activated in the arms
     public void SlabToggle() {
-        slabOpen = !slabOpen;
-        GetComponent<Animator>().SetBool("Open", slabOpen);
+        if (toggling) {
+            slabOpen = !slabOpen;
+            GetComponent<Animator>().SetBool("Open", slabOpen);
+        }
     }
 
 }

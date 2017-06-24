@@ -28,7 +28,7 @@ public class Interaction : MonoBehaviour {
                         i = true;
                         HUDManager.thisManager.Interaction(true, 1);
                         if (Input.GetButtonDown("Interaction")) {
-
+                            hit.transform.GetComponent<DialogueManager>().StartConversation();
                         }
                         //activate conversation
                         break;
