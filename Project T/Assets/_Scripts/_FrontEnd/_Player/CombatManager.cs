@@ -14,38 +14,22 @@ public class CombatManager : MonoBehaviour
 
     public List<Transform> hitObjects = new List<Transform>();
 
-    public float rayLenght = .2f, coolRate = .5f, minComboPercentage = 60;
+    public float rayLenght = .2f, coolRate = .5f, minComboPct = 60;
 
     float coolTmr;
 
+    bool attacking, hasHit;
+
     public void Update()
     {
-        #region Deprecated
-        /*if (checkHit)
-        {
-            foreach (Transform emitter in emitters)
-            {
-                Color colour = Color.green;
-
-                Ray ray = new Ray(emitter.transform.position, -emitter.transform.right); //* .2f);
-                RaycastHit hit;
-
-                if(Physics.Raycast(ray, out hit, rayLenght))
-                {
-                    colour = Color.red;
-                    print("hit " + hit.transform.name);
-                }
-
-                UnityEngine.Debug.DrawRay(ray.origin, ray.direction * rayLenght, colour, .20f);
-            }
-        }*/
-        #endregion
-        anim.SetBool("cdFinished", Time.time > coolTmr);
+        anim.SetBool("cdFinished", Time.time > coolTmr); //If current time is above"Cool Timer" the bool "Cool Down FInished" will be set to true in the Animator.
         anim.SetBool("fight", Input.GetButtonDown("Fire1"));
         anim.SetBool("fightAlt", Input.GetButtonDown("Fire2"));
-        var curAnim = anim.GetCurrentAnimatorStateInfo(1);
-        anim.SetBool("attacking", ((curAnim.IsName("Slash 1")) || (curAnim.IsName("Slash 0"))));    //&& (anim.GetCurrentAnimatorStateInfo(0).length * anim.GetCurrentAnimatorStateInfo(0).speed >= ));
-        anim.SetBool("afterPercentage", (curAnim.normalizedTime >= (minComboPercentage / 100)));
+        var curAnim = anim.GetCurrentAnimatorStateInfo(0); //We receive the Current Animation from the Animator.
+        anim.SetBool("attacking", ((curAnim.IsName("Slash 1")) || (curAnim.IsName("Slash 0")))); //If either of these animations are the current, we'll be "attacking". making it possible to chain attacks.
+        anim.SetBool("afterPercentage", (curAnim.normalizedTime >= (minComboPct / 100))); //if we're at minComboPct % of the current animation (no need to rule out attacks) afterPercentage will be set to true in the Animator enabeling us to chain the attacks
+
+        attacking = ((curAnim.IsName("Slash 1")) || (curAnim.IsName("Slash 0")));
 
         if (checkHit)
         {
@@ -57,24 +41,32 @@ public class CombatManager : MonoBehaviour
                 Ray ray = new Ray(emitter.transform.position, -emitter.transform.right); //* .2f);
                 RaycastHit hit;
 
-                if(Physics.Raycast(ray, out hit, rayLenght))
+                if (Physics.Raycast(ray, out hit, rayLenght))
                 {
                     colour = Color.red;
                     hitObjects.Add(hit.transform);
-                    //print("hit " + hit.transform.name);
                 }
 
-                UnityEngine.Debug.DrawRay(ray.origin, ray.direction * rayLenght, colour, .20f);
+                Debug.DrawRay(ray.origin, ray.direction * rayLenght, colour, .20f);
             }
-            for(int i = 0; i <= hitObjects.Count-1; i++)
+            if (hasHit == false)
             {
-                if(hitObjects[i].tag == "NPC")
+                for (int i = 0; i <= hitObjects.Count - 1; i++)
                 {
-                    if (hitObjects[i].GetComponentInChildren<NpcHealthManager>())
+                    if (hitObjects[i].tag == "Enemy")
                     {
-                        NpcHealthManager npcHealth = hitObjects[i].GetComponentInChildren<NpcHealthManager>();
-                        npcHealth.UpdateHP(damageAmount);
-                        break;
+                        if (hitObjects[i].GetComponentInChildren<NpcHealthManager>())
+                        {
+                            NpcHealthManager npcHealth = hitObjects[i].GetComponentInChildren<NpcHealthManager>();
+                            npcHealth.UpdateHP(-damageAmount);
+                            hasHit = true;
+                            print("bitch");
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        //hitObjects[i].
                     }
                 }
             }
@@ -85,12 +77,15 @@ public class CombatManager : MonoBehaviour
     {
         checkHit = !checkHit;
         hitObjects.Clear();
+        hasHit = false;
     }
 
-    /*public void EndCheck()
+    public void EndCheck()
     {
         checkHit = false;
-    }*/
+        hitObjects.Clear();//resets hitObjects so you can do damage again.
+        hasHit = false;
+    }
 
     public void DoDamage()
     {

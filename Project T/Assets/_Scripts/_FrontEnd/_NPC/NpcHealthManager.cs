@@ -1,28 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class NpcHealthManager : MonoBehaviour
 {
     public float healthPoints = 100f;
 
-    public AudioClip damageSound;
+    public Animator anim;
 
-    public AudioSource effectsAudioSource;
+    public Boss boss;
+
+    bool ded = false;
+
+    //public AudioClip damageSound;
+
+    //public AudioSource effectsAudioSource;
     
     public void Start()
     {
-        effectsAudioSource = GetComponent<AudioSource>();
+        if(anim == null)
+        {
+            anim = GetComponent<Animator>();
+        }
+        //effectsAudioSource = GetComponent<AudioSource>();
     }
 
     public void UpdateHP(float hpAddition)
     {
-        healthPoints += hpAddition;
-        print("I'm a person and I'm being hurt");
-        if (hpAddition <= 0)
+        if (!ded)
         {
-            effectsAudioSource.clip = damageSound;
-            effectsAudioSource.Play();
+            healthPoints += hpAddition;
+            if (hpAddition <= 0)
+            {
+                if (boss != null)
+                {
+                    boss.currentHealth = Mathf.RoundToInt(healthPoints);
+                }
+                //effectsAudioSource.clip = damageSound;
+                //effectsAudioSource.Play();
+                if (healthPoints <= 0)
+                {
+                    ded = true;
+                    anim.SetTrigger("Death"); //anim.SetBool("Death", healthPoints <= 0);
+                }
+            }
         }
     }
 }

@@ -18,7 +18,9 @@ public class Boss : MonoBehaviour {
     public LayerMask hitLayer2;
     //Health
     public int health;
-    private int currentHealth;
+
+    [HideInInspector]
+    public int currentHealth;
 
     //floats
     public float minAngle;
