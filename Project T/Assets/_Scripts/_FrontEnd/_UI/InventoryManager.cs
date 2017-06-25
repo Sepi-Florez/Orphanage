@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour {
 
 
     List<Item> inventory = new List<Item>();
-    List<Transform> inventoryButtons = new List<Transform>();
+    public List<Transform> inventoryButtons = new List<Transform>();
     void Update() {
 
     }
@@ -91,19 +91,22 @@ public class InventoryManager : MonoBehaviour {
     }
     //Used to delete the item received from the inventory
     public void Delete(Item item) {
+        print("Check Delete");
         if(item.category == 0) {
             //check if equiped else delete
         }
         else {
             int a = 0;
+            int aa = Search2(item.ID);
             List<Item> checkList = GetCategory(item.category);
             foreach(Item i in checkList) {
 
                 //print("InvCheck");
-                if(checkList[a] == item) {
-                    inventory.RemoveAt(a);
-                    Destroy(inventoryButtons[a].gameObject);
-                    inventoryButtons.RemoveAt(a);
+                if(i == item) {
+                    print(i.itemName);
+                    inventory.RemoveAt(aa);
+                    Destroy(inventoryButtons[aa].gameObject);
+                    inventoryButtons.RemoveAt(aa);
                 }
                 a++;
 
@@ -114,6 +117,7 @@ public class InventoryManager : MonoBehaviour {
     }
     // Used to remove an fixed amount of an item.
     public void Remove(Item item, int amount) {
+
         Item newItem = Search(item.ID);
         CraftingObject newCO = newItem as CraftingObject;
         newCO.count -= amount;
@@ -148,16 +152,32 @@ public class InventoryManager : MonoBehaviour {
         }
         CraftingManager.thisManager.RefreshRecipes();
     }
+    //Searches through the inventory list for an specific item and returns it
     public Item Search(int itemID) {
         Item newItem = DataBaseManager.thisManager.GetItem(itemID);
+        int a = 0;
         foreach(Item item in inventory) {
             if(newItem.ID == item.ID) {
                 return (item);
             }
+            a++;
         }
         return null;
     }
-	public bool RecipeCheck(List<Item> recipe ,List<int> recipeAmount){
+
+    public int Search2(int itemID) {
+        Item newItem = DataBaseManager.thisManager.GetItem(itemID);
+        int a = 0;
+        foreach (Item item in inventory) {
+            if (newItem.ID == item.ID) {
+                return (a);
+            }
+            a++;
+        }
+        return -1;
+    }
+    //checks if a recipe can be made
+    public bool RecipeCheck(List<Item> recipe ,List<int> recipeAmount){
         bool ii = false;
 		int i = 0;
         int a = 0;

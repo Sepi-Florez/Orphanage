@@ -12,7 +12,7 @@
 			<description>A nice villager told me the minotaur resides within the temple on a hill not far from here.</description>
 		</Quest>
     <Quest>
-  	<questID>2</questID>
+		<questID>2</questID>
 			<title>Through the gates</title>
 			<description>Upon following the path to the hill where the temple resides I found an obstacle in the way in the form of a closed gate. Maybe I need to light the braziers with something special... </description>
 		</Quest>

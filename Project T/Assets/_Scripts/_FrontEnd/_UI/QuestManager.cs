@@ -43,7 +43,6 @@ public class QuestManager : MonoBehaviour {
     public void Start() {
         QuestAdd(0);
         QuestShow(0);
-        QuestAdd(1);
     }
     public void Update() {
     }
