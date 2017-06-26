@@ -79,6 +79,9 @@ public class HUDManager : MonoBehaviour {
         }
         print(health);
         bossHP.transform.GetChild(1).GetComponent<Image>().fillAmount = health / 100;
+        if (health <= 0) {
+            StartCoroutine(Fade(bossHPCanvas));
+        }
 
     }
     public void QuestPrompt(int questID, int option) {

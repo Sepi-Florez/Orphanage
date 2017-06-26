@@ -36,6 +36,7 @@ public class Interaction : MonoBehaviour {
                         i = true;
                         HUDManager.thisManager.Interaction(true, 0);
                         if (Input.GetButtonDown("Interaction")) {
+                            hit.transform.parent.GetComponent<SoundManager>().SoundLister(0);
                             hit.transform.parent.GetComponent<Animator>().SetTrigger("Toggle");
                         }
                         //toggle door anim

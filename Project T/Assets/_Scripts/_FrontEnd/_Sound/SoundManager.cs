@@ -7,8 +7,14 @@ public class SoundManager : MonoBehaviour {
     public List<AudioClip> useableSounds = new List<AudioClip>();
     public AudioSource gOAS;
 
+    public bool playFirst = false;
+
     void Awake() {
         gOAS = transform.GetComponent<AudioSource>();
+        if (useableSounds.Count != 0 && playFirst) { 
+
+           gOAS.PlayOneShot(useableSounds[0]);
+        }
     }
     public void SoundLister (int i) {
         print("SoundListerActivated!");

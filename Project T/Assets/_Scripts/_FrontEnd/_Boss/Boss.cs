@@ -223,8 +223,15 @@ public class Boss : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
     }
-    void Damage(int damage) {
+    public void Damage(int damage) {
         currentHealth -= damage;
+
         HUDManager.thisManager.UpdateBossHealth(currentHealth);
+        if (currentHealth <= 0) {
+            anim.SetTrigger("Death");
+            GetComponent<SoundManager>().SoundLister(0);
+            StopAllCoroutines();
+        }
+
     }
 }

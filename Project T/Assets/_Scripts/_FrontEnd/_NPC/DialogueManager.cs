@@ -12,7 +12,6 @@ public class DialogueManager : MonoBehaviour {
 
     public Text answer;
     public List<Text> responses = new List<Text>();
-    public string[] test;
 
     DialogueNode currentNode;
 

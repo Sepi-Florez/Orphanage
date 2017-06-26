@@ -3,7 +3,7 @@
   <answer>Hello there stranger</answer>
   <responses>
     <string>Good day there fair maiden</string>
-    <string>No time for dabbling, I need to know where the minotaur resides</string>
+    <string>No time for dabbling, I need to know where to minotaur resides</string>
     <string>Bye</string>
   </responses>
   <responseNodes>
@@ -142,45 +142,37 @@
           <end>false</end>
         </DialogueNode>
         <DialogueNode>
-          <answer>Not really no... But if you are looking for ingredients the Alchemist might help you</answer>
+          <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
           <responses>
-            <string>Where does he live?</string>
-            <string>Great, Im off!</string>
+            <string>Hey there, Can you help me?</string>
+            <string>Sup hottie</string>
             <string>Bye</string>
           </responses>
           <responseNodes>
             <DialogueNode>
-              <answer>Just a few houses over</answer>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
               <responses>
-                <string>Thank you!</string>
-                <string>Okido</string>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
                 <string>Bye</string>
-              </responses>
-				<responseNodes>
-				<DialogueNode>
-				<answer>Stay Safe..</answer>
-				<end>true</end>				
-				</DialogueNode>
-				<DialogueNode>
-				<answer>Stay Safe..</answer>
-				<end>true</end>
-				</DialogueNode>
-				<DialogueNode>
-				<answer>Stay Safe..</answer>
-				<end>true</end>
-				</DialogueNode>
-				</responseNodes>
-				<end>false</end>
-			</DialogueNode>
-            <DialogueNode>
-              <answer>Stay Safe..</answer>
-              <responses>
               </responses>
               <end>true</end>
             </DialogueNode>
             <DialogueNode>
-              <answer>Stay Safe..</answer>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
               <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
+              </responses>
+              <end>true</end>
+            </DialogueNode>
+            <DialogueNode>
+              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
+              <responses>
+                <string>Hey there, Can you help me?</string>
+                <string>Sup hottie</string>
+                <string>Bye</string>
               </responses>
               <end>true</end>
             </DialogueNode>
@@ -202,7 +194,7 @@
       </responses>
       <responseNodes>
         <DialogueNode>
-          <answer>Stay Safe...</answer>
+          <answer>Go Away ron</answer>
           <end>true</end>
         </DialogueNode>
         <DialogueNode>

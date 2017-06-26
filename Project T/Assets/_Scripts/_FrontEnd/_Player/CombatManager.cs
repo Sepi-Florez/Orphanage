@@ -55,12 +55,16 @@ public class CombatManager : MonoBehaviour
                 {
                     if (hitObjects[i].tag == "Enemy")
                     {
+                        if (hitObjects[i].GetComponent<Boss>()) {
+                            hitObjects[i].GetComponent<Boss>().Damage(damageAmount);
+                            hasHit = true;
+                            return;
+                        }
                         if (hitObjects[i].GetComponentInChildren<NpcHealthManager>())
                         {
                             NpcHealthManager npcHealth = hitObjects[i].GetComponentInChildren<NpcHealthManager>();
                             npcHealth.UpdateHP(-damageAmount);
                             hasHit = true;
-                            print("bitch");
                             break;
                         }
                     }

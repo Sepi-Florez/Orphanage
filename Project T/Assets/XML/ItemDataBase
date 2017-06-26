@@ -30,9 +30,9 @@
       <Description>An elixer which restores health.</Description>
       <Category>1</Category>
       <Components>0</Components>
-      <Components>4</Components>
+      <Components>3</Components>
       <Components_Need>1</Components_Need>
-      <Components_Need>5</Components_Need>
+      <Components_Need>2</Components_Need>
       <Consumable_Strength>1</Consumable_Strength>
       <Consumable_Effect>0</Consumable_Effect>
       <Count>10</Count>

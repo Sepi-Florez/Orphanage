@@ -51,6 +51,7 @@ public class QuestManager : MonoBehaviour {
         questInfo.GetChild(1).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].description;
     }
     public void QuestAdd(int questID) {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<SoundManager>().SoundLister(1);
         //print("Creating");
         Transform quest = (Transform)Instantiate(questPrefab, Vector3.zero, Quaternion.identity);
         quest.SetParent(questContent);
@@ -62,6 +63,7 @@ public class QuestManager : MonoBehaviour {
         HUDManager.thisManager.QuestPrompt(questID, 1);
     }
     public void QuestComplete(int questID) {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<SoundManager>().SoundLister(0);
         for (int i = 0; i < playerQuests.Count; i++) {
             if (playerQuests[i].questID == questID) {
                 playerQuestsCompleted.Add(playerQuests[i]);
