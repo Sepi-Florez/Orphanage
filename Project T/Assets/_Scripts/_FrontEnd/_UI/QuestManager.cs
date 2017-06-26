@@ -46,10 +46,12 @@ public class QuestManager : MonoBehaviour {
     }
     public void Update() {
     }
+    //Shows a quest in the journal page
     public void QuestShow(int questID) {
         questInfo.GetChild(0).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].title;
         questInfo.GetChild(1).GetComponent<Text>().text = QuestManager.thisManager.questList.qList[questID].description;
     }
+    //Adds a quest
     public void QuestAdd(int questID) {
         GameObject.FindGameObjectWithTag("Player").GetComponent<SoundManager>().SoundLister(1);
         //print("Creating");
@@ -62,6 +64,7 @@ public class QuestManager : MonoBehaviour {
         playerQuests.Add(questList.qList[questID]);
         HUDManager.thisManager.QuestPrompt(questID, 1);
     }
+    //Completes 
     public void QuestComplete(int questID) {
         GameObject.FindGameObjectWithTag("Player").GetComponent<SoundManager>().SoundLister(0);
         for (int i = 0; i < playerQuests.Count; i++) {
@@ -74,6 +77,7 @@ public class QuestManager : MonoBehaviour {
         }
         HUDManager.thisManager.QuestPrompt(questID, 0);
     }
+    //checks if the player has the requested quest
     public bool QuestCheck(int questID) {
         print(playerQuests.Count);
         for (int i = 0; i < playerQuests.Count; i++) {

@@ -32,10 +32,7 @@ public class InventoryManager : MonoBehaviour {
     }
     private void Start() {
         contentObjects[0].transform.position = new Vector3(0, 0, 0);
-        InventoryAdd(0, 10);
-        InventoryAdd(3, 10);
-        InventoryAdd(5, 10);
-        InventoryAdd(6, 10);
+
     }
     // Is called upon when adding an item to the inventory
     public void InventoryAdd(int item,int count) {
@@ -164,7 +161,7 @@ public class InventoryManager : MonoBehaviour {
         }
         return null;
     }
-
+   
     public int Search2(int itemID) {
         Item newItem = DataBaseManager.thisManager.GetItem(itemID);
         int a = 0;
