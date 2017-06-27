@@ -70,7 +70,7 @@ public class DialogueManager : MonoBehaviour {
         UpdateConversation(-1);
         //disable stuff
     }
-    //Ends the conversation
+    //end the conversation
     public void EndConversation() {
         SlabManager.thisManager.toggling = true;
         Destroy(canvas.gameObject);
@@ -80,7 +80,7 @@ public class DialogueManager : MonoBehaviour {
         
         //enable stuff again
     }
-
+    //closes the conversation for a part. Will still show the npc answer.
     public void CloseConversation() {
         end = true;
         foreach(Text i in responses) {
@@ -90,8 +90,10 @@ public class DialogueManager : MonoBehaviour {
     }
     // Will based upon the response replace the answer of the npc and the responses for the player.
     public void UpdateConversation(int i) {
-        if(i != -1) {
+
+        if (i != -1) {
             currentNode = currentNode.responseNodes[i];
+            ExtraCheck();
             if (currentNode.end) {
                 CloseConversation();
                 return;
@@ -102,7 +104,7 @@ public class DialogueManager : MonoBehaviour {
             responses[ii].text = currentNode.responses[ii];
 
         }
-        ExtraCheck();
+
     }
     //This function checks if there are Quest,Items or Recipes to be added at the end of the conversation.
     public void ExtraCheck() {
@@ -126,6 +128,7 @@ public class DialogueManager : MonoBehaviour {
             InventoryManager.thisManager.InventoryAdd(itemIds[i], itemCount[i]);
         }
         foreach(int i in recipeIds) {
+            print("Adding recipe");
             CraftingManager.thisManager.AddRecipe(i);
         }
     }

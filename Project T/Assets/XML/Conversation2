@@ -1,246 +1,193 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <DialogueNode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <answer>Hello there stranger</answer>
-  <responses>
-    <string>Good day there fair maiden</string>
-    <string>No time for dabbling, I need to know where to minotaur resides</string>
-    <string>Bye</string>
-  </responses>
-  <responseNodes>
-    <DialogueNode>
-      <answer>With what can I help you sir?</answer>
-      <responses>
-        <string>I have come to destroy the minotaur</string>
-        <string>Is there shop in this village?</string>
-        <string>I gotta go</string>
-      </responses>
-      <responseNodes>
-        <DialogueNode>
-          <answer>I see, If there is anything you need don't be afraid to ask</answer>
-          <responses>
-            <string>Where is the minotaur?</string>
-            <string>Is there as shop in this village?</string>
-            <string>I will, Ill be off for now</string>
-          </responses>
-          <responseNodes>
-            <DialogueNode>
-              <answer>A top of the hill not far from here he resides, inside the temple.</answer>
-              <responses>
-                <string>Thank you for your help, I'll be off now!</string>
-                <string>Anything else I need to know?</string>
-                <string>I'm Off!</string>
-			  </responses>
-			  <responseNodes>
-				<DialogueNode>
-					<answer>Take care...</answer>
-					<responseNodes>
-					</responseNodes>
-					<end>true</end>
-				</DialogueNode>
-				<DialogueNode>
-					<answer>I recommend you talk to the alchemist before you go to the temple</answer>
-					<responses>
-						<string>I Will, thank you for your advice.</string>
-						<string>where do I find him</string>
-						<string>Im off!</string>
-					</responses>
-					<responseNodes>
-							<DialogueNode>
-								<answer>be safe...</answer>
-								<end>true</end>
-							</DialogueNode>
-							<DialogueNode>
-								<answer>In the house with the alchemist sign</answer>
-								<responses>
-									<string>I will go see him now, thank you</string>
-									<string>I have no time, I will go to the temple at once!</string>
-									<string>Im off!</string>
-								</responses>
-								<responseNodes>
-									<DialogueNode>
-										<answer>Say hi to him for me, goodbye.</answer>
-										<end>true</end>
-									</DialogueNode>
-									<DialogueNode>
-										<answer>As you wish...Be safe</answer>
-										<end>true</end>
-									</DialogueNode>
-									<DialogueNode>
-										<answer>goodbye</answer>
-										<end>true</end>								
-									</DialogueNode>								
-								</responseNodes>
-								<end>false</end>
-							</DialogueNode>
-							<DialogueNode>
-								<answer>be safe...</answer>
-								<end>true</end>
-							</DialogueNode>
-						</responseNodes>
-						<end>false</end>
-					</DialogueNode>
-					<DialogueNode>
-						<answer>Take care...</answer>
-						<responseNodes>
-						</responseNodes>
-						<end>true</end>
-					</DialogueNode>
-				</responseNodes>
-              <end>false</end>
-			  <questID>1</questID>
-            </DialogueNode>
-			<DialogueNode>
-              <answer>Not really.. we have the old alchemist although he never really sells his potions and gives recipes</answer>
-              <responses>
-                <string>I will head there then</string>
-                <string>why doesnt he sell potions?</string>
-                <string>I have to go</string>
-              </responses>
-			  <responseNodes>
-				<DialogueNode>
-					<answer>Say hi to him for me</answer>
-				<end>true</end>
-				</DialogueNode>
-				<DialogueNode>
-				<answer> I'm not sure why dont you ask him?</answer>
-				<responses>
-					<string>I will, thank you for your help</string>
-					<string>we'll see good bye</string>
-					<string>ok</string>
-				</responses>
-				<responseNodes>
-					<DialogueNode>
-						<answer>Until next time</answer>
-						<end>true</end>
-					</DialogueNode>
-					<DialogueNode>
-						<answer>Until next time</answer>
-						<end>true</end>
-					</DialogueNode>
-					<DialogueNode>
-						<answer>Until next time</answer>
-						<end>true</end>
-					</DialogueNode>					
-				</responseNodes>
-				</DialogueNode>
-				<DialogueNode>
-					<end>true</end>
-				</DialogueNode>
-			  </responseNodes>
-              <end>false</end>
-            </DialogueNode>
-            <DialogueNode>
-              <answer>Goodbye Traveller</answer>
-              <responses>
-                <string>Goodbye</string>
-                <string>Bye Hottie</string>
-                <string>Bye</string>
-              </responses>
-              <end>true</end>
-            </DialogueNode>
-          </responseNodes>
-          <end>false</end>
-        </DialogueNode>
-        <DialogueNode>
-          <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
-          <responses>
-            <string>Hey there, Can you help me?</string>
-            <string>Sup hottie</string>
-            <string>Bye</string>
-          </responses>
-          <responseNodes>
-            <DialogueNode>
-              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
-              <responses>
-                <string>Hey there, Can you help me?</string>
-                <string>Sup hottie</string>
-                <string>Bye</string>
-              </responses>
-              <end>true</end>
-            </DialogueNode>
-            <DialogueNode>
-              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
-              <responses>
-                <string>Hey there, Can you help me?</string>
-                <string>Sup hottie</string>
-                <string>Bye</string>
-              </responses>
-              <end>true</end>
-            </DialogueNode>
-            <DialogueNode>
-              <answer>Hey there  Traveller, I see you have come with a great quest. Can I help you in any way?</answer>
-              <responses>
-                <string>Hey there, Can you help me?</string>
-                <string>Sup hottie</string>
-                <string>Bye</string>
-              </responses>
-              <end>true</end>
-            </DialogueNode>
-          </responseNodes>
-          <end>false</end>
-        </DialogueNode>
-        <DialogueNode>
-          <end>true</end>
-        </DialogueNode>
-      </responseNodes>
-      <end>false</end>
-    </DialogueNode>
-    <DialogueNode>
-      <answer>I see, the Minotaur resides within the temple on the hill nearby.</answer>
-      <responses>
-        <string>Thank you I'm off!</string>
-        <string>What hill?</string>
-        <string>kbai!</string>
-      </responses>
-      <responseNodes>
-        <DialogueNode>
-          <answer>Go Away ron</answer>
-          <end>true</end>
-        </DialogueNode>
-        <DialogueNode>
-          <answer>Just follow the path that leads out of the village</answer>
-          <responses>
-            <string>Thank you!</string>
-            <string>Allright Im off!</string>
-            <string>kbai</string>
-          </responses>
-          <responseNodes>
-            <DialogueNode>
-              <answer>Good luck</answer>
-              <responses>
 
-              </responses>
-              <end>true</end>
-            </DialogueNode>
-            <DialogueNode>
-              <answer>Good luck</answer>
-              <end>true</end>
-            </DialogueNode>
-            <DialogueNode>
-              <answer>stay safe</answer>
-              <responses>
-              </responses>
-              <end>true</end>
-            </DialogueNode>
-          </responseNodes>
-          <end>false</end>
-        </DialogueNode>
-        <DialogueNode>
-          <answer>Good luck</answer>
-          <responses>
-          </responses>
-          <responseNodes>
-          </responseNodes>
-          <end>true</end>
-        </DialogueNode>
-      </responseNodes>
-      <end>false</end>
-	  <questID>1</questID>
-    </DialogueNode>
-	<DialogueNode>
-		<answer>Goodbye</answer>
-      <end>true</end>
-    </DialogueNode>
-  </responseNodes>
-  <end>false</end>
+	<answer>Good day</answer>
+	
+	<responses>
+	
+		<string>Can you give me a recipe for a healing potion?</string>
+		<string>I heard you had information regarding the minotaur</string>
+		<string>Bye</string>
+		
+	</responses>
+	
+	<responseNodes>
+	
+		<DialogueNode>
+			
+			<answer>I certainly can , here you go</answer>
+			
+			<responses>
+			
+				<string>Thank you!</string>
+				<string>Do you have any some bottled water I can use?</string>
+				<string>Bye</string>
+				
+				<end>false</end>
+
+			</responses>
+			
+			<responseNodes>
+			
+				<DialogueNode>
+				
+					<answer>No Problem, stay safe!</answer>
+
+					<end> true </end>
+				
+				</DialogueNode>
+			
+				<DialogueNode>
+				
+					<answer>Yeah, just grab one from inside</answer>
+					
+					<responses>
+					
+						<string> Thank you! </string>
+						<string> Great! </string>
+						<string> bye </string>
+					
+					</responses>
+					
+					<responseNodes>
+					
+						<DialogueNode>
+						
+							<answer> Your welcome </answer>
+							
+							<end> true </end>
+							
+						</DialogueNode>
+						
+						<DialogueNode>
+						
+							<answer> Your welcome </answer>
+							
+							<end> true </end>
+							
+						</DialogueNode>
+						
+						<DialogueNode>
+						
+							<answer> Goodbye </answer>
+							
+							<end> true </end>
+							
+						</DialogueNode>
+						
+					</responseNodes>
+
+					<end> false </end>
+				
+				</DialogueNode>
+			
+				<DialogueNode>
+				
+					<answer>Goodbye</answer>
+
+					<end> true </end>
+				
+				</DialogueNode>
+				
+			</responseNodes>
+			
+			<end>false</end>
+			<recipeID>2</recipeID>
+			
+		</DialogueNode>
+		
+		<DialogueNode>
+			
+			<answer>What do you like to know?</answer>
+			
+			<responses>
+			
+				<string>How do I get into the maze?</string>
+				<string>You close with Paula?</string>
+				<string>Bye</string>
+
+			</responses>
+			
+			<responseNodes>
+			
+				<DialogueNode>
+				
+					<answer> I see... You'll need a substance called blue fire</answer>
+					
+					<responses>
+			
+						<string>How do I craft this subtance?</string>
+						<string>I know enough, thank you!</string>
+						<string>Bye</string>
+
+					</responses>
+					
+					<responseNodes>
+					
+						<DialogueNode>
+						
+							<answer>Here, this is what you'll need. After you made it ignite the braziers at the gate.</answer>
+							
+							<end> true </end>
+							
+							<recipeID>5</recipeID>
+						
+						</DialogueNode>
+						
+						<DialogueNode>
+						
+							<answer>Your welcome, good luck...</answer>
+							
+							<end> true </end>
+						
+						</DialogueNode>
+						
+						<DialogueNode>
+						
+							<answer>Good bye</answer>
+							
+							<end> true </end>
+						
+						</DialogueNode>
+					
+					</responseNodes>
+				
+					<end> false </end>
+				
+				</DialogueNode>
+				
+				<DialogueNode>
+				
+					<answer> What... eh... Its better you leave</answer>
+				
+					<end> true </end>
+				
+				</DialogueNode>
+				
+				<DialogueNode>
+				
+					<answer>Good bye</answer>
+				
+					<end> true </end>
+				
+				</DialogueNode>				
+			
+			</responseNodes>
+			
+			<end>false</end>
+			
+		</DialogueNode>
+		
+		<DialogueNode>
+		
+		<answer>Farewell</answer>
+		
+		<end> true </end>
+			
+		</DialogueNode>
+		
+	</responseNodes>
+	
+	<end>false</end>
+	
 </DialogueNode>
