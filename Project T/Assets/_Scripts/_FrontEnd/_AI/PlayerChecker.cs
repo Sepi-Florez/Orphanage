@@ -5,15 +5,19 @@ using UnityEngine;
 public class PlayerChecker : MonoBehaviour {
 
     BunnyBehaviour bunny;
+    GameObject aiManager;
+    public Transform[] bHoleArray;
     
 
 	// Use this for initialization
 	void Start () {
-        bunny = transform.parent.GetComponent<BunnyBehaviour>();
+        aiManager = GameObject.FindGameObjectWithTag("AIManager");
+        bunny = aiManager.GetComponent<BunnyBehaviour>();
 	}
 	
-    void OnTriggerEnter() {
-        bunny.inChase = true;
-        bunny.PlayerHasEntered();
+    void OnTriggerEnter(Collider checkerCol) {
+        if (checkerCol.tag == "Player") {
+            bunny.ChaseMode(bHoleArray);
+        }
     }
 }
