@@ -19,13 +19,15 @@ public class SoundManager : MonoBehaviour {
             gOAS.PlayOneShot(useableSounds[0]);
         }
     }
-    public void SoundLister (int i) {
-        print("SoundListerActivated!");
-        if (i <= useableSounds.Count) {
+    public void SoundLister (int i)
+    {
+        if (i <= useableSounds.Count)
+        {
             gOAS.PlayOneShot(useableSounds[i]);
         }
-        else {
-            print("SoundRequest out of range! The audioNumber you are requesting is not available");
+        else
+        {
+            Debug.Log("SoundRequest out of range! The audioNumber you are requesting is not available");
         }
     }
 

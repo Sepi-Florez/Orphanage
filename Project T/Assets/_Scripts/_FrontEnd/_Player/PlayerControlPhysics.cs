@@ -188,7 +188,8 @@ public class PlayerControlPhysics : MonoBehaviour {
         return (Physics.SphereCast(transform.position + coll.center, coll.radius, -transform.up, out hit, (coll.height / 2) * 1.1f));
     }
 
-    public float HeadBob() {
+    public float HeadBob()
+    {
         float waveSlice = 0.0f;
         if (Mathf.Abs(Input.GetAxis("Horizontal")) == 0 && Mathf.Abs(Input.GetAxis("Vertical")) == 0) {
             bobTimer = 0f;
@@ -202,9 +203,11 @@ public class PlayerControlPhysics : MonoBehaviour {
             }
         }
 
-        if (waveSlice != 0) {
+        if (waveSlice != 0)
+        {
             float change = waveSlice * cameraSettings.headBobRotMult;
-            if (IsGrnded() && waveSlice >= -1) {
+            if (IsGrnded() && waveSlice >= -1)
+            {
                 soundManager.SoundLister(Random.Range(2, 4));
                 //GetMat.GetMaterial(new Ray(transform.position, -transform.up));
             }

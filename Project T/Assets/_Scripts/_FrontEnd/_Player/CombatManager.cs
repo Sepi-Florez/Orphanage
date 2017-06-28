@@ -18,7 +18,14 @@ public class CombatManager : MonoBehaviour
 
     float coolTmr;
 
-    bool attacking, hasHit;
+    bool attacking, hasHit, whoosh;
+
+    public SoundManager soundManager;
+
+    public void Awake()
+    {
+        CursorLock.SetPlayerScripts(this);
+    }
 
     public void Update()
     {
@@ -31,6 +38,19 @@ public class CombatManager : MonoBehaviour
 
         attacking = ((curAnim.IsName("Slash 1")) || (curAnim.IsName("Slash 0")));
 
+        if (whoosh == false && Input.GetButtonDown("Fire1"))
+        {
+            soundManager.SoundLister(Random.Range(0,1));
+            whoosh = true;
+        }
+
+        if(whoosh == false && Input.GetButtonDown("Fire2"))
+        {
+            soundManager.SoundLister(2);
+            whoosh = true;
+        }
+        //if (attacking) { soundManager.SoundLister(5); }
+
         if (checkHit)
         {
             coolTmr = Time.time + coolRate;
@@ -39,11 +59,11 @@ public class CombatManager : MonoBehaviour
                 Color colour = Color.green;
 
                 Ray ray = new Ray(emitter.transform.position, -emitter.transform.right); //* .2f);
+                //GetMat.GetMaterial(ray);
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit, rayLenght))
                 {
-                    colour = Color.red;
                     hitObjects.Add(hit.transform);
                 }
 
@@ -55,11 +75,6 @@ public class CombatManager : MonoBehaviour
                 {
                     if (hitObjects[i].tag == "Enemy")
                     {
-                        if (hitObjects[i].GetComponent<Boss>()) {
-                            hitObjects[i].GetComponent<Boss>().Damage(damageAmount);
-                            hasHit = true;
-                            return;
-                        }
                         if (hitObjects[i].GetComponentInChildren<NpcHealthManager>())
                         {
                             NpcHealthManager npcHealth = hitObjects[i].GetComponentInChildren<NpcHealthManager>();
@@ -89,43 +104,11 @@ public class CombatManager : MonoBehaviour
         checkHit = false;
         hitObjects.Clear();//resets hitObjects so you can do damage again.
         hasHit = false;
+        whoosh = false;
     }
 
     public void DoDamage()
     {
         doDamage = !doDamage;
     }
-
-    #region Test
-    /*
-    public void OnDrawGizmos()
-    {
-
-    }
-    */
-
-    /*
-    int caseSwitch = 1;
-    switch (caseSwitch)
-    {
-        case 1:
-            Console.WriteLine("Case 1");
-            break;
-        case 2:
-            Console.WriteLine("Case 2");
-            break;
-        default:
-            Console.WriteLine("Default case");
-            break;
-    }
-    */
-
-    /*
-     var div : int = animation["attack"].normalizedTime + 0;
-    var progression = (animation["attack"].wrapMode == WrapMode.Loop) ? animation[anim].normalizedTime - div : animation["attack"].normalizedTime;
-
-    if( progression < 0.3 ) didHit = false; // Make sure we hit just once
-    if( progression > 0.5 && !didHit ) Hit();
-     */
-    #endregion
 }

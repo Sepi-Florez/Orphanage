@@ -4,8 +4,14 @@ public class NpcHealthManager : MonoBehaviour
 {
     public float healthPoints = 100f;
 
+    [Space(10)]
+    public GameObject spawnOnDeath;
+
+    [Space(10)]
+    public bool animate;
     public Animator anim;
 
+    [Space(10)]
     public Boss boss;
 
     bool ded = false;
@@ -16,7 +22,7 @@ public class NpcHealthManager : MonoBehaviour
     
     public void Start()
     {
-        if(anim == null)
+        if(animate && anim == null)
         {
             anim = GetComponent<Animator>();
         }
@@ -39,6 +45,10 @@ public class NpcHealthManager : MonoBehaviour
                 if (healthPoints <= 0)
                 {
                     ded = true;
+                    if (spawnOnDeath != null)
+                    {
+                        Instantiate(spawnOnDeath, transform.position, Quaternion.identity);
+                    }
                     anim.SetTrigger("Death"); //anim.SetBool("Death", healthPoints <= 0);
                 }
             }

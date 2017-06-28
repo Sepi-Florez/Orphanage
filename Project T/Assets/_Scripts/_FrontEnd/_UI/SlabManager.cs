@@ -81,6 +81,7 @@ public class SlabManager : MonoBehaviour {
         if (toggling) {
             slabOpen = !slabOpen;
             GetComponent<Animator>().SetBool("Open", slabOpen);
+            CursorLock.Lock();
         }
     }
 
