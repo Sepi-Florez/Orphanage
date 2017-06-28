@@ -60,16 +60,16 @@ public class BunnyBehaviour : MonoBehaviour {
                 tMin = t;
                 minDist = dist;
                 agent.SetDestination(t.position);
-                
+                StartCoroutine(waitForDestination());
             }
         }
     }
 
     IEnumerator waitForDestination () {
-        yield return new WaitForSeconds(5);
-        if(agent.remainingDistance < agent.stoppingDistance) {
+        yield return new WaitForSeconds(1);
+        if(agent.remainingDistance <= agent.stoppingDistance) {
             print("ChaseEvaded");
-            StartCoroutine(movementAI(15));
+            StartCoroutine(movementAI(8));
         }
         else {
             StartCoroutine(waitForDestination());
