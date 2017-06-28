@@ -48,6 +48,10 @@ public class HUDManager : MonoBehaviour {
     }
     void Start() {
     }
+
+    public void Toggle(int i) {
+        thisCanvas.alpha = i;
+    }
     public void Interaction(bool toggle, int spriteID) {
         if (toggle) {
             //print("/Sprites/Interaction" + spriteID);

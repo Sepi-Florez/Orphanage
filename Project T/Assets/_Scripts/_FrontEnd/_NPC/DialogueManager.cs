@@ -10,6 +10,8 @@ public class DialogueManager : MonoBehaviour {
     public Transform ConversationCanvasPrefab;
     Transform canvas;
 
+    public string name;
+
     public Text answer;
     public List<Text> responses = new List<Text>();
 
@@ -53,6 +55,7 @@ public class DialogueManager : MonoBehaviour {
     public void MakeCanvas() {
         canvas = (Transform)Instantiate(ConversationCanvasPrefab, Vector3.zero, Quaternion.identity);
         answer = canvas.GetChild(0).GetChild(0).GetComponent<Text>();
+        canvas.GetChild(0).GetChild(1).GetComponent<Text>().text = name;
         responses.Clear();
         foreach (Transform response in canvas.GetChild(1)) {
             responses.Add(response.GetChild(0).GetComponent<Text>());
@@ -62,6 +65,9 @@ public class DialogueManager : MonoBehaviour {
     //Starts the conversation
     public void StartConversation() {
         MakeCanvas();
+        Interaction.thisManager.it = false;
+        HUDManager.thisManager.Toggle(0);
+        CursorLock.Lock();
         if(SlabManager.thisManager.slabOpen == true) {
             SlabManager.thisManager.SlabToggle();
 
@@ -72,8 +78,11 @@ public class DialogueManager : MonoBehaviour {
     }
     //end the conversation
     public void EndConversation() {
+        HUDManager.thisManager.Toggle(1);
         SlabManager.thisManager.toggling = true;
         Destroy(canvas.gameObject);
+        CursorLock.Lock();
+        Interaction.thisManager.it = true;
         ExtraDo();
         Load();
         end = false;

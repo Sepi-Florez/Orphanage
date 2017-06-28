@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour {
 
+    public static Interaction thisManager;
+
     public bool it ;
     public float itRange;
+
+    private void Awake() {
+        thisManager = this;
+    }
 
     void Update() {
         if (it) {
             RaycastHit hit;
-            if(Physics.Raycast(transform.position,transform.forward, out hit, itRange)) {
+            if (Physics.Raycast(transform.position, transform.forward, out hit, itRange)) {
                 //print("Interactle BOy");
                 Transform itObject = hit.transform;
                 bool i = false;
@@ -45,7 +51,7 @@ public class Interaction : MonoBehaviour {
                         i = true;
                         HUDManager.thisManager.Interaction(true, 0);
                         if (Input.GetButtonDown("Interaction")) {
-                            if(InventoryManager.thisManager.Search(5) != null) {
+                            if (InventoryManager.thisManager.Search(5) != null) {
                                 InventoryManager.thisManager.Remove(DataBaseManager.thisManager.GetItem(5), 1);
                                 itObject.GetChild(0).GetComponent<ParticleSystem>().Play();
                                 FindObjectOfType<Gate>().GetComponent<Gate>().Open();
@@ -63,6 +69,9 @@ public class Interaction : MonoBehaviour {
             else {
                 HUDManager.thisManager.Interaction(false, 0);
             }
+        }
+        else {
+            HUDManager.thisManager.Interaction(false, 0);
         }
     }
 }

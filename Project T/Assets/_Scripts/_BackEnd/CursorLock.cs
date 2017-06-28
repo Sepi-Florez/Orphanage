@@ -1,68 +1,44 @@
 ﻿using UnityEngine;
 
-public class CursorLock
-{
-   bool isLocked = true;
-    public void Awake()
-    {
+public class CursorLock {
+    static bool isLocked = true;
+
+    static PlayerControlPhysics playerController;
+    static CombatManager weapon;
+
+    public void Awake() {
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
-    /*public IEnumerator Lock (PlayerControl playerController, CombatManager weapon, float yieldTime)
-    {
-        //print("Meep");
-        Debug.Log("A = " + Time.time);
-        //yield(yieldTime);
-        //Debug.Log("B = " + Time.time);
-        if (Time.timeScale == 1.0)
-        {
-            yield return new WaitForSeconds(yieldTime);
-            Time.timeScale = 0f;
-            playerController.enabled = false; //Camera.main.GetComponentInParent<PlayerControl>().enabled = false;
-            weapon.enabled = false;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Time.timeScale = 1.0f;
-            playerController.enabled = true; //Camera.main.GetComponentInParent<PlayerControl>().enabled = true;
-            weapon.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-	}*/
 
-    public void Lock (PlayerControlPhysics playerController, CombatManager weapon)
-    {
-        if (isLocked)
-        {
-           Time.timeScale = 0f;
-            if (playerController != null)
-            {
-                playerController.enabled = false; //disables the playerController so you can't look around or move when timescale is set to 0
-            }
+    #region
 
-            if (weapon != null) //disables the weaponScript because you might still be able to fire bullets while timescale is set to 0 so when you set it back to 1 again you shoot or swing X amount at the same time.
-            {
-                weapon.enabled = false;
-            }
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            isLocked = !isLocked;
+    public static void SetPlayerScripts(PlayerControlPhysics _playerController, CombatManager _weapon) {
+        playerController = _playerController;
+        weapon = _weapon;
+    }
+    public static void SetPlayerScripts(PlayerControlPhysics _playerController) {
+        playerController = _playerController;
+    }
+    public static void SetPlayerScripts(CombatManager _weapon) {
+        weapon = _weapon;
+    }
+
+    #endregion
+
+    public static void Lock() {
+        Time.timeScale = isLocked ? 0f : 1.0f;
+        if (playerController != null) {
+            playerController.enabled = !isLocked; //disables the playerController so you can't look around or move when timescale is set to 0
         }
-        else
+
+        if (weapon != null) //disables the weaponScript because you might still be able to fire bullets while timescale is set to 0 so when you set it back to 1 again you shoot or swing X amount at the same time.
         {
-           Time.timeScale = 1.0f;
-            if (playerController != null)
-            {
-                playerController.enabled = true;
-            }
-            if (weapon != null)
-            {
-                weapon.enabled = true;
-            }
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            isLocked = !isLocked;
+            weapon.enabled = !isLocked;
         }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = isLocked;
+        isLocked = !isLocked;
     }
 }

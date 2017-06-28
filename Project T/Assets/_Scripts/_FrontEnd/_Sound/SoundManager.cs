@@ -11,9 +11,12 @@ public class SoundManager : MonoBehaviour {
 
     void Awake() {
         gOAS = transform.GetComponent<AudioSource>();
-        if (useableSounds.Count != 0 && playFirst) { 
 
-           gOAS.PlayOneShot(useableSounds[0]);
+    }
+    private void Start() {
+        if (useableSounds.Count != 0 && playFirst) {
+            gOAS.loop = true;
+            gOAS.PlayOneShot(useableSounds[0]);
         }
     }
     public void SoundLister (int i) {

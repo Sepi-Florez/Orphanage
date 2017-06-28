@@ -16,6 +16,9 @@ public class Boss : MonoBehaviour {
 
     public LayerMask hitLayer;
     public LayerMask hitLayer2;
+
+    public Vector3[] knockBackForces; //public List<Vector3> knockBackForces = new List<Vector3>();
+    private int kBForce;
     //Health
     public int health;
 
@@ -38,17 +41,32 @@ public class Boss : MonoBehaviour {
     //Coroutines
     public Coroutine looker;
 
+    AnimatorStateInfo curAnim;
+    Vector3 oldWeaponPos;
+
     //Fills in some variables
-	void Start () {
+    void Start() {
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         anim = GetComponent<Animator>();
         currentHealth = health;
         agent.isStopped = true;
-        //Damage(10);
-        //StartLooking();
-        
+        curAnim = anim.GetCurrentAnimatorStateInfo(0); //Current Animation
+                                                       //Damage(10);
+                                                       //StartLooking();
+
+    }
+    void Update() //moet eigenlijk in een normale functie geplaatst worden die gecalled word als we attacken maar voor nu is het even zo..
+    {
+        if (oldWeaponPos == null) {
+            oldWeaponPos = weapon.position;
+        }
+
+        if (curAnim.normalizedTime % 0.1f == 0)//als current Animation gedeelt kan worden door 0.1 betekend het dat het op x tiende zit van zijn animation..
+        {
+            oldWeaponPos = weapon.position;//en word de oldWeaponPosition  geupdate met de huidige position (dit is zodat ik een beter idee van impact krijg)
+        }
     }
 
     //decides on the next course of action.
@@ -63,7 +81,7 @@ public class Boss : MonoBehaviour {
         }
         else {
             int r = Random.Range(0, 2);
-            if(r == 0) {
+            if (r == 0) {
                 bossAction += Overhead;
                 stopDist = 6;
             }
@@ -99,7 +117,7 @@ public class Boss : MonoBehaviour {
             else {
                 if (!agent.isStopped)
                     agent.isStopped = true;
-                
+
 
                 Quaternion rotation = Quaternion.LookRotation(ppos - transform.position);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
@@ -118,19 +136,20 @@ public class Boss : MonoBehaviour {
             if (Vector3.Angle(transform.forward, ppos - transform.position) < minAngle) {
                 transform.rotation = Quaternion.LookRotation((ppos - transform.position).normalized);
                 lastPos = player.position;
-                
+
             }
             yield return new WaitForSeconds(0.01f);
-        }    
+        }
     }
     //Will charge at the player's last position until it hits the play or terrain.
     IEnumerator Charge() {
         while (charge) {
             Collider[] list = Physics.OverlapSphere(transform.position + transform.forward, chargeRadius, hitLayer);
             foreach (Collider col in list) {
-                if(list.Length > 0) {
-                    if(col.tag == "Player") {
+                if (list.Length > 0) {
+                    if (col.tag == "Player") {
                         charge = false;
+                        col.GetComponent<PlayerControlPhysics>().AddForce(knockBackForces[kBForce]);
                         HealthManager.UpdateHP(-10);
                         print("Charge Hit Player");
                     }
@@ -139,20 +158,20 @@ public class Boss : MonoBehaviour {
                     print("Collision with " + col.transform.name);
                 }
             }
-                /*RaycastHit hit;
-                Vector3 ppos = new Vector3(lastPos.x, transform.position.y, lastPos.z);
-                if (Physics.Raycast(transform.position, ppos ,out hit, 1000, hitLayer2)) {
-                    if (hit.distance < 10) {
-                        if (hit.transform.tag == "Player") {
-                            charge = false;
-                            HealthManager.thisManager.UpdateHP(-10);
-                            print("Charge Hit Player");
-                        }
+            /*RaycastHit hit;
+            Vector3 ppos = new Vector3(lastPos.x, transform.position.y, lastPos.z);
+            if (Physics.Raycast(transform.position, ppos ,out hit, 1000, hitLayer2)) {
+                if (hit.distance < 10) {
+                    if (hit.transform.tag == "Player") {
                         charge = false;
-                        anim.SetBool("Charge", false);
-                        print(hit.transform.name);
+                        HealthManager.thisManager.UpdateHP(-10);
+                        print("Charge Hit Player");
                     }
-                }*/
+                    charge = false;
+                    anim.SetBool("Charge", false);
+                    print(hit.transform.name);
+                }
+            }*/
             chargeSpeed += maxChargeSpeed / 75;
             if (chargeSpeed > maxChargeSpeed)
                 chargeSpeed = maxChargeSpeed;
@@ -169,17 +188,19 @@ public class Boss : MonoBehaviour {
         StartCoroutine(AttackFollow());
         anim.SetTrigger("Overhead");
         bossAction -= Overhead;
+        kBForce = 0;
     }
     void Sweep() {
         anim.SetTrigger("Sweep");
         bossAction -= Sweep;
-
+        kBForce = 1;
     }
     void BullCharge() {
         anim.SetTrigger("Charge");
         lookFollow = true;
         StartCoroutine(AttackFollow());
         bossAction -= BullCharge;
+        kBForce = 2;
     }
     // A function to be called through animation events
     void EventCall(int i) {
@@ -192,8 +213,8 @@ public class Boss : MonoBehaviour {
                 //if (Physics.Raycast(transform.position, ppos, out hit, 1000, hitLayer2)) {
                 //    lastPos = hit.point;
                 //}
-                    StartCoroutine(Charge());
-                
+                StartCoroutine(Charge());
+
                 break;
         }
 
@@ -209,6 +230,7 @@ public class Boss : MonoBehaviour {
         }
 
     }
+
     IEnumerator HitChecks() {
         while (hitting) {
             Collider[] list = Physics.OverlapSphere(weapon.position, weaponRadius, hitLayer);
@@ -216,7 +238,8 @@ public class Boss : MonoBehaviour {
                 if (col.transform.tag == "Player") {
                     print("Player hit");
                     HealthManager.UpdateHP(-30);
-                    //col.attachedRigidbody.
+                    //col.GetComponent<PlayerControlPhysics>().AddForce((weapon.position - oldWeaponPos).normalized * 100);//applies a force in the direction of the sweep
+                    col.GetComponent<PlayerControlPhysics>().AddForce(knockBackForces[kBForce]);
                     hitting = false;
                 }
             }
@@ -225,13 +248,7 @@ public class Boss : MonoBehaviour {
     }
     public void Damage(int damage) {
         currentHealth -= damage;
-
         HUDManager.thisManager.UpdateBossHealth(currentHealth);
-        if (currentHealth <= 0) {
-            anim.SetTrigger("Death");
-            GetComponent<SoundManager>().SoundLister(0);
-            StopAllCoroutines();
-        }
-
     }
 }
+ 
