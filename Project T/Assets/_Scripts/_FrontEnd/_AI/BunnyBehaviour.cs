@@ -60,7 +60,7 @@ public class BunnyBehaviour : MonoBehaviour {
                 tMin = t;
                 minDist = dist;
                 agent.SetDestination(t.position);
-                
+                StartCoroutine(waitForDestination());
             }
         }
     }
