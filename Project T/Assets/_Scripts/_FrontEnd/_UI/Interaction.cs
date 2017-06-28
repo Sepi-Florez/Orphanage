@@ -6,8 +6,6 @@ public class Interaction : MonoBehaviour {
 
     public static Interaction thisManager;
 
-    public GameObject particle;
-
     public bool it ;
     public float itRange;
 
@@ -30,7 +28,6 @@ public class Interaction : MonoBehaviour {
                             print(itObject.name);
                             InventoryManager.thisManager.InventoryAdd(itObject.GetComponent<ItemPickUp>().itemID, itObject.GetComponent<ItemPickUp>().count);
                             Destroy(itObject.gameObject);
-                            Destroy(Instantiate(particle, itObject.position, Quaternion.identity), 1);
                         }
                         break;
                     case "NPC":
