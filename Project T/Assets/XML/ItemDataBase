@@ -62,11 +62,9 @@
       <Components>9</Components>
       <Components>8</Components>
 	  <Components>0</Components>
-	  <Components>10</Components>
       <Components_Need>1</Components_Need>
-      <Components_Need>5</Components_Need>
+      <Components_Need>1</Components_Need>
 	  <Components_Need>1</Components_Need>
-	  <Components_Need>5</Components_Need>
       <Count>0</Count>
     </Item>
     <Item xsi:type="Weapon">

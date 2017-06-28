@@ -249,6 +249,13 @@ public class Boss : MonoBehaviour {
     public void Damage(int damage) {
         currentHealth -= damage;
         HUDManager.thisManager.UpdateBossHealth(currentHealth);
+        if (currentHealth <= 0) {
+            StopAllCoroutines();
+            GetComponent<SoundManager>().SoundLister(0);
+            QuestManager.thisManager.QuestComplete(3);
+            anim.SetTrigger("Death");
+        }
+
     }
 }
  

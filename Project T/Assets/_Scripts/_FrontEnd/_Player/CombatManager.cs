@@ -75,10 +75,9 @@ public class CombatManager : MonoBehaviour
                 {
                     if (hitObjects[i].tag == "Enemy")
                     {
-                        if (hitObjects[i].GetComponentInChildren<NpcHealthManager>())
+                        if (hitObjects[i].GetComponentInChildren<Boss>())
                         {
-                            NpcHealthManager npcHealth = hitObjects[i].GetComponentInChildren<NpcHealthManager>();
-                            npcHealth.UpdateHP(-damageAmount);
+                            hitObjects[i].GetComponentInChildren<Boss>().Damage(10);
                             hasHit = true;
                             break;
                         }
