@@ -17,18 +17,17 @@ public class BunnyBehaviour : MonoBehaviour {
     NavMeshHit hit;
 
     public GameObject goal;
-    GameObject artIntel;
     NavMeshAgent agent;
 
     //Hieronder definieër ik de variabels. Daarnaast vertel ik ook de NavMeshAgent dat hij naar zijn eerste positie moet en dat de movement IEnumerator moet starten.
     void Start() {
         ground = GameObject.FindGameObjectWithTag("Ground");
-        artIntel = GameObject.FindGameObjectWithTag("AI");
-        agent = artIntel.GetComponent<NavMeshAgent>();
+        agent = rabbit.GetComponent<NavMeshAgent>();
         xTerrainMin = ground.GetComponent<Renderer>().bounds.min.x;
         xTerrainMax = ground.GetComponent<Renderer>().bounds.max.x;
         zTerrainMin = ground.GetComponent<Renderer>().bounds.min.z;
         zTerrainMax = ground.GetComponent<Renderer>().bounds.max.z;
+        print(xTerrainMin + xTerrainMax + zTerrainMin + zTerrainMax);
         agent.SetDestination(goal.transform.position);
         StartCoroutine(movementAI(10));
         print("FirstTimeMove");
