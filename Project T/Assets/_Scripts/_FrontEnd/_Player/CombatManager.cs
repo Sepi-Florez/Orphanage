@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class CombatManager : MonoBehaviour
 {
@@ -12,13 +13,15 @@ public class CombatManager : MonoBehaviour
 
     public List<Transform> emitters = new List<Transform>();
 
-    public List<Transform> hitObjects = new List<Transform>();
+    private List<RaycastHit> hitObjects = new List<RaycastHit>(); //public List<Transform> hitObjects = new List<Transform>();
+
+    public List<GameObject> collisionParticles = new List<GameObject>();
 
     public float rayLenght = .2f, coolRate = .5f, minComboPct = 60;
 
     float coolTmr;
 
-    bool attacking, hasHit, whoosh;
+    bool attacking, hasHit, hasHitWorld, whoosh;
 
     public SoundManager soundManager;
 
@@ -38,7 +41,8 @@ public class CombatManager : MonoBehaviour
 
         attacking = ((curAnim.IsName("Slash 1")) || (curAnim.IsName("Slash 0")));
 
-        if (whoosh == false && Input.GetButtonDown("Fire1"))
+        #region deprecated
+        /*if (whoosh == false && Input.GetButtonDown("Fire1"))
         {
             soundManager.SoundLister(Random.Range(0,1));
             whoosh = true;
@@ -48,8 +52,9 @@ public class CombatManager : MonoBehaviour
         {
             soundManager.SoundLister(2);
             whoosh = true;
-        }
+        }*/
         //if (attacking) { soundManager.SoundLister(5); }
+        #endregion
 
         if (checkHit)
         {
@@ -58,13 +63,13 @@ public class CombatManager : MonoBehaviour
             {
                 Color colour = Color.green;
 
-                Ray ray = new Ray(emitter.transform.position, -emitter.transform.right); //* .2f);
+                Ray ray = new Ray(emitter.transform.position, -emitter.transform.right);
                 //GetMat.GetMaterial(ray);
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit, rayLenght))
                 {
-                    hitObjects.Add(hit.transform);
+                    hitObjects.Add(hit);
                 }
 
                 Debug.DrawRay(ray.origin, ray.direction * rayLenght, colour, .20f);
@@ -73,18 +78,22 @@ public class CombatManager : MonoBehaviour
             {
                 for (int i = 0; i <= hitObjects.Count - 1; i++)
                 {
-                    if (hitObjects[i].tag == "Enemy")
+                    Transform hitTrans = hitObjects[i].transform;
+                    if (hitTrans.tag == "Enemy")
                     {
-                        if (hitObjects[i].GetComponentInChildren<Boss>())
+                        Destroy(Instantiate(collisionParticles[0], hitObjects[i].point, Quaternion.identity), 0.5f);
+
+                        if (hitTrans.GetComponentInChildren<Boss>())
                         {
-                            hitObjects[i].GetComponentInChildren<Boss>().Damage(10);
+                            hitTrans.GetComponentInChildren<Boss>().Damage(10);
                             hasHit = true;
                             break;
                         }
                     }
-                    else
+                    else if(!hasHitWorld)
                     {
-                        //hitObjects[i].
+                        Destroy(Instantiate(collisionParticles[1], hitObjects[i].point, Quaternion.identity), 0.5f);
+                        hasHitWorld = true;
                     }
                 }
             }
@@ -96,6 +105,7 @@ public class CombatManager : MonoBehaviour
         checkHit = !checkHit;
         hitObjects.Clear();
         hasHit = false;
+        hasHitWorld = false;
     }
 
     public void EndCheck()
@@ -104,10 +114,17 @@ public class CombatManager : MonoBehaviour
         hitObjects.Clear();//resets hitObjects so you can do damage again.
         hasHit = false;
         whoosh = false;
+        hasHitWorld = false;
     }
 
-    public void DoDamage()
+    public void SoundTrigger(int sound)
     {
-        doDamage = !doDamage;
+        soundManager.SoundLister(sound-1);
     }
+    public void SoundTrigger(string randomizeSounds)
+    {
+        string[] sounds = randomizeSounds.Split('/');
+        soundManager.SoundLister(UnityEngine.Random.Range( int.Parse(sounds[0]), int.Parse(sounds[1]) ) );
+    }
+
 }
