@@ -36,8 +36,9 @@ public class InventoryManager : MonoBehaviour {
     }
     // Is called upon when adding an item to the inventory
     public void InventoryAdd(int item,int count) {
-        //print("Adding" + item);
+
         if (DataBaseManager.thisManager.ReturnItem(item) != null) {
+            print("Adding" + item);
             Item newItem = DataBaseManager.thisManager.ReturnItem(item);
             int i = SearchInventory(newItem);
             switch (newItem.category) {
@@ -79,7 +80,7 @@ public class InventoryManager : MonoBehaviour {
     }
     //Instantiates the button which represents the item.
     Transform Visualize(Item item) {
-        //print("Vizualizing " + item.itemName);
+        print("Vizualizing " + item.itemName);
         Transform newButton = Instantiate(buttonPref, Vector3.zero, Quaternion.identity).transform;
         newButton.SetParent(contentObjects[item.category].transform);
         helpArrange(newButton);

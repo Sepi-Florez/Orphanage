@@ -23,27 +23,25 @@ public class DataBaseManager : MonoBehaviour {
     public string dataPath;
 
     void Awake() {
+        Load();
         thisManager = this;
-        
-
-        if (File.Exists(Application.dataPath + dataPath)) {
-            FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
-            XmlSerializer reader = new XmlSerializer(typeof(ItemDatabase));
-            ItemDatabase a = reader.Deserialize(stream) as ItemDatabase;
-            stream.Close();
-            dbList = a;
-            //print("Loaded Database");
+    }
+    private void Load() {
+        TextAsset n = (TextAsset)Resources.Load(dataPath);
+        if (n != null) {
+            dbList = Deserialize(n);
+            print("Deserialized!");
             loaded = true;
         }
         else {
-            dbList = new ItemDatabase();
-            //print("Did not load Database");
-            loaded = false;
+            print("Conversation file not found");
         }
     }
-    void Start() {
-    }
-    void Update() {
+    ItemDatabase Deserialize(TextAsset xmlFile) {
+        XmlSerializer serializer = new XmlSerializer(typeof(ItemDatabase));
+        using (System.IO.StringReader reader = new System.IO.StringReader(xmlFile.text)) {
+            return serializer.Deserialize(reader) as ItemDatabase;
+        }
     }
     // Gives an Item variable back 
     public Item ReturnItem(int itemID) {

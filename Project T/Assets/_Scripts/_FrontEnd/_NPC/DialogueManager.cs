@@ -41,17 +41,18 @@ public class DialogueManager : MonoBehaviour {
     }
     private void Load() {
 
-        /*TextAsset n = (TextAsset)Resources.Load(dataPath);
-        if (n != null) {
-            currentNode = Deserialize(n);
-            print("Deserialized!");
-        }*/
-        print(Application.persistentDataPath + dataPath);
+
+        /*print(Application.persistentDataPath + dataPath);
         if (File.Exists(Application.dataPath + dataPath)) {
             FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(DialogueNode));
             currentNode = reader.Deserialize(stream) as DialogueNode;
             stream.Close();
+        }*/
+        TextAsset n = (TextAsset)Resources.Load(dataPath);
+        if (n != null) {
+            currentNode = Deserialize(n);
+            print("Deserialized!");
         }
         else {
             print("Conversation file not found");

@@ -23,7 +23,8 @@ public class QuestManager : MonoBehaviour {
         thisManager = this; 
         questContent = GameObject.FindGameObjectWithTag("QuestContent").transform;
         questInfo = GameObject.FindGameObjectWithTag("QuestInfo").transform;
-        if (File.Exists(Application.dataPath + dataPath)) {
+        Load();
+        /*if (File.Exists(Application.dataPath + dataPath)) {
             FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(QuestList));
             QuestList a = reader.Deserialize(stream) as QuestList;
@@ -38,11 +39,27 @@ public class QuestManager : MonoBehaviour {
             writer.Serialize(stream, questList);
             stream.Close();
             //print("didn't find Quest file");
-        }
+        }*/
     }
     public void Start() {
         QuestAdd(0);
         QuestShow(0);
+    }
+    private void Load() {
+        TextAsset n = (TextAsset)Resources.Load(dataPath);
+        if (n != null) {
+            questList = Deserialize(n);
+            print("Deserialized!");
+        }
+        else {
+            print("Conversation file not found");
+        }
+    }
+    QuestList Deserialize(TextAsset xmlFile) {
+        XmlSerializer serializer = new XmlSerializer(typeof(QuestList));
+        using (System.IO.StringReader reader = new System.IO.StringReader(xmlFile.text)) {
+            return serializer.Deserialize(reader) as QuestList;
+        }
     }
     public void Update() {
     }
