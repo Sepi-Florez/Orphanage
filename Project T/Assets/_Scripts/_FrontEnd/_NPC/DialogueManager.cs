@@ -25,9 +25,12 @@ public class DialogueManager : MonoBehaviour {
     bool end = false;
 
     public string dataPath;
+    [SerializeField]
+    public XmlDocument pi;
 
     private void Awake() {
         Load();
+        //currentNode = Deserialize(data);
     }
     private void Update() {
         if (end) {
@@ -37,6 +40,13 @@ public class DialogueManager : MonoBehaviour {
         }
     }
     private void Load() {
+
+        /*TextAsset n = (TextAsset)Resources.Load(dataPath);
+        if (n != null) {
+            currentNode = Deserialize(n);
+            print("Deserialized!");
+        }*/
+        print(Application.persistentDataPath + dataPath);
         if (File.Exists(Application.dataPath + dataPath)) {
             FileStream stream = new FileStream(Application.dataPath + dataPath, FileMode.Open);
             XmlSerializer reader = new XmlSerializer(typeof(DialogueNode));
@@ -47,6 +57,14 @@ public class DialogueManager : MonoBehaviour {
             print("Conversation file not found");
         }
     }
+    DialogueNode Deserialize(TextAsset xmlFile) { 
+        XmlSerializer serializer = new XmlSerializer(typeof(DialogueNode));
+        using (System.IO.StringReader reader = new System.IO.StringReader(xmlFile.text))
+        {
+        return serializer.Deserialize(reader) as DialogueNode;
+
+    }
+ }
     /*public void Start() {
         currentNode = new DialogueNode(answer.text, test, 3);
         Test();
