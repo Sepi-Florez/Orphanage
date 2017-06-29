@@ -206,11 +206,13 @@ public class PlayerControlPhysics : MonoBehaviour {
         if (waveSlice != 0)
         {
             float change = waveSlice * cameraSettings.headBobRotMult;
-            if (IsGrnded() && waveSlice >= -1)
+
+            /*if (IsGrnded() && waveSlice >= -1)
             {
                 soundManager.SoundLister(Random.Range(2, 4));
                 //GetMat.GetMaterial(new Ray(transform.position, -transform.up));
-            }
+            }*/
+
             float inputAxes = Mathf.Abs(Input.GetAxis("Horizontal") + Mathf.Abs(Input.GetAxis("Vertical")));
             inputAxes = Mathf.Clamp(inputAxes, 0f, 1f);
             change = inputAxes * change;
