@@ -44,6 +44,8 @@ public class Boss : MonoBehaviour {
     AnimatorStateInfo curAnim;
     Vector3 oldWeaponPos;
 
+    public GameObject ending;
+
     //Fills in some variables
     void Start() {
 
@@ -120,7 +122,7 @@ public class Boss : MonoBehaviour {
 
 
                 Quaternion rotation = Quaternion.LookRotation(ppos - transform.position);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 4);
             }
             yield return new WaitForSeconds(0.01f);
         }
@@ -254,6 +256,7 @@ public class Boss : MonoBehaviour {
             GetComponent<SoundManager>().SoundLister(0);
             QuestManager.thisManager.QuestComplete(3);
             anim.SetTrigger("Death");
+            Instantiate(ending, transform.position, Quaternion.identity);
         }
 
     }

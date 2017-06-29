@@ -11,7 +11,7 @@
 			<title>Enter the temple</title>
 			<description>A nice villager told me the minotaur resides within the temple on a hill not far from here.</description>
 		</Quest>
-    <Quest>
+		<Quest>
 		<questID>2</questID>
 			<title>Through the gates</title>
 			<description>Upon following the path to the hill where the temple resides I found an obstacle in the way in the form of a closed gate. Maybe I need to light the braziers with something special... </description>
@@ -20,6 +20,11 @@
 			<questID>3</questID>
 			<title>Finish it!</title>
 			<description>I have found the creature and now only one thing remains to be done...slaying the vile creature!</description>
+		</Quest>
+		<Quest>
+			<questID>4</questID>
+			<title>Into the maze</title>
+			<description>To defeat the pesky beast I will need to find my way out of this maze</description>
 		</Quest>
 	</qList>	
 </QuestList>
