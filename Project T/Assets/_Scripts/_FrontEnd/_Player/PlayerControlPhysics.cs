@@ -152,7 +152,7 @@ public class PlayerControlPhysics : MonoBehaviour {
         }
 
         if (IsGrnded()) {
-            animator.SetFloat("walkSpd", ((Input.GetButton("Sprint") ? 2 : ((Mathf.Ceil(Mathf.Abs(Input.GetAxis("Horizontal"))) > 0f) || (Mathf.Ceil(Mathf.Abs(Input.GetAxis("Vertical"))) > 0f)) ? 1 : 0)));
+            animator.SetFloat("walkSpd", ((Input.GetButton("Sprint") && (((Input.GetAxis("Horizontal")) > 0f) || (Mathf.Ceil(Mathf.Abs(Input.GetAxis("Vertical"))) > 0f))) ? 2 : ((Mathf.Ceil(Mathf.Abs(Input.GetAxis("Horizontal"))) > 0f) || (Mathf.Ceil(Mathf.Abs(Input.GetAxis("Vertical"))) > 0f)) ? 1 : 0));
         }
         else {
             animator.SetFloat("walkSpd", 0);

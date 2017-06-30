@@ -531,28 +531,21 @@ ModelImporter:
       events:
       - time: 0
         functionName: FootStep
-        data: 4/8
+        data: 4/7
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.2485527
+      - time: 0.3749766
         functionName: FootStep
-        data: 4/8
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.49682534
-        functionName: FootStep
-        data: 4/8
+        data: 4/7
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.75695604
         functionName: FootStep
-        data: 4/8
+        data: 4/7
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -1435,14 +1428,14 @@ ModelImporter:
       events:
       - time: 0
         functionName: FootStep
-        data: 4/8
+        data: 4/7
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.5074073
         functionName: FootStep
-        data: 4/8
+        data: 4/7
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
