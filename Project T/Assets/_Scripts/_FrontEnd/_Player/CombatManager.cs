@@ -21,7 +21,7 @@ public class CombatManager : MonoBehaviour
 
     float coolTmr;
 
-    bool attacking, hasHit, hasHitWorld, whoosh;
+    bool attacking, hasHit, hasHitWorld;
 
     public SoundManager soundManager;
 
@@ -113,7 +113,7 @@ public class CombatManager : MonoBehaviour
         checkHit = false;
         hitObjects.Clear();//resets hitObjects so you can do damage again.
         hasHit = false;
-        whoosh = false;
+        //whoosh = false;
         hasHitWorld = false;
     }
 

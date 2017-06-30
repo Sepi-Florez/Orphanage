@@ -61,9 +61,9 @@ public class Boss : MonoBehaviour {
     }
     void Update() //moet eigenlijk in een normale functie geplaatst worden die gecalled word als we attacken maar voor nu is het even zo..
     {
-        if (oldWeaponPos == null) {
+        /*if (oldWeaponPos == Vector3.zero) {
             oldWeaponPos = weapon.position;
-        }
+        }*/
 
         if (curAnim.normalizedTime % 0.1f == 0)//als current Animation gedeelt kan worden door 0.1 betekend het dat het op x tiende zit van zijn animation..
         {
